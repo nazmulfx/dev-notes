@@ -1,0 +1,4 @@
+####  frappe #####
+
+bench --site your-site-name list-apps
+		1. to check list of apps installed in your site
