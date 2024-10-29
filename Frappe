@@ -15,4 +15,7 @@ bench --site your-site-name backup --with-files
 bench --site trademode.com restore location_path/db.sql
 		- restore database
 
+bench --site your-site-name set-admin-password new-password
+		- reset Administrator password
+
 
