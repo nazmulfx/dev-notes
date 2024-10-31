@@ -18,4 +18,10 @@ bench --site trademode.com restore location_path/db.sql
 bench --site your-site-name set-admin-password new-password
 		- reset Administrator password
 
+bench --site your-site-name add-to-hosts
+		- add site to 127.0.0.1 (Multitanancy Mode)
+
+bench --site trademode.wrok reinstall
+		- to reinstall the site
+
 
