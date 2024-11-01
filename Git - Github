@@ -1,3 +1,10 @@
 
 git init
     - add .git in the folder
+
+git push origin branch-name
+    - push code to personal repository
+
+git push upstream branch-name
+    - push code to collaborative source
+
