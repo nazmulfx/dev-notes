@@ -8,3 +8,12 @@ git push origin branch-name
 git push upstream branch-name
     - push code to collaborative source
 
+git status
+    - current status of files
+
+git add path/filename
+    - add specific file
+
+git add .
+    - add all files and folder in one time
+
