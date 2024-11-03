@@ -2,6 +2,10 @@
 git init
     - add .git in the folder
 
+############################################
+########### push code to repo ##############
+############################################
+
 git push origin branch-name
     - push code to personal repository
 
@@ -20,3 +24,12 @@ git add .
 git reset filename
     - unstage files/ reset files to last stage
 
+###############################################
+############ Create & switch branch ###########
+###############################################
+
+git branch feature-branch
+    - Create a new branch
+
+git checkout -b feature-branch
+    - Alternatively, you can create and switch to the new branch immediately with
