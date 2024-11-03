@@ -17,3 +17,6 @@ git add path/filename
 git add .
     - add all files and folder in one time
 
+git reset filename
+    - unstage files/ reset files to last stage
+
