@@ -1,4 +1,7 @@
-####  frappe #####
+####  Bench #####
+
+bench get-app repo_link.git --branch branch-name
+		- install app from github
 
 bench new-site your-site-name
 		- Create a new site
