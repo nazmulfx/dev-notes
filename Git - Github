@@ -28,8 +28,13 @@ git reset filename
 ############ Create & switch branch ###########
 ###############################################
 
-git branch feature-branch
+git branch branch-name
     - Create a new branch
 
-git checkout -b feature-branch
+git checkout branch-name
+    - switch to another branch
+git switch branch-name
+    - Alternatively, if you're using Git 2.23 or newer, you can also use git switch
+
+git checkout -b branch-name
     - Alternatively, you can create and switch to the new branch immediately with
