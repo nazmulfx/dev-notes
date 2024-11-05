@@ -1,22 +1,13 @@
 ####  Bench #####
 
-bench get-app repo_link.git --branch branch-name
-		- install app from github
+
 
 bench new-site your-site-name
 		- Create a new site
 
-bench --site your-site-name list-apps
-		- list-app in site
 
-bench --site your-site-name backup
-		- backup database & files of site
 
-bench --site your-site-name backup --with-files
-		- take backup of site with files public & private
 
-bench --site trademode.com restore location_path/db.sql
-		- restore database
 
 bench --site your-site-name set-admin-password new-password
 		- reset Administrator password
@@ -24,9 +15,18 @@ bench --site your-site-name set-admin-password new-password
 bench --site your-site-name add-to-hosts
 		- add site to 127.0.0.1 (Multitanancy Mode)
 
-bench --site trademode.wrok reinstall
-		- to reinstall the site
+###############################################
+################### Apps ######################
+###############################################
 
+bench get-app repo_link.git --branch branch-name
+		- install app from github
+
+bench new-app app_name
+		- create new app
+
+bench --site your-site-name list-apps
+		- list-app in site
 
 
 
@@ -52,17 +52,21 @@ bench --site site-name mariadb
 		- start mariadb console
 
 
-##############################################
-############# Backup #######################
-#############################################
+################################################
+###### Backup & Restore & Reinstall ############
+################################################
 
-bench --site library.localhost backup
-		- to take backup
+bench --site your-site-name backup
+		- backup database & files of site
 
+bench --site your-site-name backup --with-files
+		- take backup of site with files public & private
 
+bench --site trademode.com restore location_path/db.sql
+		- restore database
 
-
-
+bench --site trademode.wrok reinstall
+		- to reinstall the site
 
 
 
