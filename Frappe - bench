@@ -28,3 +28,25 @@ bench --site trademode.wrok reinstall
 		- to reinstall the site
 
 
+
+
+###############################################
+############### developer mode ################
+###############################################
+
+bench --site library.com set-config developer_mode 1
+		- to enable developer mode in specific site
+
+conmmand
+		- to enable developer mode globally
+
+
+
+################################################
+################## Console #####################
+################################################
+
+bench --site site_name console
+		- start mariadb console
+
+
