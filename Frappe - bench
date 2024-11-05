@@ -37,9 +37,8 @@ bench --site trademode.wrok reinstall
 bench --site library.com set-config developer_mode 1
 		- to enable developer mode in specific site
 
-conmmand
+bench set-config -g developer_mode true
 		- to enable developer mode globally
-
 
 
 ################################################
