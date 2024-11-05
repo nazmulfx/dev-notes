@@ -53,7 +53,12 @@ bench --site site-name mariadb
 		- start mariadb console
 
 
+##############################################
+############# Backup #######################
+#############################################
 
+bench --site library.localhost backup
+		- to take backup
 
 
 
