@@ -30,8 +30,9 @@ bench --site your-site-name list-apps
 
 
 
+
 ###############################################
-############### developer mode ################
+############### enable / disable ##############
 ###############################################
 
 bench --site library.com set-config developer_mode 1
@@ -40,6 +41,12 @@ bench --site library.com set-config developer_mode 1
 bench set-config -g developer_mode true
 		- to enable developer mode globally
 
+bench set-config -g server_script_enabled true
+		- enable server-side-script
+
+
+
+
 
 ################################################
 ################## Console #####################
@@ -47,9 +54,16 @@ bench set-config -g developer_mode true
 
 bench --site site_name console
 		- start python console
+	
 
 bench --site site-name mariadb
 		- start mariadb console
+
+	MariaDB [_ad03fa1a016ca1c4]> desc tabArticle;
+		- will show the description of the article table.
+
+	MariaDB [_ad03fa1a016ca1c4]> select * from tabArticle;
+		- will show you all the records
 
 
 ################################################
