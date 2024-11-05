@@ -46,3 +46,37 @@ git switch branch-name
 
 git checkout -b branch-name
     - Alternatively, you can create and switch to the new branch immediately with
+
+
+git checkout -b branch-name origin/branch-name
+    - create and checkout a branch which already exists in the remote
+
+git fetch origin
+
+##########################################
+################## Pull Branch ###########
+##########################################
+
+git checkout -b branch-name
+    - create a branch and switch you want to pull 
+
+git remote add origin https://github.com/your-username/your-repo.git
+    - add remote to pull from the remote repo
+
+git pull origin branch-name
+    - branch you want to pull
+
+    - Merge : git pull origin develop --no-rebase OR git config pull.rebase false
+    - Rebase : git pull origin develop --rebase OR git config pull.rebase true
+    - fast-forward only : git pull origin develop --ff-only OR git config pull.ff only
+    - if any unrelated history fetal : git pull origin develop --allow-unrelated-histories
+
+################################
+########### Remote #############
+################################
+git remote add origin repo_link.git
+    - to Add remote repo
+
+git remote set-url origin git@github-nazmul:nazmulfx/library_management.git
+    - if remote already exists then set-url again
+
