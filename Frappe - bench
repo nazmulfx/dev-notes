@@ -47,6 +47,8 @@ conmmand
 ################################################
 
 bench --site site_name console
-		- start mariadb console
+		- start python console
 
+bench --site site-name mariadb
+		- start mariadb console
 
