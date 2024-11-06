@@ -84,7 +84,8 @@ git commit -m "Merged version-15 into update-by-nazmul"
     - commit
 
 git push upstream update-by-nazmul
-
+#or 
+git push origin update-by-nazmul
 
 ################################
 ########### Remote #############
