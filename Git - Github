@@ -53,23 +53,38 @@ git checkout -b branch-name origin/branch-name
 
 git fetch origin
 
-##########################################
-################## Pull Branch ###########
-##########################################
+###########################################
+################## Pull & Merge ###########
+###########################################
 
-git checkout -b branch-name
+git checkout -b version-15
     - create a branch and switch you want to pull 
 
 git remote add origin https://github.com/your-username/your-repo.git
     - add remote to pull from the remote repo
 
-git pull origin branch-name
+git pull origin version-15
     - branch you want to pull
 
-    - Merge : git pull origin develop --no-rebase OR git config pull.rebase false
-    - Rebase : git pull origin develop --rebase OR git config pull.rebase true
-    - fast-forward only : git pull origin develop --ff-only OR git config pull.ff only
-    - if any unrelated history fetal : git pull origin develop --allow-unrelated-histories
+    - Merge                             : git pull origin develop --no-rebase     OR git config pull.rebase false
+    - Rebase                            : git pull origin develop --rebase        OR git config pull.rebase true
+    - fast-forward only                 : git pull origin develop --ff-only       OR git config pull.ff only
+    - if any unrelated history fetal    : git pull origin develop --allow-unrelated-histories
+
+git checkout update-by-nazmul
+    - checkout back to update-by-nazmul
+
+git merge version-15
+    - merge version-15 with update-by-nazmul
+
+git add <resolved-files>
+    - Resolve any merge conflicts if they arise, and then add the resolved files
+
+git commit -m "Merged version-15 into update-by-nazmul"
+    - commit
+
+git push upstream update-by-nazmul
+
 
 ################################
 ########### Remote #############
@@ -79,4 +94,7 @@ git remote add origin repo_link.git
 
 git remote set-url origin git@github-nazmul:nazmulfx/library_management.git
     - if remote already exists then set-url again
+
+
+
 
