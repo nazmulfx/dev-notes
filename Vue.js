@@ -15,7 +15,7 @@ npm run dev
 {{ variable }}
     - bind text for a portion in a line
 
-<span v-text="varible" ></span>
+<h1 v-text="varible" ></h1>
     - bind text for full line
 
 <template>
