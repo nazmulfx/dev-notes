@@ -140,10 +140,46 @@ Note: shorthand ":" refers to "v-bind:"
 
 
 
+###########################################################################################
+#####  Conditional Rendering - if, elif, else, show : v-if, v-else-if, v-else, v-show #####
+###########################################################################################
+Note: v-if doesn't render html DOM
+Note: v-show render html DOM but keep display:hidden
 
+<template>
+    <!-- if-else -->
+    <h2 v-if="num === 0" >The number is Zero</h2>
+    <h2 v-else-if="num < 0">The number is Negative</h2>
+    <h2 v-else-if="num > 0">The number is Positive</h2>
+    <h2 v-else >Not a number</h2>
 
+    <!-- condition with template -->
+    <template v-if="display">
+        <p>One</p>
+        <p>Two</p>
+        <p>Three</p>
+    </template>
 
+    <!-- v-show -->
+    <h2></h2>
 
+</template>
+<script>
+    export default {
+        name: "App",
+        data() {
+            return {
+                num: 0,
+                display: true,
+                showElement: true,
+
+            }
+        },
+    }
+</script>
+<style>
+
+</style>
 
 
 
