@@ -1,0 +1,108 @@
+###############################################################
+########################  Database  ###########################
+###############################################################
+
+CREATE DATABASE db_name
+    - will create a database, & if same name db exists will raise an error
+
+CREATE DATABASE IF NOT EXISTS db_name
+    - will create a database, & if already exists no error 'STANDARD WAY'
+
+DROP DATABASE db_name
+    - will remove database, if db not exists will raise an error
+
+DROP DATABASE IF EXISTS db_name
+    - will remove database, if db not exists no error 'STANDARD WAY'
+
+
+
+
+
+###############################################################
+##########################  Table  ############################
+###############################################################
+
+CREATE TABLE IF NOT EXISTS db_name.users(
+	user_id INTEGER,
+  name VARCHAR(255),
+  email VARCHAR(255),
+  password VARCHAR(255)
+)
+    - creating a table
+
+INSERT INTO
+  db_name.`users (`email`, `name`, `password`, `user_id`)
+VALUES
+  ('nazmul@email.com', 'Nazmul', '123', '1'),
+  ('a@email.com', 'a', '123', '2'),
+  ('b@email.com', 'b', '123', '3'),
+  ('c@email.com', 'c', '123', '4')
+    - update values (order should be accurate as column defined)
+
+TRUNCATE TABLE campusx.users
+    - to remove all records in the table (HIGHLY DANGER)
+    - doesn't remove stracture of the table
+
+DROP TABLE campusx.users
+    - drop table and it's all records
+    - remove stracture of the table
+
+
+
+CREATE TABLE IF NOT EXISTS db_name.users(
+	user_id INTEGER NOT NULL,
+  name VARCHAR(255) NOT NULL UNIQUE,
+  email VARCHAR(255) NOT NULL UNIQUE,
+  password VARCHAR(255) NOT NULL UNIQUE,
+)
+    - EASY WAY of creating Table
+    - maybe can't change constraints without change table and data loss risk
+
+
+CREATE TABLE IF NOT EXISTS db_name.users(
+	user_id INTEGER NOT NULL,
+  name VARCHAR(255) NOT NULL,
+  email VARCHAR(255) NOT NULL,
+  password VARCHAR(255) NOT NULL,
+  
+  CONSTRAINT user_email_unique UNIQUE (name, email, password),
+  CONSTRAINT user_pk PRIMARY KEY (name, user_id)
+)
+    - NOTE: using constraint. need when we want to unique combination name, email, passowrd (IMPORTANT)
+    - can change constraints without change table or data loss
+
+###############################################################
+###################  Constraints of DB  #######################
+###############################################################
+
+NOT NuLL
+    - this column can not be NULL
+
+UNIQUE (combo)
+    -> Another way of creating constraints
+    - should be unique data in each row of this column, like email
+
+PRIMARY KEY
+    - only one column can be primary key, like roll number of students
+    - automatically applied UNIQUE when PRIMARY KEY is given
+
+AUTO INCREMENT
+    - automatically increment value from last row value, like integer value
+
+CHECK
+    - check is a condition. like in age column only age allowed avobe 30 so, age > 30
+
+DEFAULT
+    - when no value given for this column, default value will be saved
+
+FOREIGN KEY
+    - relationship with another Table
+
+###  REFERENTIAL ACTIONS ###
+RESTRICT
+
+CASCADE
+
+SET NULL
+
+SET DEFAULT
