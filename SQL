@@ -311,6 +311,42 @@ SET DEFAULT
 INNER JOIN	: takes only matchig rows from both table
 LEFT JOIN	: All rows from Left Table and only takes matchig rows from Right Table
 RIGHT JOIN	: All rows from Right Table and only takes matching rows from Left Table
-FULL JOIN	: 
+FULL JOIN	: LEFT JOIN UNION RIGHT JOIN
 CROSS JOIN	: all possible combination (mostly not used)
 SELF JOIN
+
+
+
+###############################################################
+########################  SET Operations  #####################
+###############################################################
+
+UNION		: WITHOUT DUPLICATES
+UNION ALL	: WITH DUPLICATES
+INTERSECT	: ONLY THOSE, WHOS ARE AVAILABLE IN BOTH
+EXCEPT		: SUBTRACTS LAST TABLE FROM FIRST TABLE
+
+
+
+###############################################################
+########################  SUB Queries  ########################
+###############################################################
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
