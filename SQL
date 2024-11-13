@@ -15,6 +15,47 @@ DROP DATABASE IF EXISTS db_name
     - will remove database, if db not exists no error 'STANDARD WAY'
 
 
+###############################################################
+##########################  Update  ###########################
+###############################################################
+
+UPDATE campusx.smartphone SET processor_brand = 'dimensity' WHERE processor_brand = 'mediatek'
+	- update any column value (NOTE: WHERE clause must, otherwise it will change all rows values)
+
+UPDATE 
+	campusx.users 
+SET 
+	email = 'nitish@email.com',
+  	password = '12345'
+WHERE 
+	name = 'nitish'
+
+
+###############################################################
+#########################  Retrive  ###########################
+###############################################################
+
+SELECT * FROM campusx.users
+SELECT * FROM campusx.users WHERE 1
+	- retrive all columns
+
+SELECT DISTINCT(brand_name) AS 'BRANDS' FROM campusx.smartphones;
+	- return unique values from a column
+
+SELECT DISTINCT brand_name, processor_brand AS 'BRAND' FROM campusx.smartphones;
+	- return unique combination of two column
+
+SELECT * FROM campusx.smartphones WHERE brand_name = 'samsung';
+SELECT * FROM campusx.smartphones WHERE price > 50000;
+SELECT * FROM campusx.smartphones WHERE price > 10000 AND price < 50000
+SELECT * FROM campusx.smartphones WHERE price BETWEEN 10000 AND 50000
+SELECT * FROM campusx.smartphones WHERE processor_brand IN ('snapdragon', 'bionic', 'dimensity')
+SELECT * FROM campusx.smartphones WHERE processor_brand NOT IN ('snapdragon', 'bionic', 'dimensity')
+	- filter rows using where clause
+
+
+NOTE: QUERY EXECUTION ORDER -> FROM, JOIN, WHERE, GROUP BY, HAVING, SELECT, DISTINCT, ORDERBY
+
 
 
 
