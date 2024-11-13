@@ -300,3 +300,17 @@ SET_NULL
 	- in relations between 2 table, if mother table is deleted child table will keep but parent value will be NULL
 
 SET DEFAULT
+
+
+
+
+###############################################################
+##########################  JOINS  ############################
+###############################################################
+
+INNER JOIN	: takes only matchig rows from both table
+LEFT JOIN	: All rows from Left Table and only takes matchig rows from Right Table
+RIGHT JOIN	: All rows from Right Table and only takes matching rows from Left Table
+FULL JOIN	: 
+CROSS JOIN	: all possible combination (mostly not used)
+SELF JOIN
