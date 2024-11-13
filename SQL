@@ -16,6 +16,103 @@ DROP DATABASE IF EXISTS db_name
 
 
 ###############################################################
+#######################  Functions  ###########################
+###############################################################
+
+NOTE: 2 types of functions
+	1. Built-in Functions
+		a. Scalar Func (like, round)
+			- return a value for each value
+		b. Aggregate Func (like, avg, sum, min, max)
+			- run one time and return a value for all value
+	2. User Defined Function
+
+
+1. Aggregate Functions
+AVG()			: Returns the average value of a numeric column.
+COUNT()			: Returns the number of rows matching a condition.
+SUM()			: Returns the sum of a numeric column.
+MAX()			: Returns the maximum value in a column.
+MIN()			: Returns the minimum value in a column.
+GROUP_CONCAT()	: Concatenates values from a group.  (MySQL)
+STRING_AGG()	: Concatenates values with a separator. (PostgreSQL)
+VARIANCE() or VAR_POP(): Calculates the population variance.
+VAR_SAMP()		: Calculates the sample variance.
+
+
+2. String Functions
+CONCAT()		: Concatenates two or more strings.
+LOWER()			: Converts a string to lowercase.
+UPPER()			: Converts a string to uppercase.
+LENGTH() / LEN(): Returns the length of a string.
+LEFT(), RIGHT()	: Extracts characters from the left or right of a string.
+SUBSTRING()		: Extracts a substring from a string.
+REPLACE()		: Replaces occurrences of a substring.
+TRIM()			: Removes whitespace from both ends of a string.
+LPAD(), RPAD()	: Pads a string to a specified length.
+CHARINDEX() (SQL Server) / INSTR() (MySQL): Returns the position of a substring.
+
+3. Date and Time Functions
+NOW()						: Returns the current date and time.
+CURDATE() / CURRENT_DATE()	: Returns the current date.
+CURTIME() / CURRENT_TIME()	: Returns the current time.
+DATE()						: Extracts the date part from a date or datetime.
+TIME()						: Extracts the time part from a datetime.
+YEAR(), MONTH(), DAY()		: Returns the year, month, or day.
+HOUR(), MINUTE(), SECOND()	: Returns the hour, minute, or second.
+DATEDIFF()					: Returns the difference in days between two dates.
+DATEADD() (SQL Server)		: Adds an interval to a date.
+DATE_TRUNC() (PostgreSQL)	: Truncates a date to the specified precision.
+
+
+4. Mathematical Functions
+ABS()				: Returns the absolute value of a number.
+ROUND()				: Rounds a number to a specified number of decimal places.
+CEIL() / CEILING()	: Returns the smallest integer greater than or equal to a number.
+FLOOR()				: Returns the largest integer less than or equal to a number.
+SQRT()				: Returns the square root of a number.
+POWER()				: Raises a number to the power of another number.
+MOD()				: Returns the remainder of a division.
+RAND()				: Returns a random number between 0 and 1.
+PI()				: Returns the value of pi.
+
+
+5. Conditional Functions
+CASE				: Conditional expression for if-else logic.
+COALESCE()			: Returns the first non-null value in a list.
+NULLIF()			: Returns NULL if two expressions are equal.
+IFNULL() (MySQL)	: Returns a specified value if the expression is NULL.
+IIF() (SQL Server)	: Inline if statement.
+
+
+6. JSON Functions (Supported in MySQL, PostgreSQL, SQL Server)
+JSON_EXTRACT() (MySQL) / -> operator (PostgreSQL): Extracts data from a JSON document.
+JSON_OBJECT()			: Creates a JSON object.
+JSON_ARRAY()			: Creates a JSON array.
+JSON_CONTAINS()			: Checks if JSON contains a specific value.
+JSONB_SET() (PostgreSQL): Updates a value within a JSONB document.
+
+
+7. XML Functions (Supported in SQL Server, Oracle)
+XMLQUERY()			: Executes an XQuery on XML data.
+XMLELEMENT()		: Creates an XML element.
+XMLSERIALIZE()		: Serializes an XML data type.
+
+
+8. System Functions
+VERSION()			: Returns the version of the database.
+USER()				: Returns the current user.
+DATABASE()			: Returns the current database name.
+SESSION_USER()		: Returns the session user.
+
+
+9. Encryption and Hashing Functions
+MD5(), SHA1(), SHA256()					: Hashing functions.
+AES_ENCRYPT() / AES_DECRYPT() (MySQL)	: Encryption and decryption functions.
+
+
+
+###############################################################
 ##########################  Update  ###########################
 ###############################################################
 
@@ -62,9 +159,13 @@ SELECT * FROM campusx.smartphones WHERE processor_brand NOT IN ('snapdragon', 'b
 	- filter rows using where clause
 
 
-NOTE: QUERY EXECUTION ORDER -> FROM, JOIN, WHERE, GROUP BY, HAVING, SELECT, DISTINCT, ORDERBY
+NOTE: QUERY EXECUTION ORDER -> FROM, JOIN, WHERE, GROUP BY, HAVING, SELECT, DISTINCT, ORDERBY, LIMIT
 
-
+WHERE - where works for select
+GROUP BY
+HAVING - works for group by
+ORDER BY / Sorting
+LIMIT
 
 
 ###############################################################
@@ -88,8 +189,6 @@ DROP TABLE campusx.users
     - drop table and it's all records
     - remove stracture of the table
 
-
-
 CREATE TABLE IF NOT EXISTS db_name.users(
 	user_id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
   name VARCHAR(255) NOT NULL UNIQUE,
@@ -98,7 +197,6 @@ CREATE TABLE IF NOT EXISTS db_name.users(
 )
     - EASY WAY of creating Table
     - maybe can't change constraints without change table and data loss risk
-
 
 CREATE TABLE IF NOT EXISTS db_name.users(
 	user_id INTEGER NOT NULL AUTO_INCREMENT,
@@ -174,7 +272,7 @@ PRIMARY KEY
     - only one column can be primary key, like roll number of students
     - automatically applied UNIQUE when PRIMARY KEY is given
 
-AUTO INCREMENT
+AUTO_INCREMENT (MySQL) / SERIAL (PostgreSQL)
     - automatically increment value from last row value, like integer value
 
 CHECK
@@ -185,6 +283,8 @@ DEFAULT
 
 FOREIGN KEY
     - relationship with another Table
+
+INDEX
 
 DATETIME
 
