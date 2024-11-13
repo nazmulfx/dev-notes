@@ -30,14 +30,6 @@ CREATE TABLE IF NOT EXISTS db_name.users(
 )
     - creating a table
 
-INSERT INTO
-  db_name.`users (`email`, `name`, `password`, `user_id`)
-VALUES
-  ('nazmul@email.com', 'Nazmul', '123', '1'),
-  ('a@email.com', 'a', '123', '2'),
-  ('b@email.com', 'b', '123', '3'),
-  ('c@email.com', 'c', '123', '4')
-    - update values (order should be accurate as column defined)
 
 TRUNCATE TABLE campusx.users
     - to remove all records in the table (HIGHLY DANGER)
@@ -92,6 +84,31 @@ drop constraint (i will add the command later)
 
 modify constraint
 	- actually modify isn't possible directly, first drop existing constraint and add again
+
+
+
+
+###############################################################
+#########################  Insert  ############################
+###############################################################
+
+INSERT INTO db_name.users VALUES
+  ('nazmul@email.com', 'Nazmul', '123', '1'),
+  ('a@email.com', 'a', '123', '2'),
+  ('b@email.com', 'b', '123', '3'),
+  ('c@email.com', 'c', '123', '4')
+	- make sure data serial is matching with column serial
+
+
+INSERT INTO
+  db_name.users (`email`, `name`, `password`, `user_id`)
+VALUES
+  ('nazmul@email.com', 'Nazmul', '123', '1'),
+  ('a@email.com', 'a', '123', '2'),
+  ('b@email.com', 'b', '123', '3'),
+  ('c@email.com', 'c', '123', '4')
+    - update values (order should be accurate as column defined)
+
 
 ###############################################################
 ###################  Constraints of DB  #######################
