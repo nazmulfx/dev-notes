@@ -332,8 +332,19 @@ EXCEPT		: SUBTRACTS LAST TABLE FROM FIRST TABLE
 ########################  SUB Queries  ########################
 ###############################################################
 
+3 type Sub Query based on Return
+	1. Scalar Sub Query
+		- return only one value like min/ max/ round/ 
+	2. Row Sub Query
+		- return multiple rows
+	3. Table Sub Query
+		- return a table with rows & column
 
-
+2 type Sub Query based on Working
+	1. Independent
+		- can execute directly
+	2. Correlated
+		- inner query depends on outer query
 
 
 
