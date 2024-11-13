@@ -84,6 +84,15 @@ ALTER TABLE campusx.users DROP COLUMN password
 ALTER TABLE campusx.users MODIFY COLUMN password INTEGER
 	- modify specific column
 
+ALTER TABLE campusx.users ADD CONSTRAINT constraint_name CHECK (age > 18)
+	- add constraint 
+
+drop constraint (i will add the command later)
+	- drop specific constraint
+
+modify constraint
+	- actually modify isn't possible directly, first drop existing constraint and add again
+
 ###############################################################
 ###################  Constraints of DB  #######################
 ###############################################################
