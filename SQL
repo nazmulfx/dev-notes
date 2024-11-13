@@ -71,6 +71,19 @@ CREATE TABLE IF NOT EXISTS db_name.users(
     - NOTE: using constraint. need when we want to unique combination name, email, passowrd (IMPORTANT)
     - can change constraints without change table or data loss
 
+
+ALTER TABLE campusx.users ADD COLUMN password VARCHAR(255) NOT NULL
+	- add extra column in existing table. will be add at the end
+
+ALTER TABLE campusx.users ADD COLUMN password VARCHAR(255) NOT NULL AFTER name
+	- will add the column after name column (BEFORE name / AFTER name)
+
+ALTER TABLE campusx.users DROP COLUMN password
+	- drop specific column
+
+ALTER TABLE campusx.users MODIFY COLUMN password INTEGER
+	- modify specific column
+
 ###############################################################
 ###################  Constraints of DB  #######################
 ###############################################################
@@ -98,11 +111,17 @@ DEFAULT
 FOREIGN KEY
     - relationship with another Table
 
+DATETIME
+
+CURRENT_TIMESTAMP
+
 ###  REFERENTIAL ACTIONS ###
 RESTRICT
 
 CASCADE
+	- in relations between 2 table, if mother table is deleted child table also delete
 
-SET NULL
+SET_NULL
+	- in relations between 2 table, if mother table is deleted child table will keep but parent value will be NULL
 
 SET DEFAULT
