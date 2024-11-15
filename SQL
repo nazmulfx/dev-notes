@@ -356,12 +356,12 @@ EXCEPT		: SUBTRACTS LAST TABLE FROM FIRST TABLE
 
 
 
-Q-1 : FIND OUT THE MOVIE WITH MAXIMUM SCORE RATING
+Q-1 : FIND OUT THE MOVIE WITH MAXIMUM SCORE RATING (Example of Scalar Sub Query)
 
 	SELECT * FROM campusx.movies ORDER BY score DESC LIMIT 1;
 		- using simple order by and limit
 	SELECT * FROM campusx.movies WHERE score = (SELECT max(SCORE) FROM campusx.movies)
-		- using sub queries
+		- using sub queries (inner query in outer query)
 
 
 
