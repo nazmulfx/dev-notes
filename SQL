@@ -350,13 +350,13 @@ EXCEPT		: SUBTRACTS LAST TABLE FROM FIRST TABLE
 
 2 type Sub Query based on Working
 	1. Independent
-		- can execute directly
+		- can execute Indipendently
 	2. Correlated
 		- inner query depends on outer query
 
 
 
-Q-1 : FIND OUT THE MOVIE WITH MAXIMUM SCORE RATING (Example of Scalar Sub Query)
+Q-1 : FIND OUT THE MOVIE WITH MAXIMUM SCORE RATING (Example of Scalar Indipendent Sub Query)
 
 	SELECT * FROM campusx.movies ORDER BY score DESC LIMIT 1;
 		- using simple order by and limit
