@@ -15,6 +15,76 @@ DROP DATABASE IF EXISTS db_name
     - will remove database, if db not exists no error 'STANDARD WAY'
 
 
+
+###############################################################
+##########################  Table  ############################
+###############################################################
+
+CREATE TABLE IF NOT EXISTS db_name.users(
+	user_id INTEGER,
+  name VARCHAR(255),
+  email VARCHAR(255),
+  password VARCHAR(255)
+)
+    - creating a table
+
+
+TRUNCATE TABLE campusx.users
+    - to remove all records in the table (HIGHLY DANGER)
+    - doesn't remove stracture of the table
+
+DROP TABLE campusx.users
+    - drop table and it's all records
+    - remove stracture of the table
+
+CREATE TABLE IF NOT EXISTS db_name.users(
+	user_id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  name VARCHAR(255) NOT NULL UNIQUE,
+  email VARCHAR(255) NOT NULL UNIQUE,
+  password VARCHAR(255) NOT NULL UNIQUE,
+)
+    - EASY WAY of creating Table
+    - maybe can't change constraints without change table and data loss risk
+
+CREATE TABLE IF NOT EXISTS db_name.users(
+	user_id INTEGER NOT NULL AUTO_INCREMENT,
+  name VARCHAR(255) NOT NULL,
+  email VARCHAR(255) NOT NULL,
+  password VARCHAR(255) NOT NULL,
+  
+  CONSTRAINT user_email_unique UNIQUE (name, email, password),
+  CONSTRAINT user_pk PRIMARY KEY (name, user_id)
+)
+    - NOTE: using constraint. need when we want to unique combination name, email, passowrd (IMPORTANT)
+    - can change constraints without change table or data loss
+
+
+ALTER TABLE campusx.users ADD COLUMN password VARCHAR(255) NOT NULL
+	- add extra column in existing table. will be add at the end
+
+ALTER TABLE campusx.users ADD COLUMN password VARCHAR(255) NOT NULL AFTER name
+	- will add the column after name column (BEFORE name / AFTER name)
+
+ALTER TABLE campusx.users DROP COLUMN password
+	- drop specific column
+
+ALTER TABLE campusx.users MODIFY COLUMN password INTEGER
+	- modify specific column
+
+ALTER TABLE campusx.users ADD CONSTRAINT constraint_name CHECK (age > 18)
+	- add constraint 
+
+drop constraint (i will add the command later)
+	- drop specific constraint
+
+modify constraint
+	- actually modify isn't possible directly, first drop existing constraint and add again
+
+
+
+
+
+
 ###############################################################
 #######################  Functions  ###########################
 ###############################################################
@@ -111,29 +181,27 @@ MD5(), SHA1(), SHA256()					: Hashing functions.
 AES_ENCRYPT() / AES_DECRYPT() (MySQL)	: Encryption and decryption functions.
 
 
-
 ###############################################################
-##########################  Update  ###########################
-###############################################################
-
-UPDATE campusx.smartphone SET processor_brand = 'dimensity' WHERE processor_brand = 'mediatek'
-	- update any column value (NOTE: WHERE clause must, otherwise it will change all rows values)
-
-UPDATE 
-	campusx.users 
-SET 
-	email = 'nitish@email.com',
-  	password = '12345'
-WHERE 
-	name = 'nitish'
-
-
-###############################################################
-##########################  Delete  ###########################
+#########################  Insert  ############################
 ###############################################################
 
-DELETE FROM campusx.smartphones WHERE primary_camera_rear > 150 AND brand_name = 'samsung'
-	- delete specefic rows based on condition
+INSERT INTO db_name.users VALUES
+  ('nazmul@email.com', 'Nazmul', '123', '1'),
+  ('a@email.com', 'a', '123', '2'),
+  ('b@email.com', 'b', '123', '3'),
+  ('c@email.com', 'c', '123', '4')
+	- make sure data serial is matching with column serial
+
+
+INSERT INTO
+  db_name.users (`email`, `name`, `password`, `user_id`)
+VALUES
+  ('nazmul@email.com', 'Nazmul', '123', '1'),
+  ('a@email.com', 'a', '123', '2'),
+  ('b@email.com', 'b', '123', '3'),
+  ('c@email.com', 'c', '123', '4')
+    - update values (order should be accurate as column defined)
+
 
 
 ###############################################################
@@ -168,93 +236,33 @@ ORDER BY / Sorting
 LIMIT
 
 
+
 ###############################################################
-##########################  Table  ############################
+##########################  Update  ###########################
 ###############################################################
 
-CREATE TABLE IF NOT EXISTS db_name.users(
-	user_id INTEGER,
-  name VARCHAR(255),
-  email VARCHAR(255),
-  password VARCHAR(255)
-)
-    - creating a table
+UPDATE campusx.smartphone SET processor_brand = 'dimensity' WHERE processor_brand = 'mediatek'
+	- update any column value (NOTE: WHERE clause must, otherwise it will change all rows values)
 
-
-TRUNCATE TABLE campusx.users
-    - to remove all records in the table (HIGHLY DANGER)
-    - doesn't remove stracture of the table
-
-DROP TABLE campusx.users
-    - drop table and it's all records
-    - remove stracture of the table
-
-CREATE TABLE IF NOT EXISTS db_name.users(
-	user_id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
-  name VARCHAR(255) NOT NULL UNIQUE,
-  email VARCHAR(255) NOT NULL UNIQUE,
-  password VARCHAR(255) NOT NULL UNIQUE,
-)
-    - EASY WAY of creating Table
-    - maybe can't change constraints without change table and data loss risk
-
-CREATE TABLE IF NOT EXISTS db_name.users(
-	user_id INTEGER NOT NULL AUTO_INCREMENT,
-  name VARCHAR(255) NOT NULL,
-  email VARCHAR(255) NOT NULL,
-  password VARCHAR(255) NOT NULL,
-  
-  CONSTRAINT user_email_unique UNIQUE (name, email, password),
-  CONSTRAINT user_pk PRIMARY KEY (name, user_id)
-)
-    - NOTE: using constraint. need when we want to unique combination name, email, passowrd (IMPORTANT)
-    - can change constraints without change table or data loss
-
-
-ALTER TABLE campusx.users ADD COLUMN password VARCHAR(255) NOT NULL
-	- add extra column in existing table. will be add at the end
-
-ALTER TABLE campusx.users ADD COLUMN password VARCHAR(255) NOT NULL AFTER name
-	- will add the column after name column (BEFORE name / AFTER name)
-
-ALTER TABLE campusx.users DROP COLUMN password
-	- drop specific column
-
-ALTER TABLE campusx.users MODIFY COLUMN password INTEGER
-	- modify specific column
-
-ALTER TABLE campusx.users ADD CONSTRAINT constraint_name CHECK (age > 18)
-	- add constraint 
-
-drop constraint (i will add the command later)
-	- drop specific constraint
-
-modify constraint
-	- actually modify isn't possible directly, first drop existing constraint and add again
-
-
+UPDATE 
+	campusx.users 
+SET 
+	email = 'nitish@email.com',
+  	password = '12345'
+WHERE 
+	name = 'nitish'
 
 
 ###############################################################
-#########################  Insert  ############################
+##########################  Delete  ###########################
 ###############################################################
 
-INSERT INTO db_name.users VALUES
-  ('nazmul@email.com', 'Nazmul', '123', '1'),
-  ('a@email.com', 'a', '123', '2'),
-  ('b@email.com', 'b', '123', '3'),
-  ('c@email.com', 'c', '123', '4')
-	- make sure data serial is matching with column serial
+DELETE FROM campusx.smartphones WHERE primary_camera_rear > 150 AND brand_name = 'samsung'
+	- delete specefic rows based on condition
 
 
-INSERT INTO
-  db_name.users (`email`, `name`, `password`, `user_id`)
-VALUES
-  ('nazmul@email.com', 'Nazmul', '123', '1'),
-  ('a@email.com', 'a', '123', '2'),
-  ('b@email.com', 'b', '123', '3'),
-  ('c@email.com', 'c', '123', '4')
-    - update values (order should be accurate as column defined)
+
+
 
 
 ###############################################################
@@ -313,7 +321,7 @@ LEFT JOIN	: All rows from Left Table and only takes matchig rows from Right Tabl
 RIGHT JOIN	: All rows from Right Table and only takes matching rows from Left Table
 FULL JOIN	: LEFT JOIN UNION RIGHT JOIN
 CROSS JOIN	: all possible combination (mostly not used)
-SELF JOIN
+SELF JOIN	: JOINING WITH SAME TABLE
 
 
 
@@ -348,8 +356,12 @@ EXCEPT		: SUBTRACTS LAST TABLE FROM FIRST TABLE
 
 
 
+Q-1 : FIND OUT THE MOVIE WITH MAXIMUM SCORE RATING
 
-
+	SELECT * FROM campusx.movies ORDER BY score DESC LIMIT 1;
+		- using simple order by and limit
+	SELECT * FROM campusx.movies WHERE score = (SELECT max(SCORE) FROM campusx.movies)
+		- using sub queries
 
 
 
