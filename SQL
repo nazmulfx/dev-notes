@@ -14,6 +14,8 @@ DROP DATABASE db_name
 DROP DATABASE IF EXISTS db_name
     - will remove database, if db not exists no error 'STANDARD WAY'
 
+USE db_name;
+	- to use this db
 
 
 ###############################################################
@@ -365,12 +367,67 @@ Sub Query used in:
 	4. DELETE
 
 
-Q-1 : FIND OUT THE MOVIE WITH MAXIMUM SCORE RATING (Example of Scalar Indipendent Sub Query)
+
+###############  EXAMPLE OF SCALAR sub query & INDEPENDENT sub query  ##############
+
+Q-1 : FIND OUT THE MOVIE WITH MAXIMUM SCORE RATING 
 
 	SELECT * FROM campusx.movies ORDER BY score DESC LIMIT 1;
 		- using simple order by and limit
 	SELECT * FROM campusx.movies WHERE score = (SELECT max(SCORE) FROM campusx.movies)
 		- using sub queries (inner query in outer query)
+
+
+Q-2: FIND THE MOVIES WITH HEIGHT PROFIT (VS ORDER BY)
+
+	USE campusx;
+	SELECT * FROM movies ORDER BY (gross - budget) DESC LIMIT 1;
+		- using simple order by and limit
+	SELECT * FROM movies WHERE (gross - budget) = (SELECT MAX(gross - budget) FROM movies);
+		- using sub queries (inner query in outer query)
+
+Q-3: FIND HOW MANY MOVIES HAVE A RATING > THE AVG OF ALL THE MOVIES RATING & FIND COUNT ALL MOVIES HAVE RATING > AVG RATING OF ALL MOVIES
+	USE campusx;
+	SELECT * FROM movies WHERE score > (SELECT AVG(score) FROM movies);
+	SELECT COUNT(*) FROM movies WHERE score > (SELECT AVG(score) FROM movies);
+
+Q-4: FIND OUT MAX SCORE MOVIE RELEASED IN 2000
+	USE campusx;
+	SELECT * FROM movies WHERE year = 2000 AND score  = (SELECT MAX(score) FROM movies WHERE year = 2000);
+
+
+###############  EXAMPLE OF ROWS sub query & INDEPENDENT sub query  ##############
+
+Q-1: FIND OUT THE USERS WHO NEVER PLACED ANY ORDERS
+	SELECT DISTINCT(user_id) FROM orders
+		- step-1: getting all user_id who placed orders
+
+	USE campusx;
+	SELECT * FROM users WHERE user_id NOT IN (SELECT DISTINCT(user_id) FROM orders);
+
+Q-2: FIND ALL THE MOVEIS MADE BY TOP 3 DIRECTORS (IN TERMS OF TOTAL GROSS INCOME)
+	
+	SELECT director, SUM(gross) FROM movies GROUP BY director
+		- step-1: finding sum of gross profit for each director
+	SELECT director, SUM(gross) FROM movies GROUP BY director ORDER BY SUM(gross) DESC LIMIT 3
+		- step-2: finding highest 3
+
+	USE campusx;
+	SELECT * FROM movies WHERE director IN (SELECT director FROM movies GROUP BY director ORDER BY SUM(gross) DESC LIMIT 3)
+		- ERROR: this version of MariaDB doesn't support LIMIT in inner/Sub Query
+
+	USE campusx;
+	WITH top_directors AS (SELECT director FROM movies GROUP BY director ORDER BY SUM(gross) DESC LIMIT 3)
+	SELECT * FROM movies WHERE director IN (SELECT * FROM top_directors);
+
+
+
+
+
+
+
+
+
 
 
 
