@@ -421,21 +421,27 @@ Q-2: FIND ALL THE MOVEIS MADE BY TOP 3 DIRECTORS (IN TERMS OF TOTAL GROSS INCOME
 	SELECT * FROM movies WHERE director IN (SELECT * FROM top_directors);
 
 
+###############  EXAMPLE OF TABLE sub query & INDEPENDENT sub query  ##############
+
+Q-1: FIND THE MOST PROFITABLE MOVIE EACH YEAR
+	SELECT year, MAX(gross-budget) FROM movies ORDER BY year
+		- step-1: query max profitable movie each ear
+	
+	USE campusx;
+	SELECT * FROM movies WHERE (year, gross-budget) IN (SELECT year, MAX(gross-budget) FROM movies ORDER BY year);
 
 
 
+###############  EXAMPLE OF CORRELATED sub query  ##############
+
+Q-1: FIND ALL THE MOVIES THAT HAVE A RATING HIGHER THAN THE AVG RATING OF SAME GENRE.
+		NOTE: genre means the category of the movies like, Action, Crime, Thriller, Fantasy etc.
+
+	USE campusx;
+	SELECT * FROM movies AS m1 WHERE score > (SELECT AVG(score) FROM movies AS m2 WHERE m2.genre = m1.genre)
 
 
-
-
-
-
-
-
-
-
-
-
-
+Q-2: FIND OUT THE FAVORITE FOOD OF EACH CUSTOMER
+	
 
 
