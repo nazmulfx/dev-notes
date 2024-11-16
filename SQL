@@ -354,6 +354,15 @@ EXCEPT		: SUBTRACTS LAST TABLE FROM FIRST TABLE
 	2. Correlated
 		- inner query depends on outer query
 
+Sub Query used in:
+	1. INSERT
+	2. SELECT
+		a. WHERE
+		b. SELECT
+		c. FROM
+		d. HAVING
+	3. UPDATE
+	4. DELETE
 
 
 Q-1 : FIND OUT THE MOVIE WITH MAXIMUM SCORE RATING (Example of Scalar Indipendent Sub Query)
