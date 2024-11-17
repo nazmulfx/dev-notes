@@ -504,7 +504,15 @@ SELECT *, AVG(marks) OVER(PARTITION BY branch) FROM student_marks
 NOTE: 'Window functions' is like 'GROUP BY'. but difference is 'GROUP BY' works on Rows but 'Window Function' works like by making separate window by data in the table
 
 
-
+USE campusx;
+SELECT *,
+	AVG(marks) OVER() AS 'AVG in all student',
+    MIN(marks) OVER() AS 'MIN in all student',
+    MAX(marks) OVER() AS 'MAX in all student',
+    MIN(marks) OVER(PARTITION BY branch) AS 'MIN in dept',
+    MAX(marks) OVER(PARTITION BY branch) AS 'MAX in dept'
+FROM student_marks
+ORDER BY student_id
 
 
 
