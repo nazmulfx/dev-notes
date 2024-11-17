@@ -517,8 +517,11 @@ ORDER BY student_id
 
 Q-1: FIND ALL THE STUDENTS WHO HAVE MARKS HIGHER THAT THE AVG MARKS OF THEIR RESPECTIVE BRANCH
 
-
-
+	USE campusx;
+	SELECT * 
+	FROM (SELECT *, AVG(marks) OVER(PARTITION BY branch) AS 'branch_avg' FROM student_marks) AS t
+	WHERE t.marks > t.branch_avg
+	
 
 
 
