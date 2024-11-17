@@ -481,3 +481,24 @@ Q-2: FIND OUT THE FAVORITE FOOD OF EACH CUSTOMER
 	
 	SELECT * FROM fav_food AS t1 WHERE frequency = (SELECT MAX(frequency) FROM fav_food AS t2 WHERE t2.user_id = t1.user_id)
 
+
+
+
+
+###############################################################
+###################  Window Function  #########################
+###############################################################
+
+
+
+
+
+
+
+
+
+
+
+
+
+
