@@ -32,3 +32,8 @@ pip install mysql-connector
 
 # After you're done, deactivate the virtual environment
 deactivate
+
+# check is the python running from env
+which python
+    will return path of python running like '/home/nazmul/campusx/env/bin/python'
+
