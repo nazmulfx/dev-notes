@@ -501,7 +501,7 @@ SELECT *, AVG(marks) OVER(PARTITION BY branch) FROM student_marks
 	- return all columes and avg markes on each branch
 	- window made by branch 
 
-NOTE: Window functions is like 'GROUP BY'. but difference is 'GROUP BY' works on Rows but Window Function works like by making separate window by data in the table
+NOTE: 'Window functions' is like 'GROUP BY'. but difference is 'GROUP BY' works on Rows but 'Window Function' works like by making separate window by data in the table
 
 
 
