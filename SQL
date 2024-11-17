@@ -488,8 +488,18 @@ Q-2: FIND OUT THE FAVORITE FOOD OF EACH CUSTOMER
 ###############################################################
 ###################  Window Function  #########################
 ###############################################################
+USE campusx;
 
+SELECT AVG(marks) FROM student_marks
+	- return only single row with avg marks (single value)
 
+SELECT AVG(marks) OVER() FROM student_marks
+	- return avg num of all rows, to all rows in the table (multiple rows value)
+	- window func. OVER thinking that whole table is a window
+
+SELECT *, AVG(marks) OVER(PARTITION BY branch) FROM student_marks
+	- return all columes and avg markes on each branch
+	- window made by branch 
 
 
 
