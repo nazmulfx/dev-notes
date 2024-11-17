@@ -488,6 +488,9 @@ Q-2: FIND OUT THE FAVORITE FOOD OF EACH CUSTOMER
 ###############################################################
 ###################  Window Function  #########################
 ###############################################################
+1. OVER()
+
+
 USE campusx;
 
 SELECT AVG(marks) FROM student_marks
@@ -523,9 +526,18 @@ Q-1: FIND ALL THE STUDENTS WHO HAVE MARKS HIGHER THAT THE AVG MARKS OF THEIR RES
 	WHERE t.marks > t.branch_avg
 	
 
+Q-2: FIND TOP 2 MOST PAYING CUSTOMERS OF EACH MONTH
 
+	SELECT *,
+	RANK() OVER(ORDER BY marks DESC)
+	FROM student_marks
+		- ranking students in whole window (whole table) by marks
 
-
+	SELECT *,
+	RANK() OVER(PARTITION BY branch ORDER BY marks DESC)
+	FROM student_marks
+		- ranking students in branch window by marks
+	
 
 
 
