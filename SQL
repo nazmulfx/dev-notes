@@ -489,6 +489,7 @@ Q-2: FIND OUT THE FAVORITE FOOD OF EACH CUSTOMER
 ###################  Window Function  #########################
 ###############################################################
 1. OVER()
+2. RANK()  /  DENSE_RANK()  /  ROW_NUMBER()
 
 
 USE campusx;
@@ -537,7 +538,39 @@ Q-2: FIND TOP 2 MOST PAYING CUSTOMERS OF EACH MONTH
 	RANK() OVER(PARTITION BY branch ORDER BY marks DESC)
 	FROM student_marks
 		- ranking students in branch window by marks
+		- if 2 students have same marks like 95 & 95 rank will be like 1  & 1 and next 3
 	
+	SELECT *,
+	DENSE_RANK() OVER(PARTITION BY branch ORDER BY marks DESC)
+	FROM student_marks
+		- ranking students in branch window by marks
+		- if 2 students have same marks like 95 & 95 rank will be like 1  & 1 and next 2
 
+		MARKS => RANK()		-> DENSE_RANK()
+		95	  => 1			-> 1
+		95	  => 1			-> 1
+		80	  => 3			-> 3
 
+	SELECT *,
+	ROW_NUMBER() OVER(PARTITION BY branch)
+	FROM student_marks
+		- basically assigning a row number to each row based on window
+		Output:
+			'7', 'Deepak',	'CSE', '98', '1'
+			'5', 'Shubham',	'CSE', '78', '2'
+			'8', 'Arpan',	'CSE', '95', '3'
+
+	SELECT *,
+	CONCAT(branch, '-', ROW_NUMBER() OVER(PARTITION BY branch))
+	FROM student_marks
+		Output:
+			'7', 'Deepak',	'CSE', '98', 'CSE-1'
+			'5', 'Shubham',	'CSE', '78', 'CSE-2'
+			'8', 'Arpan',	'CSE', '95', 'CSE-3'
+			'12', 'Rohit',	'ECE', '95', 'ECE-1'
+			'10', 'Ankit',	'ECE', '88', 'ECE-2'
+			'11', 'Anand',	'ECE', '81', 'ECE-3'
+			'2', 'Rishabh',	'EEE', '91', 'EEE-1'
+			'3', 'Anukant',	'EEE', '69', 'EEE-2'
+			'1', 'Nitish',	'EEE', '82', 'EEE-3'
 
