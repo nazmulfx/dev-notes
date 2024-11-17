@@ -1,3 +1,29 @@
 sudo apt update
 sudo apt --fix-broken install
 sudo dpkg -i mysql-workbench-community_8.0.40-1ubuntu24.04_amd64.deb
+
+
+
+
+
+
+
+
+
+
+##############################################################
+###################   Python Environment   ###################
+##############################################################
+
+
+# Create a virtual environment
+python3 -m venv venv
+
+# Activate the virtual environment
+source venv/bin/activate
+
+# Install the package
+pip install mysql-connector
+
+# After you're done, deactivate the virtual environment
+deactivate
