@@ -490,6 +490,7 @@ Q-2: FIND OUT THE FAVORITE FOOD OF EACH CUSTOMER
 ###############################################################
 1. OVER()
 2. RANK()  /  DENSE_RANK()  /  ROW_NUMBER()
+3. FIRST_VALUE()  /  LAST_VALUE()  /  NTH_VALUE()
 
 
 USE campusx;
