@@ -443,5 +443,41 @@ Q-1: FIND ALL THE MOVIES THAT HAVE A RATING HIGHER THAN THE AVG RATING OF SAME G
 
 Q-2: FIND OUT THE FAVORITE FOOD OF EACH CUSTOMER
 	
+	SELECT * FROM users AS u
+		- first select all users
 
+	SELECT * FROM users AS u
+	JOIN orders AS o ON o.user_id = u.user_id
+		- join with orders (User can order & user linked with order)
+
+	SELECT * FROM users AS u
+	JOIN orders AS o ON o.user_id = u.user_id
+	JOIN order_details AS od ON od.order_id = o.order_id
+		- join with order details (Orders linked with order_details)
+
+	SELECT * FROM users AS u
+	JOIN orders AS o ON o.user_id = u.user_id
+	JOIN order_details AS od ON od.order_id = o.order_id
+	JOIN food AS f ON f.f_id = od.f_id
+		- join with food (order_details linked with food)
+
+	SELECT name, f_name, Count(*) FROM users AS u
+	JOIN orders AS o ON o.user_id = u.user_id
+	JOIN order_details AS od ON od.order_id = o.order_id
+	JOIN food AS f ON f.f_id = od.f_id
+	GROUP BY o.user_id, od.f_id
+		- checking which user order which food how many times
+
+
+
+	USE campusx;
+	WITH fav_food AS (
+		SELECT o.user_id, name, f_name, Count(*) AS 'frequency' FROM users AS u
+		JOIN orders AS o ON o.user_id = u.user_id
+		JOIN order_details AS od ON od.order_id = o.order_id
+		JOIN food AS f ON f.f_id = od.f_id
+		GROUP BY o.user_id, od.f_id
+	)
+	
+	SELECT * FROM fav_food AS t1 WHERE frequency = (SELECT MAX(frequency) FROM fav_food AS t2 WHERE t2.user_id = t1.user_id)
 
