@@ -20,7 +20,12 @@ sudo dpkg -i mysql-workbench-community_8.0.40-1ubuntu24.04_amd64.deb
 python3 -m venv venv
 
 # Activate the virtual environment
-source venv/bin/activate
+For bash or sh:
+    source venv/bin/activate
+For zsh:
+    source venv/bin/activate
+For fish:
+    source venv/bin/activate.fish
 
 # Install the package
 pip install mysql-connector
