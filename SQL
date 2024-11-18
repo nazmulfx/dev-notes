@@ -584,3 +584,111 @@ Q-2: FIND TOP 2 MOST PAYING CUSTOMERS OF EACH MONTH
 			'3', 'Anukant',	'EEE', '69', 'EEE-2'
 			'1', 'Nitish',	'EEE', '82', 'EEE-3'
 
+
+##################  FIRST_VALUE()  /  LAST_VALUE()  /  NTH_VALUE()  #####################
+
+Q-1: FIND MAXIMUM marks AND ADD IN EACH ROW
+
+	SELECT *,
+	FIRST_VALUE(marks) OVER(ORDER BY marks DESC)
+	FROM student_marks;
+
+	OUTPUT:
+		'7', 'Deepak',	'CSE', '98', '98'
+		'8', 'Arpan',	'CSE', '95', '98'
+		'2', 'Rishabh',	'EEE', '91', '98'
+		'15', 'Sunny',	'MECH','39', '98'
+
+
+
+Q-2: FIND MINIMUM marks AND ADD IN EACH ROW
+
+	SELECT *,
+	LAST_VALUE(marks) OVER(ORDER BY marks DESC)
+	FROM student_marks;
+
+	OUTPUT:
+		'7', 'Deepak',	'CSE', '98', '98'
+		'8', 'Arpan',	'CSE', '95', '95'
+		'2', 'Rishabh',	'EEE', '91', '91'
+		'15', 'Sunny',	'MECH','39', '39'
+			- This is happen because of frame. here need first to last rows means 'ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING' this frame to get the last value
+
+
+	SELECT *,
+	LAST_VALUE(marks) OVER(ORDER BY marks DESC ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING)
+	FROM student_marks;
+
+	OUTPUT:
+		'7', 'Deepak',	'CSE', '98', '39'
+		'8', 'Arpan',	'CSE', '95', '39'
+		'2', 'Rishabh',	'EEE', '91', '39'
+		'15', 'Sunny',	'MECH','39', '39'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
