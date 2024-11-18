@@ -488,11 +488,18 @@ Q-2: FIND OUT THE FAVORITE FOOD OF EACH CUSTOMER
 ###############################################################
 ###################  Window Function  #########################
 ###############################################################
-1. OVER()
-2. RANK()  /  DENSE_RANK()  /  ROW_NUMBER()
-3. FIRST_VALUE()  /  LAST_VALUE()  /  NTH_VALUE()
+WINDOW FUNCTIONS
+	1. OVER()
+	2. RANK()  /  DENSE_RANK()  /  ROW_NUMBER()
+	3. FIRST_VALUE()  /  LAST_VALUE()  /  NTH_VALUE()
 
+FRAMES
+	1. ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW				: frame includes all rows from the beginning of the partition up to and including the current row
+	2. ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING						: current row and the row immediately before and after it.
+	3. ROWS BETWEEN 3 PRECEDING AND 2 FOLLWOING						: frame includes all rows in the partition.
+	4. ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING		: current row and the three rows before it and the two rows after it.
 
+###############################   OVER()   #####################################
 USE campusx;
 
 SELECT AVG(marks) FROM student_marks
@@ -527,6 +534,8 @@ Q-1: FIND ALL THE STUDENTS WHO HAVE MARKS HIGHER THAT THE AVG MARKS OF THEIR RES
 	FROM (SELECT *, AVG(marks) OVER(PARTITION BY branch) AS 'branch_avg' FROM student_marks) AS t
 	WHERE t.marks > t.branch_avg
 	
+
+##################  RANK()  /  DENSE_RANK()  /  ROW_NUMBER()  #####################
 
 Q-2: FIND TOP 2 MOST PAYING CUSTOMERS OF EACH MONTH
 
