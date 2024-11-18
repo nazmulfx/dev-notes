@@ -494,7 +494,7 @@ WINDOW FUNCTIONS
 	3. FIRST_VALUE()  /  LAST_VALUE()  /  NTH_VALUE()
 
 FRAMES
-	1. ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW				: frame includes all rows from the beginning of the partition up to and including the current row
+	1. ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW				: (default frame) frame includes all rows from the beginning of the partition up to and including the current row
 	2. ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING						: current row and the row immediately before and after it.
 	3. ROWS BETWEEN 3 PRECEDING AND 2 FOLLWOING						: frame includes all rows in the partition.
 	4. ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING		: current row and the three rows before it and the two rows after it.
