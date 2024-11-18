@@ -488,10 +488,12 @@ Q-2: FIND OUT THE FAVORITE FOOD OF EACH CUSTOMER
 ###############################################################
 ###################  Window Function  #########################
 ###############################################################
+
 WINDOW FUNCTIONS
 	1. OVER()
 	2. RANK()  /  DENSE_RANK()  /  ROW_NUMBER()
 	3. FIRST_VALUE()  /  LAST_VALUE()  /  NTH_VALUE()
+	4. LAG()  / LEAD()
 
 FRAMES
 	1. ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW				: (default frame) frame includes all rows from the beginning of the partition up to and including the current row
