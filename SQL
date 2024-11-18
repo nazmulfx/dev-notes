@@ -229,7 +229,7 @@ SELECT * FROM campusx.smartphones WHERE processor_brand NOT IN ('snapdragon', 'b
 	- filter rows using where clause
 
 
-NOTE: QUERY EXECUTION ORDER -> FROM, JOIN, WHERE, GROUP BY, HAVING, SELECT, DISTINCT, ORDERBY, LIMIT
+NOTE: QUERY EXECUTION ORDER -> FROM, JOIN, WHERE, GROUP BY, HAVING, SELECT, DISTINCT, ORDER BY, LIMIT
 
 WHERE - where works for select
 GROUP BY
