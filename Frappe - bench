@@ -113,3 +113,13 @@ Commands:
   console                     Start ipython console for a site
   data-import                 Import documents in bulk from CSV or XLSX...
   destroy-all-sessions        Clear sessions of all users (logs them out)
+
+
+
+
+
+########################################################
+################## Frappe Insights #####################
+########################################################
+
+installation guide and product link: https://github.com/frappe/insights
