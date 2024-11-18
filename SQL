@@ -625,6 +625,30 @@ Q-2: FIND MINIMUM marks AND ADD IN EACH ROW
 		'2', 'Rishabh',	'EEE', '91', '39'
 		'15', 'Sunny',	'MECH','39', '39'
 
+Q-3: FIND OUT 2ND STUDENT IN EACH BRANCH
+
+	SELECT *,
+	NTH_VALUE(NAME, 2) OVER(PARTITION BY branch ORDER BY marks DESC ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING)
+	FROM student_marks;
+
+	OUTPUT:
+		'7',	'Deepak',	'CSE',	'98', 'Arpan'
+		'8',	'Arpan',	'CSE',	'95', 'Arpan'
+		'5',	'Shubham',	'CSE',	'78', 'Arpan'
+		'6',	'Ved',		'CSE',	'43', 'Arpan'
+		'9',	'Vinay',	'ECE',	'95', 'Rohit'
+		'12',	'Rohit',	'ECE',	'95', 'Rohit'
+		'10',	'Ankit',	'ECE',	'88', 'Rohit'
+		'11',	'Anand',	'ECE',	'81', 'Rohit'
+		'2',	'Rishabh',	'EEE',	'91', 'Nitish'
+		'1',	'Nitish',	'EEE',	'82', 'Nitish'
+		'3',	'Anukant',	'EEE',	'69', 'Nitish'
+		'4',	'Rupesh',	'EEE',	'55', 'Nitish'
+		'13',	'Prashant',	'MECH',	'75', 'Amit'
+		'14',	'Amit',		'MECH',	'69', 'Amit'
+		'16',	'Gautam',	'MECH',	'51', 'Amit'
+		'15',	'Sunny',	'MECH',	'39', 'Amit'
+			- if nth value doesn't exist then NULL value will set.
 
 
 
