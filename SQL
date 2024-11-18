@@ -271,7 +271,7 @@ DELETE FROM campusx.smartphones WHERE primary_camera_rear > 150 AND brand_name =
 ###################  Constraints of DB  #######################
 ###############################################################
 
-NOT NuLL
+NOT NULL
     - this column can not be NULL
 
 UNIQUE (combo)
