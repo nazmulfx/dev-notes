@@ -51,6 +51,7 @@ bench set-config -g developer_mode true
 		- to enable developer mode globally
 
 bench set-config -g server_script_enabled true
+bench set-config -g server_script_enabled 1
 		- enable server-side-script
 
 
