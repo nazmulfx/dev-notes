@@ -11,6 +11,7 @@ from frappe.model.docstatus import DocStatus
 
 
 source /home/ubuntu/frappe-bench/env/bin/activate
+		- activate bench environment
 
 
 bench new-site your-site-name
