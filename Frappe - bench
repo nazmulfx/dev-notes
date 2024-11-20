@@ -10,6 +10,8 @@ from frappe.model.docstatus import DocStatus
 ######################################  Bench  #############################################
 
 
+source /home/ubuntu/frappe-bench/env/bin/activate
+
 
 bench new-site your-site-name
 		- Create a new site
