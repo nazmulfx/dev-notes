@@ -732,9 +732,36 @@ Q-5: FIND THE TOTAL RUNS IN 10th, 50th, 100th number Match in specific player =>
 		'Match-200', '41', '6334'
 
 
+Q-6: FIND AVG RUNS OF VIRAT KOHLI USING CUMULATIVE AVG
 
+	SELECT * FROM (
+		SELECT 
+			CONCAT('Match-', CAST(ROW_NUMBER() OVER(ORDER BY ID) AS CHAR)) AS 'match_no',
+			SUM(batsman_run) AS 'runs_scored',
+			SUM(SUM(batsman_run)) OVER(ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS 'career_runs',
+			AVG(SUM(batsman_run)) OVER(ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS 'career_runs'
+		FROM campusx.IPL_Ball_by_Ball_2008_2022
+		WHERE batter = 'v kohli'
+		GROUP BY ID) AS t
+			- calculating avg runs based on match
+			
+	SELECT * FROM (
+		SELECT 
+			CONCAT('Match-', CAST(ROW_NUMBER() OVER(ORDER BY ID) AS CHAR)) AS 'match_no',
+			SUM(batsman_run) AS 'runs_scored',
+			SUM(SUM(batsman_run)) OVER w AS 'career_runs',
+			AVG(SUM(batsman_run)) OVER w AS 'career_runs'
+		FROM campusx.IPL_Ball_by_Ball_2008_2022
+		WHERE batter = 'v kohli'
+		GROUP BY ID
+		WINDOW w as (ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)) AS t
+			- simplify window functions
 
-
+			OUTPUT:
+			# match_no	runs_scored	career_runs	Avg runs
+			Match-1		1			1			1.0000
+			Match-2		23			24			12.0000
+			Match-3		13			37			12.3333
 
 
 
