@@ -764,8 +764,20 @@ Q-6: FIND AVG RUNS OF VIRAT KOHLI USING CUMULATIVE AVG
 			Match-3		13			37			12.3333
 
 
+Q-7: FIND THE ROLLING AVG OF LAST 10 MATCH => EXAMPLE OF MOVING AVERAGE IN FX CHART LIKE 100 DAY MA
 
-
+	SELECT 
+		CONCAT('Match-', CAST(ROW_NUMBER() OVER(ORDER BY ID) AS CHAR)) AS 'match_no',
+		SUM(batsman_run) AS 'runs_scored',
+		SUM(SUM(batsman_run)) OVER w AS 'career_runs',
+		AVG(SUM(batsman_run)) OVER w AS 'career_avg',
+		AVG(SUM(batsman_run)) OVER(ROWS BETWEEN 9 PRECEDING AND CURRENT ROW) AS 'Rolling avg last 10 match'
+	FROM campusx.IPL_Ball_by_Ball_2008_2022
+	WHERE batter = 'v kohli'
+	GROUP BY ID
+	WINDOW w as (ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)
+		- calculating last 10 match run avg 
+		- it is an example of current performance used in analytics and Most useful feature
 
 
 
