@@ -502,6 +502,7 @@ FRAMES
 	4. ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING		: current row and the three rows before it and the two rows after it.
 
 ###############################   OVER()   #####################################
+
 USE campusx;
 
 SELECT AVG(marks) FROM student_marks
@@ -655,9 +656,80 @@ Q-3: FIND OUT 2ND STUDENT IN EACH BRANCH
 
 
 
+Q-4: FIND TOP 5 BATSMAN FROM EACH TEAM - best example of RANK()
+
+	SELECT * FROM campusx.IPL_Ball_by_Ball_2008_2022;
+		- all data
+
+	SELECT 
+		BattingTeam,
+		batter
+	FROM campusx.IPL_Ball_by_Ball_2008_2022
+	GROUP BY BattingTeam, batter
+		- grouping on team, batsman 
 
 
+	SELECT 
+		BattingTeam,
+		batter,
+		SUM(batsman_run) AS 'total_run',
+		DENSE_RANK() OVER(PARTITION BY BattingTeam ORDER BY SUM(batsman_run) DESC) AS 'rank_with_team'
+	FROM campusx.IPL_Ball_by_Ball_2008_2022
+	GROUP BY BattingTeam, batter
+		- adding column Sum(run) & Rank
 
+	SELECT * 
+	FROM (
+		SELECT 
+			BattingTeam,
+			batter,
+			SUM(batsman_run) AS 'total_run',
+			DENSE_RANK() OVER(PARTITION BY BattingTeam ORDER BY SUM(batsman_run) DESC) AS 'rank_with_team'
+		FROM campusx.IPL_Ball_by_Ball_2008_2022
+		GROUP BY BattingTeam, batter) AS t
+	WHERE t.rank_with_team < 6
+	ORDER BY BattingTeam, rank_with_team
+		- filter top 5 AND order by team and rank
+
+
+Q-5: FIND THE TOTAL RUNS IN 10th, 50th, 100th number Match in specific player => best example of Cumulative SUM
+
+	SELECT * FROM campusx.IPL_Ball_by_Ball_2008_2022;
+		- full table
+
+	SELECT 
+		CONCAT('Match-', CAST(ROW_NUMBER() OVER(ORDER BY ID) AS CHAR)) AS 'match_no',
+		SUM(batsman_run) AS 'runs_scored'
+	FROM campusx.IPL_Ball_by_Ball_2008_2022
+	WHERE batter = 'v kohli'
+	GROUP BY ID
+		- group by match_id & made a customer column using row number
+		
+	SELECT 
+		CONCAT('Match-', CAST(ROW_NUMBER() OVER(ORDER BY ID) AS CHAR)) AS 'match_no',
+		SUM(batsman_run) AS 'runs_scored',
+		SUM(SUM(batsman_run)) OVER(ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS 'career_runs'
+	FROM campusx.IPL_Ball_by_Ball_2008_2022
+	WHERE batter = 'v kohli'
+	GROUP BY ID
+		- calculated cumulative sum 
+
+	SELECT * FROM (
+		SELECT 
+			CONCAT('Match-', CAST(ROW_NUMBER() OVER(ORDER BY ID) AS CHAR)) AS 'match_no',
+			SUM(batsman_run) AS 'runs_scored',
+			SUM(SUM(batsman_run)) OVER(ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS 'career_runs'
+		FROM campusx.IPL_Ball_by_Ball_2008_2022
+		WHERE batter = 'v kohli'
+		GROUP BY ID) AS t
+	WHERE match_no = 'Match-10' OR match_no = 'Match-50' OR match_no = 'Match-100' OR match_no = 'Match-200'
+		- retrive specific match result from sub query
+
+		OUTPUT: 
+		'Match-10',	 '3',  '117'
+		'Match-50',  '11', '1131'
+		'Match-100', '13', '2650'
+		'Match-200', '41', '6334'
 
 
 
