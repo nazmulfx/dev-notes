@@ -501,7 +501,12 @@ WINDOW FUNCTIONS
 	9. Percentiles & Quantiles -> deciles(ten equal parts), quartiles(four equal parts), percentiles(100 equal parts) or any other number of interval
 			- PERCENTILE_DISC
 			- PERCENTILE_CONT
-	10. 
+	10. OUTLINERS 
+	11. NTILE() -> SEGMENTATION
+			- Devide data set into equal dataset
+				9   -> 3, 3, 3  devided equally
+				10  -> 4, 3, 3  devided equally and last one set at first bucket
+				11  -> 4, 4, 3  devided equally and remaining set at first bucket and second bucket
 
 FRAMES
 	1. ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW				: (default frame) frame includes all rows from the beginning of the partition up to and including the current row
