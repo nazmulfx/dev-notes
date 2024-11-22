@@ -819,7 +819,13 @@ Q-8: FIND OUT THE PERCENT OF CHANGE OF VIEWS MONTH OVER MONTH -> (BEST EXAMPLE O
 
 
 
+####################################   NTILE()   ####################################
 
+Q-9: take all students and separte in 3 bucket by marks
+
+	SELECT *,
+		NTILE(3) OVER(ORDER BY marks DESC) AS 'buckets'
+	FROM campusx.student_marks
 
 
 
