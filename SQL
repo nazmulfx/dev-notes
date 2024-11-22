@@ -498,6 +498,7 @@ WINDOW FUNCTIONS
 	6. Cumulative AVG
 	7. Rolling Window -> Rolling Frame ( like, last 100 rows avg )
 	8. Percent Change 
+	9. Percentiles & Quantiles -> deciles(ten equal parts), quartiles(four equal parts), percentiles(100 equal parts) or any other number of interval
 
 FRAMES
 	1. ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW				: (default frame) frame includes all rows from the beginning of the partition up to and including the current row
@@ -581,7 +582,7 @@ Q-2: FIND TOP 2 MOST PAYING CUSTOMERS OF EACH MONTH
 	CONCAT(branch, '-', ROW_NUMBER() OVER(PARTITION BY branch))
 	FROM student_marks
 		Output:
-			'7', 'Deepak',	'CSE', '98', 'CSE-1'
+			'7',  'Deepak',	'CSE', '98', 'CSE-1'
 			'5', 'Shubham',	'CSE', '78', 'CSE-2'
 			'8', 'Arpan',	'CSE', '95', 'CSE-3'
 			'12', 'Rohit',	'ECE', '95', 'ECE-1'
