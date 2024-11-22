@@ -493,7 +493,7 @@ WINDOW FUNCTIONS
 	1. OVER()
 	2. RANK()  /  DENSE_RANK()  /  ROW_NUMBER()
 	3. FIRST_VALUE()  /  LAST_VALUE()  /  NTH_VALUE()
-	4. LAG()  / LEAD()
+	4. LAG()  / LEAD() -> Default 1 row before/after, LAG(Column_name, 7) -> nth row before/after
 	5. Cumulative SUM
 	6. Cumulative AVG
 	7. Rolling Window -> Rolling Frame ( like, last 100 rows avg )
