@@ -494,6 +494,10 @@ WINDOW FUNCTIONS
 	2. RANK()  /  DENSE_RANK()  /  ROW_NUMBER()
 	3. FIRST_VALUE()  /  LAST_VALUE()  /  NTH_VALUE()
 	4. LAG()  / LEAD()
+	5. Cumulative SUM
+	6. Cumulative AVG
+	7. Rolling Window -> Rolling Frame ( like, last 100 rows avg )
+	8. Percent Change 
 
 FRAMES
 	1. ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW				: (default frame) frame includes all rows from the beginning of the partition up to and including the current row
@@ -692,6 +696,9 @@ Q-4: FIND TOP 5 BATSMAN FROM EACH TEAM - best example of RANK()
 		- filter top 5 AND order by team and rank
 
 
+###########################################   CUMULATIVE SUM   ##############################################
+
+
 Q-5: FIND THE TOTAL RUNS IN 10th, 50th, 100th number Match in specific player => best example of Cumulative SUM
 
 	SELECT * FROM campusx.IPL_Ball_by_Ball_2008_2022;
@@ -781,6 +788,25 @@ Q-7: FIND THE ROLLING AVG OF LAST 10 MATCH => EXAMPLE OF MOVING AVERAGE IN FX CH
 
 
 
+Q-8: FIND OUT THE PERCENT OF CHANGE OF VIEWS MONTH OVER MONTH -> (BEST EXAMPLE OF LAG & PERCENT OF CHANGE)
+
+	-- percent change = ((new_value - old_value)/ old_value)*100
+	
+	SELECT 
+		YEAR(date) AS 'year', 
+		MONTHNAME(date) AS 'month',
+		SUM(views) AS 'total_views',
+		(SUM(views) - LAG(SUM(views)) OVER(ORDER BY YEAR(date), MONTH(date)))/LAG(SUM(views)) OVER(ORDER BY YEAR(date), MONTH(date))*100 AS 'change_in_percent'
+	FROM campusx.youtube
+	GROUP BY YEAR(date), MONTH(date)
+
+	OUTPUT:
+		# year, 'month',  'total_views', 'change_in_percent'
+		'2030', 'April',  '155113',      '-10.6353'
+		'2030', 'May',    '163666',      '5.5140'
+		'2030', 'June',   '133715',      '-18.3001'
+		'2030', 'July',   '154930',      '15.8658'
+		'2030', 'August', '162543',      '4.9138'
 
 
 
