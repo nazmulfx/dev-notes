@@ -507,6 +507,9 @@ WINDOW FUNCTIONS
 				9   -> 3, 3, 3  devided equally
 				10  -> 4, 3, 3  devided equally and last one set at first bucket
 				11  -> 4, 4, 3  devided equally and remaining set at first bucket and second bucket
+	12. CUME_DIST() -> Cumulative Distribution
+	13. PARTITON IN MULTIPLE COLUMN
+
 
 FRAMES
 	1. ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW				: (default frame) frame includes all rows from the beginning of the partition up to and including the current row
