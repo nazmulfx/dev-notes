@@ -828,8 +828,29 @@ Q-9: take all students and separte in 3 bucket by marks
 	FROM campusx.student_marks
 
 
+Q-10: TAKE ALL SMARTPHONES AND DEVICE IN 3 CATEGORY PREMIUM, MID-RANGE, BUDGET PHONES => BEST EXAMPLE OF NTILE()
 
+	SELECT brand, model, price,
+	CASE
+		WHEN bucket = 1 THEN 'budget'
+		WHEN bucket = 2 THEN 'mid-range'
+		WHEN bucket = 3 THEN 'premium'
+	END AS 'phone_type'
+	FROM (SELECT brand, model, price,
+			NTILE(3) OVER(ORDER BY price) AS 'bucket'
+	  	FROM campusx.smartphone) t
 
+	output:
+	# brand		model						price	phone_type
+	Micromax	Micromax IN 2C				5999	budget
+	Tecno		Tecno Spark Go 	2022		6249	budget
+	Realme		Realme C30 (3GB RAM + 32GB)	6299	budget
+	Samsung		Samsung Galaxy A50s			15990	mid-range
+	Vivo		Vivo Y33T					15990	mid-range
+	OPPO		OPPO A73					15990	mid-range
+	Realme		Realme 10 Pro Plus 8/256	27999	premium
+	OnePlus		OnePlus Nord 3 5G			27999	premium
+	Honor		Honor X9a					27999	premium
 
 
 
