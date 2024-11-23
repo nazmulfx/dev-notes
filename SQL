@@ -977,8 +977,26 @@ STRING TYPES
 
 Wildcards
 	1. like
-		- percent %
-		- underscore _
+		- percent (%)
+		- underscore (_)
+
+String Functions
+	1. UPPER()  /  LOWER()
+	2. CONCAT() & CONCAT_WS()
+	3. SUBSTR -> LAST 5 CHARS
+	4. REPLACE()
+	5. REVERSE() -> Palindrome
+	6. CHAR_LENGTH()
+	7. LENGTH()
+	8. INSERT(str, pos, len, new_str)
+		- str	: the original string to insert into
+		- pos	: the position at which to insert the new substring. the first position is 1.
+		- len	: the number of characters to Replace
+		- new_str: the new substring to insert
+	9. LEFT AND RIGHT
+	10. REPEAT()
+	11. TRIM
+
 
 Q-1: FIND ALL BRANDS, WHERE BRAND NAME ARE 5 CHARACTERS ONLY.
 
