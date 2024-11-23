@@ -972,8 +972,7 @@ STRING TYPES
 2. VARCHAR		: variable-length string, useful in user's name
 3. TEXT			: useful in blog post, comments etc.
 4. MEDIUMTEXT	: useful in long-form articles, or legal documents
-5. LONGTEXT		: 
-6.
+5. LONGTEXT		: useful in entire books or large amount of data
 
 
 
