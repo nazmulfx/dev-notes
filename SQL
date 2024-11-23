@@ -18,6 +18,18 @@ USE db_name;
 	- to use this db
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 ###############################################################
 ##########################  Table  ############################
 ###############################################################
@@ -81,6 +93,10 @@ drop constraint (i will add the command later)
 
 modify constraint
 	- actually modify isn't possible directly, first drop existing constraint and add again
+
+
+
+
 
 
 
@@ -183,6 +199,17 @@ MD5(), SHA1(), SHA256()					: Hashing functions.
 AES_ENCRYPT() / AES_DECRYPT() (MySQL)	: Encryption and decryption functions.
 
 
+
+
+
+
+
+
+
+
+
+
+
 ###############################################################
 #########################  Insert  ############################
 ###############################################################
@@ -203,6 +230,16 @@ VALUES
   ('b@email.com', 'b', '123', '3'),
   ('c@email.com', 'c', '123', '4')
     - update values (order should be accurate as column defined)
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -239,6 +276,15 @@ LIMIT
 
 
 
+
+
+
+
+
+
+
+
+
 ###############################################################
 ##########################  Update  ###########################
 ###############################################################
@@ -253,6 +299,19 @@ SET
   	password = '12345'
 WHERE 
 	name = 'nitish'
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ###############################################################
@@ -314,6 +373,16 @@ SET DEFAULT
 
 
 
+
+
+
+
+
+
+
+
+
+
 ###############################################################
 ##########################  JOINS  ############################
 ###############################################################
@@ -327,6 +396,15 @@ SELF JOIN	: JOINING WITH SAME TABLE
 
 
 
+
+
+
+
+
+
+
+
+
 ###############################################################
 ########################  SET Operations  #####################
 ###############################################################
@@ -335,6 +413,11 @@ UNION		: WITHOUT DUPLICATES
 UNION ALL	: WITH DUPLICATES
 INTERSECT	: ONLY THOSE, WHOS ARE AVAILABLE IN BOTH
 EXCEPT		: SUBTRACTS LAST TABLE FROM FIRST TABLE
+
+
+
+
+
 
 
 
@@ -480,6 +563,12 @@ Q-2: FIND OUT THE FAVORITE FOOD OF EACH CUSTOMER
 	)
 	
 	SELECT * FROM fav_food AS t1 WHERE frequency = (SELECT MAX(frequency) FROM fav_food AS t2 WHERE t2.user_id = t1.user_id)
+
+
+
+
+
+
 
 
 
@@ -862,7 +951,9 @@ Q-10: TAKE ALL SMARTPHONES AND DEVICE IN 3 CATEGORY PREMIUM, MID-RANGE, BUDGET P
 
 
 
-
+#######################################################################
+##########################  String in SQL  ############################
+#######################################################################
 
 
 
