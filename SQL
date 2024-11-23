@@ -955,8 +955,25 @@ Q-10: TAKE ALL SMARTPHONES AND DEVICE IN 3 CATEGORY PREMIUM, MID-RANGE, BUDGET P
 ##########################  String in SQL  ############################
 #######################################################################
 
+Three TYPES OF DATABASE
+	1. NUMERICAL
+		- INTEGER
+		- DECIMAL
+	2. TEXT
+		- CHAR
+		- VARCHAR
+		- TEXT
+	3. TAMPARAL
+		- DATE
+		- TIME
 
-
+STRING TYPES
+1. CHAR			: char(10) -> will take defined space, if word is hello which is 5 but it will take 10 char space, specially used in Phone Number and abbr text
+2. VARCHAR		: variable-length string, useful in user's name
+3. TEXT			: useful in blog post, comments etc.
+4. MEDIUMTEXT	: useful in long-form articles, or legal documents
+5. LONGTEXT		: 
+6.
 
 
 
