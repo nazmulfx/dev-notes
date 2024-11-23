@@ -969,20 +969,61 @@ Three TYPES OF DATABASE
 
 STRING TYPES
 1. CHAR			: char(10) -> will take defined space, if word is hello which is 5 but it will take 10 char space, specially used in Phone Number and abbr text
-2. VARCHAR		: variable-length string, useful in user's name
+2. VARCHAR		: variable-length string, useful in users name
 3. TEXT			: useful in blog post, comments etc.
 4. MEDIUMTEXT	: useful in long-form articles, or legal documents
 5. LONGTEXT		: useful in entire books or large amount of data
 
 
+Wildcards
+	1. like
+		- percent %
+		- underscore _
+
+Q-1: FIND ALL BRANDS, WHERE BRAND NAME ARE 5 CHARACTERS ONLY.
+
+	SELECT DISTINCT(brand)
+	FROM smartphone
+	WHERE brand LIKE '_____'
+		- no matter what are the characters, but it should be in 5 character
+	OUTPUT:
+		'Apple'
+		'Tecno'
+		'iKall'
+		'LeEco'
+		'Honor'
+
+	SELECT DISTINCT(brand)
+	FROM smartphone
+	WHERE brand LIKE 'A____'
+		- should be in 5 character and starts with A
+	OUTPUT:
+		'Apple'
+
+Q-2: FIND ALL BRAND, WHERE 'SAM' WORD IN BRAND NAME
+
+	SELECT DISTINCT(brand)
+	FROM smartphone
+	WHERE brand LIKE '%sam%'
+		- no matter how many char in start or end, if sam char in word > True
+	OUTPUT:
+		'Samsung'
 
 
+	SELECT DISTINCT(brand)
+	FROM smartphone
+	WHERE brand LIKE 'sam%'
+		- if the word starts with sam > True
+	OUTPUT:
+		'Samsung'
 
 
-
-
-
-
+	SELECT DISTINCT(brand)
+	FROM smartphone
+	WHERE brand LIKE '%max'
+		- if the words ends with max
+	OUTPUT:
+		'Micromax'
 
 
 
