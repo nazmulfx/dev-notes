@@ -122,31 +122,24 @@ Yes, you can use both GitHub accounts on the same computer. Here's how you can c
 ### **1. Set Up SSH Keys for Each Account**
 
 1. **Generate SSH Key for Personal Account**
-   ```bash
    ssh-keygen -t ed25519 -C "your_personal_email@example.com"
-   ```
-   - Save the key with a custom name, e.g., `~/.ssh/id_ed25519_personal`.
+    - Save the key with a custom name, e.g., `~/.ssh/id_ed25519_personal`.
 
 2. **Generate SSH Key for Official Account**
-   ```bash
    ssh-keygen -t ed25519 -C "nazmul@invento.com.bd"
-   ```
-   - Save the key with a custom name, e.g., `~/.ssh/id_ed25519_official`.
+    - Save the key with a custom name, e.g., `~/.ssh/id_ed25519_official`.
 
 3. **Add Both Keys to the SSH Agent**
-   ```bash
    eval "$(ssh-agent -s)"
    ssh-add ~/.ssh/id_ed25519_personal
    ssh-add ~/.ssh/id_ed25519_official
-   ```
+   
 
 4. **Add the Public Keys to GitHub**
    - Copy each public key to your clipboard:
-     ```bash
-     cat ~/.ssh/id_ed25519_personal.pub
-     cat ~/.ssh/id_ed25519_official.pub
-     ```
-   - Add them to their respective GitHub accounts under **Settings > SSH and GPG Keys**.
+    cat ~/.ssh/id_ed25519_personal.pub
+    cat ~/.ssh/id_ed25519_official.pub
+        - Add them to their respective GitHub accounts under **Settings > SSH and GPG Keys**.
 
 ---
 
