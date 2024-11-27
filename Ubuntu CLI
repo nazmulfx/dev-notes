@@ -2,6 +2,8 @@ sudo apt update
 sudo apt --fix-broken install
 sudo dpkg -i mysql-workbench-community_8.0.40-1ubuntu24.04_amd64.deb
 
+sudo apt install software_name
+
 
 
 
