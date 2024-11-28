@@ -13,6 +13,10 @@ from frappe.model.docstatus import DocStatus
 source /home/ubuntu/frappe-bench/env/bin/activate
 		- activate bench environment
 
+bench find .
+		- to check is this a bech directory
+		return: /home/frappe/frappe-bench is a bench directory!
+
 
 bench new-site your-site-name
 		- Create a new site
@@ -28,17 +32,40 @@ bench --site your-site-name add-to-hosts
 		- add site to 127.0.0.1 (Multitanancy Mode)
 
 ###############################################
-################### Apps ######################
+################### Apps Command ######################
 ###############################################
-
-bench get-app repo_link.git --branch branch-name
-		- install app from github
 
 bench new-app app_name
 		- create new app
 
 bench --site your-site-name list-apps
 		- list-app in site
+
+bench get-app repo_link.git --branch branch-name
+		- install app from github
+
+
+
+
+################################################
+################## Site Command #####################
+################################################
+
+bench --site site_name console
+		- start python console
+	
+
+bench --site site-name mariadb
+		- start mariadb console
+
+	MariaDB [_ad03fa1a016ca1c4]> desc tabArticle;
+		- will show the description of the article table.
+
+	MariaDB [_ad03fa1a016ca1c4]> select * from tabArticle;
+		- will show you all the records
+
+
+
 
 
 
@@ -60,23 +87,6 @@ bench set-config -g server_script_enabled 1
 
 
 
-
-################################################
-################## Console #####################
-################################################
-
-bench --site site_name console
-		- start python console
-	
-
-bench --site site-name mariadb
-		- start mariadb console
-
-	MariaDB [_ad03fa1a016ca1c4]> desc tabArticle;
-		- will show the description of the article table.
-
-	MariaDB [_ad03fa1a016ca1c4]> select * from tabArticle;
-		- will show you all the records
 
 
 ################################################
