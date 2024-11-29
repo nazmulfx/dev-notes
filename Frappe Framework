@@ -198,4 +198,7 @@ compare_value = [">", value]
 
 
 frappe.db.exists(doctype, filters,)
-    # => Return True, False
+    # => Returns True, False
+
+frappe.db.get_single_value(doctype, fieldname)  # fieldname of the value
+    # => Returns single value
