@@ -202,3 +202,6 @@ frappe.db.exists(doctype, filters,)
 
 frappe.db.get_single_value(doctype, fieldname)  # fieldname of the value
     # => Returns single value
+
+frappe.db.count(doctype, filters, )
+    # => count
