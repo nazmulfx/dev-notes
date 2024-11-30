@@ -1,3 +1,7 @@
+##########################################################################
+############################  What is Frappe  ############################
+##########################################################################
+
 """
 
 Meta-data driven
@@ -50,6 +54,12 @@ Printing
     Frappe supports generating PDF print formats based on Jinja Templates. It also comes with a drag-and-drop Print Format Builder.
     1. Print Format (Custom) (Jinja) 
     2. Print Format Builder (Jinja)
+
+Batteries Included 
+    Frappe has tons of features that are essential to building a modern complex app. 
+    Only the basic features are introduced here. The rest of this guide will cover them and other advanced features with much finer detail, so make sure to read it all.
+
+
 
 
 
