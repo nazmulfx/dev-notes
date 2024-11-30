@@ -67,6 +67,8 @@ Batteries Included
 
 import frappe
 
+from frappe import _
+
 from frappe.model.document import Document
 from frappe.model.docstatus import DocStatus
 
