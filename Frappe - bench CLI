@@ -18,18 +18,9 @@ bench find .
 		return: /home/frappe/frappe-bench is a bench directory!
 
 
-bench new-site your-site-name
-		- Create a new site
-
-
-
-
 
 bench --site your-site-name set-admin-password new-password
 		- reset Administrator password
-
-bench --site your-site-name add-to-hosts
-		- add site to 127.0.0.1 (Multitanancy Mode)
 
 ###############################################
 ################### Apps Command ######################
@@ -51,6 +42,17 @@ bench get-app repo_link.git --branch branch-name
 ################## Site Command #####################
 ################################################
 
+bench new-site your-site-name
+		- Create a new site
+
+bench --site site_name add_to_hosts
+		- to use this site in Multi-tanancy mode
+
+bench --site site_name serve
+
+bench use site_name
+		- to use as default site directly 127.0.0.1:8000 in this url
+
 bench --site site_name console
 		- start python console
 	
@@ -63,7 +65,6 @@ bench --site site-name mariadb
 
 	MariaDB [_ad03fa1a016ca1c4]> select * from tabArticle;
 		- will show you all the records
-
 
 
 
