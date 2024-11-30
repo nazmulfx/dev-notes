@@ -1,3 +1,60 @@
+"""
+
+Meta-data driven
+    Meta-data is a first class citizen in Frappe. It is used to generate database tables, design forms and configure a lot of features. 
+    Meta-data is stored in a Model which is known as DocType in Frappe.
+    => doctype.json
+
+Rich Admin Interface 
+    Frappe does not only manage the backend, it also comes with a feature rich admin interface called the Desk. When you create a DocType in Frappe, a number of views are generated for it. 
+    Here are some of them:
+    1. List View => supports paging, filtering, sorting and bulk editing records.
+    2. Form View => used for editing records also supports file attachments, PDF format, comments, email, etc.
+    3. Report Builder => supports adding columns, grouping, filtering, sorting and saving it as a configuration.
+
+Users, Roles and Permissions
+    Frappe comes with User and Role management out of the box. 
+    A User is someone who can login to the system and perform authorized actions like creating, updating or deleting records. 
+    A Role is a mapping of DocTypes and actions allowed to perform on it.
+
+Python, JS and MariaDB
+    Frappe Framework uses Python for the backend. It comes with a simple yet powerful ORM as an abstraction over CRUD operations.
+    The default database is MariaDB. Postgres support is in beta.
+        doc = frappe.new_doc('ToDo')
+        doc.description = 'Buy Eggs'
+        doc.insert()
+
+    The front-end is an SPA built using Javascript (jQuery). (SPA = Single Page Application, works like react/vue, maybe used FrappeUI)
+
+Realtime
+    Frappe also supports realtime pub/sub events using NodeJS and socketio. (Publish/Subscrib)
+        # server
+        frappe.publish_realtime('update_progress', {
+            'progress': 42,
+            'total': 100
+        })
+
+        # client
+        frappe.realtime.on('update_progress', (data) => {
+            console.log(data)
+        });
+
+Background Jobs 
+    Frappe also supports background job queuing based on Python RQ.
+        frappe.enqueue('frappe.job.run_job', arg1='Test', arg2='Test2')
+
+Email
+    Frappe supports sending and receiving emails, which can also be linked to individual documents.
+
+Printing
+    Frappe supports generating PDF print formats based on Jinja Templates. It also comes with a drag-and-drop Print Format Builder.
+    1. Print Format (Custom) (Jinja) 
+    2. Print Format Builder (Jinja)
+
+
+
+"""
+
 ##########################################################################
 ##############################  Import Files  ############################
 ##########################################################################
@@ -6,6 +63,7 @@ import frappe
 
 from frappe.model.document import Document
 from frappe.model.docstatus import DocStatus
+
 
 
 
