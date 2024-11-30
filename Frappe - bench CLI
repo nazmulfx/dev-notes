@@ -149,21 +149,3 @@ Commands:
   data-import                 Import documents in bulk from CSV or XLSX...
   destroy-all-sessions        Clear sessions of all users (logs them out)
 
-
-
-
-
-########################################################
-################## Frappe Insights #####################
-########################################################
-
-installation guide and product link: https://github.com/frappe/insights
-
-bench new-site insights.test
-bench --site insights.test add-to-hosts
-bench get-app https://github.com/frappe/insights --branch version-3
-bench --site insights.test install-app insights
-
-
-Error: No module named 'urllib3.contrib.appengine'
-	- solution: pip install urllib3==1.26.15

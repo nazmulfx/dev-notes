@@ -1,0 +1,17 @@
+########################################################
+################## Frappe Insights #####################
+########################################################
+
+installation guide and product link: https://github.com/frappe/insights
+
+
+bench get-app https://github.com/frappe/insights --branch main
+		- for v2
+
+bench get-app https://github.com/frappe/insights --branch version-3
+		- for v3
+		
+bench --site site.local install-app insights
+
+Error: No module named 'urllib3.contrib.appengine'
+	- solution: pip install urllib3==1.26.15
