@@ -15,6 +15,20 @@ bench find .
 bench --site site.local set-admin-password new-password
 		- reset Administrator password
 
+
+
+#######################################################
+#################### Asset Build ######################
+#######################################################
+
+bench build
+		- build asset/ compile asset using asset bundler
+
+bench build --apps frappe
+bench build --apps frappe,erpnext
+		- build asset for specific apps
+
+
 #######################################################
 ################### Apps Command ######################
 #######################################################
@@ -65,6 +79,9 @@ bench --site site.local mariadb
 
 
 bench --site site.local migrate
+		- migrate with db
+bench migrate
+		- migrate with db, if using 127.0.0.1
 
 
 
