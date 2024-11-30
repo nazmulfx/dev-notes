@@ -20,9 +20,13 @@ bench --site site.local set-admin-password new-password
 #######################################################
 #################### Asset Build ######################
 #######################################################
+https://frappeframework.com/docs/user/en/basics/asset-bundling
 
 bench build
-		- build asset/ compile asset using asset bundler
+		- build all asset/ compile asset using asset bundler
+
+bench watch
+		- Watch for Changes and Rebuild Automatically
 
 bench build --apps frappe
 bench build --apps frappe,erpnext
@@ -32,6 +36,7 @@ bench build --apps frappe,erpnext
 #######################################################
 ################### Apps Command ######################
 #######################################################
+https://frappeframework.com/docs/user/en/basics/apps
 
 bench new-app app_name
 		- create new app
@@ -52,6 +57,7 @@ bench get-app repo_link.git --branch branch-name
 ################################################
 ################## Site Command ################
 ################################################
+https://frappeframework.com/docs/user/en/basics/sites
 
 bench new-site site.local
 		- Create a new site
