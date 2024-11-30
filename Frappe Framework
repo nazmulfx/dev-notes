@@ -37,7 +37,6 @@ Realtime
             'progress': 42,
             'total': 100
         })
-
         # client
         frappe.realtime.on('update_progress', (data) => {
             console.log(data)
@@ -58,9 +57,6 @@ Printing
 Batteries Included 
     Frappe has tons of features that are essential to building a modern complex app. 
     Only the basic features are introduced here. The rest of this guide will cover them and other advanced features with much finer detail, so make sure to read it all.
-
-
-
 
 
 """
