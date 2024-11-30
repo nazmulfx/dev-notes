@@ -12,7 +12,7 @@ bench find .
 
 
 
-bench --site your-site-name set-admin-password new-password
+bench --site site.local set-admin-password new-password
 		- reset Administrator password
 
 ###############################################
@@ -22,7 +22,11 @@ bench --site your-site-name set-admin-password new-password
 bench new-app app_name
 		- create new app
 
-bench --site your-site-name list-apps
+bench --site site.local install-app app_name
+bench --iste site.local uninstall-app app_name
+		- to install/uninstall app in site
+
+bench --site site.local list-apps
 		- list-app in site
 
 bench get-app repo_link.git --branch branch-name
@@ -60,7 +64,7 @@ bench --site site-name mariadb
 		- will show you all the records
 
 
-
+bench --site site.local migrate
 
 
 
@@ -87,16 +91,16 @@ bench set-config -g server_script_enabled 1
 ###### Backup & Restore & Reinstall ############
 ################################################
 
-bench --site your-site-name backup
+bench --site site.local backup
 		- backup database & files of site
 
-bench --site your-site-name backup --with-files
+bench --site site.local backup --with-files
 		- take backup of site with files public & private
 
-bench --site trademode.com restore location_path/db.sql
+bench --site site.local restore location_path/db.sql
 		- restore database
 
-bench --site trademode.wrok reinstall
+bench --site site.local reinstall
 		- to reinstall the site
 
 
