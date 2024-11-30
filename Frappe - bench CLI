@@ -15,9 +15,9 @@ bench find .
 bench --site site.local set-admin-password new-password
 		- reset Administrator password
 
-###############################################
+#######################################################
 ################### Apps Command ######################
-###############################################
+#######################################################
 
 bench new-app app_name
 		- create new app
@@ -36,25 +36,25 @@ bench get-app repo_link.git --branch branch-name
 
 
 ################################################
-################## Site Command #####################
+################## Site Command ################
 ################################################
 
-bench new-site your-site-name
+bench new-site site.local
 		- Create a new site
 
-bench --site site_name add_to_hosts
+bench --site site.local add_to_hosts
 		- to use this site in Multi-tanancy mode
 
-bench --site site_name serve
+bench --site site.local serve
 
-bench use site_name
+bench use site.local
 		- to use as default site directly 127.0.0.1:8000 in this url
 
-bench --site site_name console
+bench --site site.local console
 		- start python console
 	
 
-bench --site site-name mariadb
+bench --site site.local mariadb
 		- start mariadb console
 
 	MariaDB [_ad03fa1a016ca1c4]> desc tabArticle;
@@ -72,7 +72,7 @@ bench --site site.local migrate
 ############### enable / disable ##############
 ###############################################
 
-bench --site library.com set-config developer_mode 1
+bench --site site.local set-config developer_mode 1
 		- to enable developer mode in specific site
 
 bench set-config -g developer_mode true
