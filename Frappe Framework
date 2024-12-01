@@ -271,3 +271,27 @@ frappe.db.get_single_value(doctype, fieldname)  # fieldname of the value
 
 frappe.db.count(doctype, filters, )
     # => count
+
+
+
+#######################################################
+#################### Asset Build ######################
+#######################################################
+https://frappeframework.com/docs/user/en/basics/asset-bundling
+
+
+
+#######################################################
+#################### Static Assets ####################
+#######################################################
+https://frappeframework.com/docs/user/en/basics/static-assets
+
+
+
+#######################################################
+#################### Configuration ####################
+#######################################################
+https://frappeframework.com/docs/user/en/basics/site_config
+
+
+
