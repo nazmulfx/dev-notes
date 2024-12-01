@@ -90,6 +90,11 @@ git push origin update-by-nazmul
 ################################
 ########### Remote #############
 ################################
+
+git remote -v
+    
+
+
 git remote add origin repo_link.git
     - to Add remote repo
 

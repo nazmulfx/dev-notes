@@ -71,6 +71,7 @@ from frappe import _
 
 from frappe.model.document import Document
 from frappe.model.docstatus import DocStatus
+        #- https://frappeframework.com/docs/user/en/basics/doctypes/docstatus
 
 
 
@@ -292,6 +293,90 @@ https://frappeframework.com/docs/user/en/basics/static-assets
 #################### Configuration ####################
 #######################################################
 https://frappeframework.com/docs/user/en/basics/site_config
+
+
+Site Config
+Common Site Config
+Remote Database Host Setting
+Replica Read Only Database Host Setting
+Default Outgoing Email Setting
+Bench Configuration
+
+Sendbox Integretion
+Dropbox Integretion
+Paypal Integretion
+Google Analytics
+Razor Pay
+
+Externally extending config 
+
+Environment Variable Configuration
+
+
+#######################################################
+##################### Audit Trail #####################
+#######################################################
+https://frappeframework.com/docs/user/en/audit-trail
+
+
+
+#######################################################
+####################### DocType #######################
+#######################################################
+
+########  Fields ########
+https://frappeframework.com/docs/user/en/basics/doctypes/fieldtypes
+
+########  Naming ########
+https://frappeframework.com/docs/user/en/basics/doctypes/naming
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
