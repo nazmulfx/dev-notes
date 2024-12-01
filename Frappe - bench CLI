@@ -153,16 +153,12 @@ bench --site site.local reinstall
 Commands:
   add-system-manager          Add a new system manager to a site
   add-to-email-queue          Add an email to the Email Queue
-  add-to-hosts                Add site to hosts
-  backup                      Backup
   browse                      Opens the site on web browser
-  build                       Minify + concatenate JS and CSS files, build...
   build-message-files         Build message files for translation
   build-search-index
   bulk-rename                 Rename multiple records via CSV file
   clear-cache                 Clear cache, doctype cache and defaults
   clear-website-cache         Clear website cache
-  console                     Start ipython console for a site
   data-import                 Import documents in bulk from CSV or XLSX...
   destroy-all-sessions        Clear sessions of all users (logs them out)
 
