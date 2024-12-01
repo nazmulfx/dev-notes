@@ -18,22 +18,6 @@ bench --site site.local set-admin-password new-password
 
 
 #######################################################
-#################### Asset Build ######################
-#######################################################
-https://frappeframework.com/docs/user/en/basics/asset-bundling
-
-bench build
-		- build all asset/ compile asset using asset bundler
-
-bench watch
-		- Watch for Changes and Rebuild Automatically
-
-bench build --apps frappe
-bench build --apps frappe,erpnext
-		- build asset for specific apps
-
-
-#######################################################
 ################### Apps Command ######################
 #######################################################
 https://frappeframework.com/docs/user/en/basics/apps
@@ -89,6 +73,39 @@ bench --site site.local migrate
 bench migrate
 		- migrate with db, if using 127.0.0.1
 
+
+
+
+#######################################################
+#################### Asset Build ######################
+#######################################################
+https://frappeframework.com/docs/user/en/basics/asset-bundling
+
+bench build
+		- build all asset/ compile asset using asset bundler
+
+bench watch
+		- Watch for Changes and Rebuild Automatically
+
+bench build --apps frappe
+bench build --apps frappe,erpnext
+		- build asset for specific apps
+
+bench build --production
+		- to build assets in production mode
+
+
+
+#######################################################
+#################### Static Assets ####################
+#######################################################
+https://frappeframework.com/docs/user/en/basics/static-assets
+
+
+#######################################################
+#################### Configuration ####################
+#######################################################
+https://frappeframework.com/docs/user/en/basics/site_config
 
 
 ###############################################
