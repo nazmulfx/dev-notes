@@ -73,9 +73,13 @@ from frappe.model.document import Document
 from frappe.model.docstatus import DocStatus
         #- https://frappeframework.com/docs/user/en/basics/doctypes/docstatus
 
+from frappe.model.naming import getseries
+        #- https://frappeframework.com/docs/user/en/basics/doctypes/naming
 
 
-
+from typing import TYPE_CHECKING
+from frappe.types import DF
+        #- Type Annotation
 
 
 ##########################################################################
@@ -258,6 +262,7 @@ def after_delete(self):
 ##########################################################################
 
 doctype = "DocType Name"
+name = 'doctype name'
 filters = {"fieldname": value, 'fieldname': value}
 
 compare_value = [">", value]
@@ -272,6 +277,8 @@ frappe.db.get_single_value(doctype, fieldname)  # fieldname of the value
 
 frappe.db.count(doctype, filters, )
     # => count
+
+frappe.get_doc(doctype, name)
 
 
 
@@ -294,7 +301,7 @@ https://frappeframework.com/docs/user/en/basics/static-assets
 #######################################################
 https://frappeframework.com/docs/user/en/basics/site_config
 
-
+'''
 Site Config
 Common Site Config
 Remote Database Host Setting
@@ -312,7 +319,7 @@ Externally extending config
 
 Environment Variable Configuration
 
-
+'''
 #######################################################
 ##################### Audit Trail #####################
 #######################################################
@@ -324,18 +331,17 @@ https://frappeframework.com/docs/user/en/audit-trail
 ####################### DocType #######################
 #######################################################
 
-########  Fields ########
-https://frappeframework.com/docs/user/en/basics/doctypes/fieldtypes
+# Fields                : https://frappeframework.com/docs/user/en/basics/doctypes/fieldtypes
 
-########  Naming ########
-https://frappeframework.com/docs/user/en/basics/doctypes/naming
+# Naming                : https://frappeframework.com/docs/user/en/basics/doctypes/naming
 
+# Form & View Settings  : https://frappeframework.com/docs/user/en/basics/doctypes/form_&_view_settings
 
+# Child Table Doctype   : https://frappeframework.com/docs/user/en/basics/doctypes/child-doctype
 
+# Single Doctype        : https://frappeframework.com/docs/user/en/basics/doctypes/single-doctype
 
-
-
-
+# Virtual Doctype       : https://frappeframework.com/docs/user/en/basics/doctypes/virtual-doctype
 
 
 
