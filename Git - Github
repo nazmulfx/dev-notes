@@ -92,7 +92,7 @@ git push origin update-by-nazmul
 ################################
 
 git remote -v
-    
+    - check fetch/push repo link 
 
 
 git remote add origin repo_link.git
@@ -100,11 +100,6 @@ git remote add origin repo_link.git
 
 git remote set-url origin git@github-nazmul:nazmulfx/library_management.git
     - if remote already exists then set-url again
-
-
-
-
-
 
 
 
