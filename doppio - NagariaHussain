@@ -1,4 +1,19 @@
 https://github.com/NagariaHussain/doppio
 
+frappe-ui docs: https://frappeui.com
 
-bench get-app https://github.com/NagariaHussain/doppio
+
+
+Step-1: Install App in bench
+    bench get-app https://github.com/NagariaHussain/doppio
+
+Step-2: cd into app folder and run in terminal
+    bench add-frappe-ui
+      Dashboard Name [frontend]: enter
+      App Name: app_name
+      Adding Frappe UI starter to actions_todo...
+
+Step-3: run frontend server
+      yarn dev
+
+      Note: browse frontend on yoursite:8080
