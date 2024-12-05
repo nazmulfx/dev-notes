@@ -16,4 +16,7 @@ Step-2: cd into app folder and run in terminal
 Step-3: run frontend server
       yarn dev
 
-      Note: browse frontend on yoursite:8080
+      Note: browse frontend on your_site:8080
+
+Note: if csrf token error (need to trun off csrf token in development mode, becuase csrf not done in development mode)
+      bench --site your_site set-config ignore_csrf 1
