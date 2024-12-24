@@ -64,6 +64,7 @@ git remote add origin https://github.com/your-username/your-repo.git
     - add remote to pull from the remote repo
 
 git pull origin version-15
+git pull upstream version-15
     - branch you want to pull
 
     - Merge                             : git pull origin develop --no-rebase     OR git config pull.rebase false
