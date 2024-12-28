@@ -359,13 +359,39 @@ https://frappeframework.com/docs/user/en/audit-trail
 # Background Jobs       : https://frappeframework.com/docs/user/en/api/background_jobs
 
 # Document API
-        1. frappe.get_doc
-        2. frappe.get_last_doc
-        3. frappe.get_cached_doc
-        4. frappe.new_doc
-        5. frappe.delete_doc
-        6. frappe.rename_doc
-        7. 
+        frappe.get_doc()
+        frappe.get_last_doc()
+        frappe.get_cached_doc()     # as like get_doc
+        frappe.new_doc()
+        frappe.delete_doc()
+        frappe.rename_doc()
+        frappe.get_meta()
+                - has_field(fieldname)
+                - get_custom_fields()
+        # Document Method
+        doc.insert(ignore_permissions=True, ignore_links=True, ignore_if_duplicate=True, ignore_mandatory=True)
+        doc.save()
+        doc.delete()                # as like frappe.delete_doc
+        doc.get_doc_before_save()
+        doc.has_value_changed(fields)
+        doc.check_permission(permtype='write')
+        doc.get_title()
+        doc.notify_update()
+        doc.db_set(field, value)
+        doc.append()                # used to add item in child table
+        doc.get_url()
+        doc.add_comment()
+        doc.add_seen()
+        doc.add_viewed()
+        doc.add_tag()
+        doc.get_tags()
+        doc.run_methods('validate')
+        doc.queue_action()          # used to call methods in background
+        doc.get_children()
+        doc.get_parent()
+        doc.db_insert()             # as like, doc.insert() but skip all controller
+        doc.db_update()             # as like, doc.save() but skip all controller
+
 
 
 
