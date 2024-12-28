@@ -370,14 +370,14 @@ https://frappeframework.com/docs/user/en/audit-trail
                 - get_custom_fields()
         # Document Method
         doc.insert(ignore_permissions=True, ignore_links=True, ignore_if_duplicate=True, ignore_mandatory=True)
-        doc.save()
+        doc.save(ignore_permission=True, ignore_version=True)
         doc.delete()                # as like frappe.delete_doc
         doc.get_doc_before_save()
         doc.has_value_changed(fields)
         doc.check_permission(permtype='write')
         doc.get_title()
         doc.notify_update()
-        doc.db_set(field, value)
+        doc.db_set(field, value, notify=True, commit=True, update_modified=False)
         doc.append()                # used to add item in child table
         doc.get_url()
         doc.add_comment()
