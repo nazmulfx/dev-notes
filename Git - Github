@@ -6,6 +6,28 @@ git branch
     - check current branch
 
 
+############################################
+########### Commit Add & Remove ############
+############################################
+
+git commit -m "commit message"
+    - to commit added files
+
+git reset --soft HEAD~1
+    - The changes will be preserved and staged for a new commit.
+    - HEAD~1 means last commit
+
+git reset --mixed HEAD~1
+    - To Keep the Changes but Unstage Them
+
+git reset --hard HEAD~1
+    - to Discard the Changes Completely
+
+git reset --soft HEAD~1
+git push origin --force
+    - If Youu have Already Pushed the Commit
+    - If the commit has been pushed to a remote repository and you need to remove it, you must force-push after resetting.
+    - Warning: Be cautious when using --force, as it rewrites the commit history, which may affect other collaborators.
 
 ############################################
 ########### push code to repo ##############
