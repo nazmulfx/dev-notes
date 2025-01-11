@@ -393,6 +393,24 @@ https://frappeframework.com/docs/user/en/audit-trail
         doc.db_update()             # as like, doc.save() but skip all controller
 
 
+# Database API
+        frappe.db.get_list()          # also aliased to frappe.get_list
+        frappe.db.get_all()           # Also aliased to frappe.get_all (as same frappe.get_list but execute without applying permission)
+        frappe.db.get_value()         # frappe.get_value / frappe.get_values
+        frappe.db.get_single_value()  # single doctype only
+        frappe.db.set_value()         # Also aliased to frappe.db.update
+        frappe.db.exists()
+        frappe.db.count()
+        frappe.db.delete()
+        frappe.db.truncate()
+        frappe.db.commit()
+        frappe.db.savepoint()         # i didn't understand
+        frappe.db.rollback()
+        frappe.db.sql()
+        frappe.db.multisql()
+        
+
+
 
 
 
