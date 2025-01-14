@@ -1,3 +1,5 @@
+bench init [bench-name] --frappe-branch [branch-name]
+bench init my-bench --frappe-branch version-14
 
 
 ######################################  Bench  #############################################
@@ -9,8 +11,6 @@ source /home/ubuntu/frappe-bench/env/bin/activate
 bench find .
 		- to check is this a bech directory
 		return: /home/frappe/frappe-bench is a bench directory!
-
-
 
 bench --site site.local set-admin-password new-password
 		- reset Administrator password
