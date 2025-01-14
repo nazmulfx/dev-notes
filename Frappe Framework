@@ -358,7 +358,7 @@ https://frappeframework.com/docs/user/en/audit-trail
 
 # Background Jobs       : https://frappeframework.com/docs/user/en/api/background_jobs
 
-# Document API
+# Document API : https://docs.frappe.io/framework/user/en/api/document
         frappe.get_doc()
         frappe.get_last_doc()
         frappe.get_cached_doc()     # as like get_doc
@@ -393,7 +393,7 @@ https://frappeframework.com/docs/user/en/audit-trail
         doc.db_update()             # as like, doc.save() but skip all controller
 
 
-# Database API
+# Database API : https://docs.frappe.io/framework/user/en/api/database
         frappe.db.get_list()          # also aliased to frappe.get_list
         frappe.db.get_all()           # Also aliased to frappe.get_all (as same frappe.get_list but execute without applying permission)
         frappe.db.get_value()         # frappe.get_value / frappe.get_values
@@ -408,6 +408,20 @@ https://frappeframework.com/docs/user/en/audit-trail
         frappe.db.rollback()
         frappe.db.sql()
         frappe.db.multisql()
+        frappe.db.rename_table()
+        frappe.db.describe()
+        frappe.db.change_column_type()
+        frappe.db.add_index()         # i didn't understand
+        frappe.db.add_unique()        # i didn't understand
+
+        # Database transection hooks
+        frappe.db.before_commit.add(func: Callable)
+        frappe.db.after_commit.add(func: Callable)
+        frappe.db.before_rollback.add(func: Callable)
+        frappe.db.after_rollback.add(func: Callable)
+
+# Jinja API : https://docs.frappe.io/framework/user/en/api/jinja
+        frappe.format()
         
 
 
