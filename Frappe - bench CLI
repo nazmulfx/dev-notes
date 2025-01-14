@@ -1,5 +1,5 @@
-bench init [bench-name] --frappe-branch [branch-name]
-bench init my-bench --frappe-branch version-14
+bench init [bench-name] --frappe-branch [branch-name] --python [python-version]
+bench init my-bench --frappe-branch version-14 --python python3.9
 
 
 ######################################  Bench  #############################################
