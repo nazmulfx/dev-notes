@@ -5,6 +5,12 @@ git init
 git branch
     - check current branch
 
+############################################
+############### add user  ##################
+############################################
+git config user.name 'Nazmul Hossain'
+git config user.email 'nazmulfx.dev@gmail.com'
+
 
 ############################################
 ########### Commit Add & Remove ############

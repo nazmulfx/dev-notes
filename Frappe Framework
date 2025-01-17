@@ -421,7 +421,24 @@ https://frappeframework.com/docs/user/en/audit-trail
         frappe.db.after_rollback.add(func: Callable)
 
 # Jinja API : https://docs.frappe.io/framework/user/en/api/jinja
-        frappe.format()
+        frappe.format()             # convert data to user presentable format (any time)
+        frappe.format_date()        # September 8, 2019
+        frappe.get_url()            # frappe.io/
+
+        frappe.get_doc()            
+        frappe.get_all()
+        frappe.get_list()
+        frappe.db.get_value()
+        frappe.db.get_single_value()
+        frappe.get_system_settings(fieldname)
+        frappe.get_meta()
+        frappe.get_fullname(user_email)
+        frappe.render_template()    # render jinja template navbar, header, footer
+        frappe._()                  # translate {{ _('This string should get translated') }}
+        frappe.session.user()       # return current session user
+        frappe.session.csrf_token() # return current session csrf_token
+        frappe.form_dict()          # a dict of query perameter in url request like (frappe.io/products?name=iphone&color=white) dict = {'name': 'iphone', 'color': 'white'}
+        frappe.lang()               # return current language in 2 char like 'en', 'bn' etc.
         
 
 
