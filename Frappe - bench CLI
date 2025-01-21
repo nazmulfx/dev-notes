@@ -2,6 +2,12 @@ bench init [bench-name] --frappe-branch [branch-name] --python [python-version]
 bench init my-bench --frappe-branch version-13 --python python3.9
 
 
+bench pip install 'package_name'
+
+bench setup requirements
+	- cd frappe-bench/apps/frappe run this command from this path
+	- to install requirements
+
 ######################################  Bench  #############################################
 
 

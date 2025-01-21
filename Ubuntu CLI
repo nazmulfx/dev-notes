@@ -26,17 +26,15 @@ sudo apt install python3.9 python3.9-venv python3.9-dev
         - sudo add-apt-repository ppa:deadsnakes/ppa (Deadsnakes PPA will add multiple python repo version for Ubuntu apt)
         - sudo apt update (after add Deadsnakes must update apt)
 
-
-# Create a virtual environment
 python3 -m venv venv
-
-# Activate the virtual environment
-For bash or sh:
-    source venv/bin/activate
-For zsh:
-    source venv/bin/activate
-For fish:
-    source venv/bin/activate.fish
+    - Create a virtual environment
+    # Activate the virtual environment
+        For bash or sh:
+            source venv/bin/activate
+        For zsh:
+            source venv/bin/activate
+        For fish:
+            source venv/bin/activate.fish
 
 # Install the package
 pip install mysql-connector

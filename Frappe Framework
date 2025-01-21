@@ -431,7 +431,7 @@ https://frappeframework.com/docs/user/en/audit-trail
         frappe.db.get_value()
         frappe.db.get_single_value()
         frappe.get_system_settings(fieldname)
-        frappe.get_meta()
+        frappe.get_meta()           # meta.get_field('status')
         frappe.get_fullname(user_email)
         frappe.render_template()    # render jinja template navbar, header, footer
         frappe._()                  # translate {{ _('This string should get translated') }}
@@ -440,10 +440,29 @@ https://frappeframework.com/docs/user/en/audit-trail
         frappe.form_dict()          # a dict of query perameter in url request like (frappe.io/products?name=iphone&color=white) dict = {'name': 'iphone', 'color': 'white'}
         frappe.lang()               # return current language in 2 char like 'en', 'bn' etc.
         
+# Request Lifecycle : https://docs.frappe.io/framework/user/en/python-api/routing-and-rendering
+        1. api request
+           api      => '/api/'            => handles by RESTapi
 
+        2. Download request
+           backups  => '/backups'         => Download backups
+           public   => '/files'           => Download Public Files
+           private  => '/private/files'   => Download private files
 
-
-
+        3. Web Page request
+           about    => '/about'           => About Page
+           posts    => '/posts'           => Post Pages
+           products => '/products'        => Product page
+   
+        Request Pre-processing (Note: each request passed through path resolver)
+            *Path Resolver
+                Redirect Resolution     # 1st execute : Path resolver tries to resolve any possible redirect for an incoming request path.
+                Route Resolution        # if no redirect found, Route execute
+                Renderer Selection      # after route, select renderer to render page
+                    *Page Renderer
+                        #  Static Files     # www folder (files except html,md,js,xml are static files. Recommanded to server from public folder)
+                        1. StaticPage       # www folder
+                        2. 
 
 
 
