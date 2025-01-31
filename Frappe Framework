@@ -31,7 +31,7 @@ Python, JS and MariaDB
     The front-end is an SPA built using Javascript (jQuery). (SPA = Single Page Application, works like react/vue, maybe used FrappeUI)
 
 Realtime
-    Frappe also supports realtime pub/sub events using NodeJS and socketio. (Publish/Subscrib)
+    Frappe also supports realtime pub/sub events using NodeJS and socketio. (Publish/Subscribe)
         # server
         frappe.publish_realtime('update_progress', {
             'progress': 42,
@@ -51,7 +51,7 @@ Email
 
 Printing
     Frappe supports generating PDF print formats based on Jinja Templates. It also comes with a drag-and-drop Print Format Builder.
-    1. Print Format (Custom) (Jinja) 
+    1. Print Format (Custom) (Jinja/JS) 
     2. Print Format Builder (Jinja)
 
 Batteries Included 
@@ -68,6 +68,7 @@ Batteries Included
 import frappe
 
 from frappe import _
+        # this is used for Multi Language Translation Support.
 
 from frappe.model.document import Document
 from frappe.model.docstatus import DocStatus
@@ -154,7 +155,7 @@ def before_save(self):
     Submit              = ' '
     Cancel              = ' '
     Update_after_submit = ' ' 
-    
+    'X'
 def before_submit(self):
     description         = 'This method is called before the document is submitted.'
     Insert              = 'X'
@@ -257,30 +258,6 @@ def after_delete(self):
 
 
 
-##########################################################################
-############################  Frappe ORM  ################################
-##########################################################################
-
-doctype = "DocType Name"
-name = 'doctype name'
-filters = {"fieldname": value, 'fieldname': value}
-
-compare_value = [">", value]
-                (">", value)
-
-
-frappe.db.exists(doctype, filters,)
-    # => Returns True, False
-
-frappe.db.get_single_value(doctype, fieldname)  # fieldname of the value
-    # => Returns single value
-
-frappe.db.count(doctype, filters, )
-    # => count
-
-frappe.get_doc(doctype, name)
-
-
 
 #######################################################
 #################### Asset Build ######################
@@ -291,7 +268,7 @@ https://frappeframework.com/docs/user/en/basics/asset-bundling
 
 #######################################################
 #################### Static Assets ####################
-#######################################################
+##########'X'#############################################
 https://frappeframework.com/docs/user/en/basics/static-assets
 
 
@@ -461,8 +438,10 @@ https://frappeframework.com/docs/user/en/audit-trail
                 Renderer Selection      # after route, select renderer to render page
                     *Page Renderer
                         #  Static Files     # www folder (files except html,md,js,xml are static files. Recommanded to server from public folder)
-                        1. StaticPage       # www folder
-                        2. 
+                        1. Static Page      # www folder
+                        2. Template Page    # check www folder in all apps, and return page, if folder return index page
+                        3. Web Form Page    # Webform return from webform list. if routes meets.
+                        4. 
 
 
 
