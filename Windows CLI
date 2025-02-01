@@ -1,0 +1,6 @@
+dir
+    - to see all folder and files
+cd <folder name>
+    - to change directory to specific folder
+cd ..
+    - to go back from current directory
