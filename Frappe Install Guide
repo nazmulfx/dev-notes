@@ -70,10 +70,10 @@ installation should now be secure.
 
 Thanks for using MariaDB!
         """
-STEP 6 :  MySQL database development files
+STEP 4 :  MySQL database development files
         sudo apt-get install libmysqlclient-dev
 
-STEP 7 Edit the mariadb configuration ( unicode character encoding )
+STEP 5 : Edit the mariadb configuration ( unicode character encoding )
         sudo nano /etc/mysql/mariadb.conf.d/50-server.cnf
         """
 #
@@ -235,16 +235,33 @@ pid-file = /run/mysqld/mysqld.pid
 socket = /run/mysqld/mysq
         """
 
+STEP 6 :  Restart MYSQL Server
+        sudo service mysql restart
 
+STEP 7 : install Redis
+        sudo apt-get install redis-server
 
+STEP 8 : install Node.js 18.X package
+        sudo apt install curl 
+        curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
+        source ~/.profile
+        nvm install 18
 
+STEP 10 install Yarn
+        sudo apt-get install npm
+        sudo npm install -g yarn
 
+STEP 11 install wkhtmltopdf
+        sudo apt-get install xvfb libfontconfig wkhtmltopdf
 
+STEP 12 install frappe-bench
+        sudo -H pip3 install frappe-bench --break-system-packages
+        bench --version
 
-
-
-
-
+STEP 13 initilise the frappe bench & install frappe latest version
+        bench init frappe-bench --frappe-branch version-15
+        cd frappe-bench
+        bench start
 
 
 

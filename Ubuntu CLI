@@ -26,7 +26,7 @@ sudo apt install python3.9 python3.9-venv python3.9-dev
         - sudo add-apt-repository ppa:deadsnakes/ppa (Deadsnakes PPA will add multiple python repo version for Ubuntu apt)
         - sudo apt update (after add Deadsnakes must update apt)
 
-python3 -m venv venv
+python3 -m venv env
     - Create a virtual environment
     # Activate the virtual environment
         For bash or sh:
