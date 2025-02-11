@@ -46,3 +46,123 @@ deactivate
 which python
     will return path of python running like '/home/nazmul/campusx/env/bin/python'
 
+
+
+
+################################################################
+###################   Unbuntu Server Setup   ###################
+################################################################
+
+Step 1 - Installing python and nginx
+    sudo apt install python3-pip python3-dev nginx
+
+Step 2 - Creating a python virtual environment
+    sudo apt install virtualenv 
+    /////// or ///////
+    sudo pip3 install virtualenv
+
+    Note: source env/bin/activate => To activate env
+
+Step 3 - Installing Django and gunicorn
+    pip install django gunicorn
+
+Step 4 - Setting up our Django project
+    mkdir projectdir
+    cd projectdir
+    django-admin startproject textutils ~/projectdir
+
+    cd textutils
+    sudo nano settings.py
+    Edit: ALLOWED_HOSTS = ['*'] 
+
+    sudo ufw allow 8000
+        Note: need to allow port 8000 if not allowed
+
+    ~/projectdir/manage.py runserver 0.0.0.0:8000
+    ///// or /////
+    python3 manage.py runserver 0.0.0.0:8000
+
+Step 5 - Configuring gunicorn
+    gunicorn --bind 0.0.0.0:8000 textutils.wsgi
+        Note: To test gunicorn is working
+
+
+    deactivate
+        Note: deactivate env to configure gunicorn
+
+
+    sudo vim /etc/systemd/system/gunicorn.socket
+    ///// or /////
+    sudo nano /etc/systemd/system/gunicorn.socket
+    """
+[Unit]
+Description=gunicorn socket
+
+[Socket]
+ListenStream=/run/gunicorn.sock
+
+[Install]
+WantedBy=sockets.target
+    """
+
+
+    sudo vim /etc/systemd/system/gunicorn.service
+    ///// or /////
+    sudo nano /etc/systemd/system/gunicorn.service
+    '''
+[Unit]
+Description=gunicorn daemon
+Requires=gunicorn.socket
+After=network.target
+
+[Service]
+User={{ubuntu_username}}
+Group=www-data
+WorkingDirectory=/home/{{ubuntu_username}}/projectdir
+ExecStart=/home/{{ubuntu_username}}/projectdir/env/bin/gunicorn \
+        --access-logfile - \
+        --workers 3 \
+        --bind unix:/run/gunicorn.sock \
+        {{project_name}}.wsgi:application
+
+Restart=always
+RestartSec=10s
+
+[Install]
+WantedBy=multi-user.target
+    '''
+    sudo systemctl start gunicorn.socket
+    sudo systemctl enable gunicorn.socket
+
+Step 6 - Configuring Nginx as a reverse proxy
+    sudo vim /etc/nginx/sites-available/textutils
+    ///// or /////
+    sudo nano /etc/nginx/sites-available/textutils
+    '''
+server {
+    listen 80;
+    server_name {{domain_name}};
+
+    location = /favicon.ico { access_log off; log_not_found off; }
+    location /static/ {
+        root /home/{{ubuntu_username}}/projectdir;
+    }
+
+    location / {
+        include proxy_params;
+        proxy_pass {{http://unix:/run/gunicorn.sock}};
+    }
+}
+    '''
+
+    sudo ln -s /etc/nginx/sites-available/textutils /etc/nginx/sites-enabled/
+
+    sudo nginx -t
+        Note: To test nginx configuration is ok or not.
+
+
+    sudo service gunicorn restart
+    sudo service nginx restart
+
+
+

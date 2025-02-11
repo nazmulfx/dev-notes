@@ -58,10 +58,11 @@ https://frappeframework.com/docs/user/en/basics/sites
 bench new-site site.local
 		- Create a new site
 
-bench --site site.local add_to_hosts
+bench --site site.local add-to-hosts
 		- to use this site in Multi-tanancy mode
 
-bench --site site.local serve
+bench use site.local
+		- set as default site in 127.0.0.1
 
 bench use site.local
 		- to use as default site directly 127.0.0.1:8000 in this url
