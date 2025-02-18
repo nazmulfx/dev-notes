@@ -22,6 +22,8 @@ STEP 1 : Install git
 
 STEP 2 : install python
         sudo apt-get python3-dev python3-setuptools python3-pip python3.12-venv
+        ///// or /////
+        sudo apt install python3-dev python3-setuptools python3-pip python3.12-venv
 
 STEP 3 : Install MariaDB
         sudo apt-get install software-properties-common

@@ -1,0 +1,54 @@
+STEP 1 : Clone Frappe Docker files
+  git clone https://github.com/frappe/frappe_docker
+  cd frappe_docker
+
+STEP 2 : Create App JSON Files => app.json
+  [
+    {
+      "url": "https://github.com/frappe/erpnext",
+      "branch": "version-15"
+    },
+    {
+      "url": "https://github.com/frappe/payments",
+      "branch": "version-15"
+    },
+    {
+      "url": "https://{{ PAT }}@git.example.com/project/repository.git",
+      "branch": "main"
+    }
+  ]
+
+ STEP 3 : Generate base64 string from json file
+  export APPS_JSON_BASE64=$(base64 -w 0 /path/to/apps.json)
+
+  NOTE: Use the following command to decode and save the output into a JSON file named apps-test-output.json
+    echo -n ${APPS_JSON_BASE64} | base64 -d > apps-test-output.json
+
+ STEP 4 : Configure build
+
+  => Quick Build image:
+docker build \
+  --build-arg=FRAPPE_PATH=https://github.com/frappe/frappe \
+  --build-arg=FRAPPE_BRANCH=version-15 \
+  --build-arg=APPS_JSON_BASE64=$APPS_JSON_BASE64 \
+  --tag=ghcr.io/{{user}}/{{repo}}/custom:1.0.0 \
+  --file=images/layered/Containerfile .
+
+  => Custom build image:
+docker build \
+  --build-arg=FRAPPE_PATH=https://github.com/frappe/frappe \
+  --build-arg=FRAPPE_BRANCH=version-15 \
+  --build-arg=PYTHON_VERSION=3.12.3 \
+  --build-arg=NODE_VERSION=20.9.0 \
+  --build-arg=APPS_JSON_BASE64=$APPS_JSON_BASE64 \
+  --tag=ghcr.io/{{user}}/{{repo}}/{{image_name}}:1.0.0 \
+  --file=images/custom/Containerfile .
+
+sudo docker build \
+  --build-arg=FRAPPE_PATH=https://github.com/frappe/frappe \
+  --build-arg=FRAPPE_BRANCH=version-15 \
+  --build-arg=PYTHON_VERSION=3.12.3 \
+  --build-arg=NODE_VERSION=20.9.0 \
+  --build-arg=APPS_JSON_BASE64=$APPS_JSON_BASE64 \
+  --tag=ghcr.io/nazmulfx/frappe_docker_deploy/frappe_docker_deploy:1.0.0 \
+  --file=images/custom/Containerfile .

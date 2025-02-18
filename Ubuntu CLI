@@ -166,3 +166,29 @@ server {
 
 
 
+###################################################################
+###################   Frappe Production Setup   ###################
+###################################################################
+
+Step 1️⃣  : Install ansible & nginx
+    sudo apt install ansible nginx
+
+Setp 2️⃣ : Enable Production Mode
+    cd /home/youruser/frappe-bench
+    sudo bench setup production {{ubuntu_username}}
+
+Setp 3️⃣ : Setup Supervisor to Keep Bench Running
+    sudo apt update
+    sudo apt install supervisor -y
+
+    sudo systemctl enable supervisor
+    sudo systemctl start supervisor
+
+3️⃣ Configure Nginx as Reverse Proxy
+    sudo bench setup nginx
+
+    sudo ln -s /etc/nginx/sites-available/frappe-bench /etc/nginx/sites-enabled/
+    sudo systemctl restart nginx
+
+    
+
