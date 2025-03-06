@@ -1,0 +1,207 @@
+After install everythng then convert Development to Production Mode
+
+###########################################################################
+
+########################################################
+#############  Frappe Bench Production  ################
+########################################################
+
+Note: Ubuntu Username is frappe
+
+step 1 : check the username is correnct or not
+    sudo chmod -R o+rx /home/frappe
+
+step 2 : Create a site
+    cd frappe-bench
+    bench new-site site1.local
+
+step 3 : enable scheduler
+    bench --site site1.local enable-scheduler
+
+step 4 : set maintenance mood off
+    bench --site site1.local set-maintenance-mode off
+
+step 5 : install nginx
+    sudo apt install nginx
+
+step 6 : setup bench for production mode
+    sudo bench setup production [ubuntu-username]
+
+    Note: install ansible in bench. if not working, install ansible globally also.
+        bench pip install ansible [Note: from bench env]
+        sudo apt install ansible [Note: From global env]
+
+    Note: if error: bench.exceptions.CommandFaildError: bench setup role fail2ban
+        sudo nano /usr/local/lib/python3.10/dist-packages/bench/playbooks/roles/mariadb/tasks/main.yml
+        Note: replace include with include_tasks, & then run production command again
+
+---
+- include_tasks: centos.yml
+  when: ansible_distribution == 'CentOS' and ansible_distribution>
+
+- include_tasks: ubuntu-trusty.yml
+  when: ansible_distribution == 'Ubuntu' and ansible_distribution>
+
+- include_tasks: ubuntu-xenial_bionic.yml
+  when: ansible_distribution == 'Ubuntu' and ansible_distribution>
+
+- name: Add configuration
+  template:
+    src: '{{ mysql_conf_tpl }}'
+    dest: '{{ mysql_conf_dir[ansible_distribution] }}/{{ mysql_co>
+    owner: root
+    group: root
+    mode: 0644
+  when: mysql_conf_tpl != 'change_me' and ansible_distribution !=>
+  notify: restart mariadb
+
+- include_tasks: debian.yml
+  when: ansible_distribution == 'Debian'
+
+- name: Add configuration
+  template:
+    src: '{{ mysql_conf_tpl }}'
+    dest: '{{ mysql_conf_dir[ansible_distribution] }}/{{ mysql_co>
+    owner: root
+    group: root
+    mode: 0644
+  when: mysql_conf_tpl != 'change_me' and ansible_distribution ==>
+  notify: restart mariadb
+
+- name: Add additional conf for MariaDB 10.2 in mariadb.conf.d
+  blockinfile:
+    path: /etc/mysql/conf.d/settings.cnf
+    block: |
+      # Import all .cnf files from configuration directory
+      !includedir /etc/mysql/mariadb.conf.d/
+  become: yes
+  become_user: root
+  when: ansible_distribution == 'Ubuntu' or ansible_distribution >
+
+- name: Add additional conf for MariaDB 10.2 in mariadb.conf.d
+  blockinfile:
+    path: /etc/mysql/mariadb.conf.d/erpnext.cnf
+    block: |
+      [mysqld]
+      pid-file        = /var/run/mysqld/mysqld.pid
+      socket          = /var/run/mysqld/mysqld.sock
+
+      # setting appeared inside mysql but overwritten by mariadb >
+
+      collation-server = utf8mb4_unicode_ci
+    create: yes
+  become: yes
+  become_user: root
+  when: ansible_distribution == 'Ubuntu' or ansible_distribution >
+
+- name: Start and enable service
+  service:
+    name: mariadb
+    state: started
+    enabled: yes
+
+- debug:
+    msg: "{{ mysql_root_password }}"
+
+- include_tasks: mysql_secure_installation.yml
+  when: mysql_root_password is defined
+
+- debug:
+    var: mysql_secure_installation
+  when: mysql_secure_installation and mysql_root_password is defi>
+
+...
+
+
+step 7 : restart all supervisorctl, if before issue happend
+    sudo supervisorctl restart all
+
+step 8 : setup socket.io
+    bench setup socketio
+
+step 9 : setup supervisor
+    bench setup supervisor
+
+step 10 : setup redis db catch server
+    bench setup redis
+
+step 11 : reload supervisorctl to work everything properly
+    sudo supervisorctl reload
+
+step 12 : if error: Sorry! We will be back soon.
+    Note: set site1.local as default site
+        bench use site1.local
+    then, restart the bench
+        bench restart
+
+step 13 : if error: bench.exceptions.CommandFailedError: sudo supervisorctl restart frappe:
+        $ sudo supervisorctl restart frappe:
+        frappe: ERROR (no such group)
+        frappe: ERROR (no such group)
+        ERROR: sudo supervisorctl restart frappe:
+
+    if this error shows, Solution:
+        cd /etc/supervisor/
+        sudo nano supervisord.conf
+
+        Note: edit: chmod=0600 to 0760 and save.
+
+        sudo service supervisor restart
+
+    if still this error shows: again solution,
+        Check If Supervisor Is Installed and Running
+            sudo apt update
+            sudo apt install supervisor -y
+            sudo systemctl start supervisor
+            sudo systemctl enable supervisor
+
+            sudo systemctl status supervisor
+        
+        Check Supervisor Configuration for Frappe
+            ls /etc/supervisor/conf.d/
+            Note: If you don't see a frappe.conf file, regenerate it using:
+
+                cd ~/frappe-bench
+                bench setup supervisor
+                sudo ln -s `pwd`/config/supervisor.conf /etc/supervisor/conf.d/frappe.conf
+                sudo supervisorctl reread
+                sudo supervisorctl update
+
+
+
+
+
+
+########################################################
+###########  Frappe Bench SSL Certificate  #############
+########################################################
+
+step 1 : install certbot
+    sudo apt install certbot python3-certbot-nginx
+
+step 2 : setup nginx configuration
+    cd /etc/nginx/
+    sudo nano nginx.conf
+
+    """
+    server {
+        server_name frappe.test-host.click;
+    }
+    """
+
+step 3 : test nginx
+    sudo nginx -t
+
+step 4 : request for ssl certificate
+    sudo certbot --nginx -d frappe.test-host.click
+
+    success Message:
+    Deploying certificate
+    Successfully deployed certificate for frappe.test-host.click to /etc/nginx/conf.d/frappe-bench.conf
+    Congratulations! You have successfully enabled HTTPS on https://frappe.test-host.click
+
+step 5 : to check ssl certificate is close or about to expire
+    sudo certbot renew --dry-run
+
+step 6 : To renew the certificate
+    sudo certbot renew

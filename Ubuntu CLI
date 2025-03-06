@@ -192,3 +192,16 @@ Setp 3️⃣ : Setup Supervisor to Keep Bench Running
 
     
 
+
+###################################################################
+######################   Add User in Ubuntu   #####################
+###################################################################
+
+Create a New User (If Not Already Created)
+    adduser frappe
+
+Give Sudo Access
+    usermod -aG sudo frappe
+
+change user to frappe
+    su - frappe
