@@ -1,0 +1,118 @@
+.print-body {
+    width: 7.3in;
+    margin: 0in auto;
+    margin-top:20px;
+}
+.print-body-top{
+    display:flex;
+    flex-direction:row;
+}
+.print-body-top h2 {
+    font-size:14px;
+    margin:0px;
+}
+.top-left-side, .top-right-side{
+    width:50%;
+}
+.item-section {
+    width:100%;
+    margin-top:20px;
+}
+.item-section table {
+    width:100%;
+    border: 1px solid black;
+}
+
+.item-section table th, td {
+    border: 1px solid black;
+    font-size:14px;
+}
+.item-section table th {
+    font-weight:bold;
+    color: black;
+    background-color: ECECEC;
+}
+
+
+.total-section{
+    display:flex;
+    flex-direction:row;
+    margin-top:20px;
+}
+.total-section > .total-left, .total-right {
+    width: 50%;
+}
+.total-section h2 {
+    font-size: 14px;
+    margin:0px;
+    padding:0px;
+}
+
+
+
+.Amount-section {
+    display: flex;
+    flex-direction:row;
+    margin-top:20px;
+}
+.left-side, .right-side {
+    width:50%;
+}
+
+
+.width-50 {
+    width:50%;
+}
+.width-20{
+    width:20%;
+}
+.width-15{
+    width:15%;
+}
+.text-left {
+    text-align:left;
+}
+.text-center{
+    text-align:center;
+}
+.text-right{
+    text-align:right;
+}
+
+/* Print Page Settings */
+@media print{
+    @page{
+        size: A4 Potrait;
+        margin:0px;
+    }
+    .print-format{
+        display: flex;
+        flex-direction:column;
+        height:100vh;
+    }
+    .header{
+        align-self:flex-start;
+    }
+    .print-body{
+        flex-grow:1;
+    }
+    .footer{
+        align-self:flex-end;
+    }
+}
+
+
+/* Default Design Customize */
+.print-format{
+    padding:0px !important;
+}
+.print-heading{
+    margin:0px!important;
+    padding:0px!important;
+}
+.letter-head{
+    margin:0px!important;
+}
+.letter-head div{
+    margin:0px !important;
+}
