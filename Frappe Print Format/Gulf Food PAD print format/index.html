@@ -7,19 +7,37 @@
     {% endif %}
   </div>
 </div>
-<!--Header Section End-->
+<!-- Header Section End -->
 
 <!-- Print Format Body Start -->
 <div class="print-body">
     <div class="print-body-top">
         <div class="top-left-side">
+            {% set address_lines = doc.address_display.split("<br>") if doc.address_display else [] %}
             <div style="display:flex">
                 <div class="width-20 text-left"><span style="font-weight:bold">Customer: </span></div>
                 <div class="width-50 text-left">{{doc.customer}}</div>
             </div>
             <div style="display:flex">
                 <div class="width-20 text-left"><span style="font-weight:bold">Address: </span></div>
-                <div class="width-50 text-left">{{doc.address_display}}</div>
+                <!-- <div class="width-50 text-left">{{doc.address_display}}</div> -->
+                <div class="width-50 text-left">
+                    {% for line in address_lines %}
+                        {% if "Phone:" not in line and line.strip() != "" %}
+                            {{ line }}<br>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+            <div style="display:flex">
+                <div class="width-20 text-left"><span style="font-weight:bold">Phone: </span></div>
+                <div class="width-50 text-left">
+                    {% for line in address_lines %}
+                        {% if "Phone:" in line %}
+                            {{ line.replace("Phone: ", "") }}
+                        {% endif %}
+                    {% endfor %}
+                </div>
             </div>
         </div>
         <div class="top-right-side">
@@ -68,15 +86,17 @@
     </div>
     <div class="Amount-section">
         <div class="left-side"></div>
-        <div class="right-side">
+        <div class="right-side" >
             <div style="display:flex">
                 <div class="width-50 text-right"><span style="font-weight:bold">Grand Total:</span></div>
                 <div class="width-50 text-right">{{doc.grand_total}}</div>
             </div>
+            {% if doc.discount_amount %}
             <div style="display:flex">
-                <div class="width-50 text-right"><span style="font-weight:bold">Discount:</span></div>
+               <div class="width-50 text-right"><span style="font-weight:bold">Discount:</span></div>
                 <div class="width-50 text-right">{{doc.discount_amount}}</div>
-            </div>
+            </div> 
+            {% endif %}
             <div style="display:flex">
                 <div class="width-50 text-right"><span style="font-weight:bold">Net Total:</span></div>
                 <div class="width-50 text-right">{{doc.net_total}}</div>

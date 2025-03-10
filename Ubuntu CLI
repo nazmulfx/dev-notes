@@ -5,10 +5,11 @@ sudo dpkg -i mysql-workbench-community_8.0.40-1ubuntu24.04_amd64.deb
 sudo apt install software_name
 
 
+##############################################################
+###########   Data Transfer Local to Server   ################
+##############################################################
 
-
-
-
+scp -r /home/ubuntu/Downloads/scil/ {server ip or url}:/home/nazmul/frappe/frappe-bench/
 
 
 
