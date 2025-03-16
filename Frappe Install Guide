@@ -259,6 +259,13 @@ STEP 10 install Yarn
 STEP 11 install wkhtmltopdf
         sudo apt-get install xvfb libfontconfig wkhtmltopdf
 
+        Note: Install wkhtmltopdf (with patched qt)
+                wget https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-2/wkhtmltox_0.12.6.1-2.jammy_amd64.deb
+                sudo dpkg -i wkhtmltox_0.12.6.1-2.jammy_amd64.deb
+                sudo apt install -f
+                wkhtmltopdf --version
+                        Output: wkhtmltopdf 0.12.6.1 (with patched qt)
+
 STEP 12 install frappe-bench
         sudo -H pip3 install frappe-bench --break-system-packages
         bench --version
