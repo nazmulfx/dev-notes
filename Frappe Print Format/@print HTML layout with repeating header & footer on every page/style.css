@@ -1,0 +1,68 @@
+/* Styles go here */
+
+.page-header, .page-header-space {
+    height: 100px;
+  }
+  
+  .page-footer, .page-footer-space {
+    height: 50px;
+  
+  }
+  
+  .page-footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    border-top: 1px solid black; /* for demo */
+    background: yellow; /* for demo */
+  }
+  
+  .page-header {
+    position: fixed;
+    top: 0mm;
+    width: 100%;
+    border-bottom: 1px solid black; /* for demo */
+    background: yellow; /* for demo */
+  }
+  
+  .page {
+    page-break-after: always;
+  }
+  
+  @page {
+    /*margin: 20mm*/
+      size: A4 portrait;
+      margin:0;
+  }
+  
+  @media print {
+     thead {display: table-header-group;} 
+     tfoot {display: table-footer-group;}
+     
+     button {display: none;}
+     
+     body {margin: 0;}
+  }
+  
+  
+  /* Default Design Customize */
+  .print-format{
+      padding:0px !important;
+  }
+  
+  .print-heading{
+      margin:0px !important;
+      padding:0px !important;
+  }
+  .letter-head{
+      margin:0px !important;
+  }
+  .letter-head div{
+      margin:0px !important;
+  }
+  .print-format td, .print-format th {
+      padding:0px !important;
+  }
+  .page-header {
+      margin:0px !important;
+  }
