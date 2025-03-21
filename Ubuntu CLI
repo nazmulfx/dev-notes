@@ -48,6 +48,91 @@ which python
     will return path of python running like '/home/nazmul/campusx/env/bin/python'
 
 
+################################################################
+############   Setup SSH access without password   #############
+################################################################
+dev@server:~$ ~/.ssh/
+-bash: /home/dev/.ssh/: Is a directory
+dev@server:~$ ls ~/.ssh/
+authorized_keys  known_hosts  known_hosts.old
+dev@server:~$ cat ~/.ssh/authorized_keys
+dev@server:~$ ssh-keygen -t rsa
+Generating public/private rsa key pair.
+Enter file in which to save the key (/home/dev/.ssh/id_rsa): 
+Enter passphrase (empty for no passphrase): 
+Enter same passphrase again: 
+Your identification has been saved in /home/dev/.ssh/id_rsa
+Your public key has been saved in /home/dev/.ssh/id_rsa.pub
+The key fingerprint is:
+SHA256:chLye611wwOU1iKBNnJTsEtREJpEZXay25+6Qw7hoh0 dev@server
+The key's randomart image is:
++---[RSA 3072]----+
+|   .o.XB=        |
+|   ..=** . o     |
+|    ++=o. = .    |
+|     +.= + .     |
+|     .*.S .      |
+|    E o=.o +     |
+|   o o.+. = =    |
+|  . .  .o+ . o   |
+|        +o       |
++----[SHA256]-----+
+dev@server:~$ ls ~/.ssh/
+authorized_keys  id_rsa  id_rsa.pub  known_hosts  known_hosts.old
+dev@server:~$ cat ~/.ssh/id_rsa.pub
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDk+0PhJGswBzu+ZeHsV95bL80l+IVWShNLdxRVuF5FnutHy1+vwR7yF2yRfQwbEHJUZfjuFpGE0LFfPD/y8LRG7JQ6ZOqHRRx+3NEr8/wpltSWZg8FfUxwzciYkfaQIzMrCfb6OABuXHZwkLzWZbk83LBvjV+atH3tRKfk/rIaiHYiHk4bC/TRUCQWyIynSY4XtLsZCCHxpVqH3CVcqjbGadGdgmKmEspnDH17XXRde01OGDCPmw6LaWcfqRyhYACU8WhunhAp9Vene/i7+YTnxSHQ/iT1qRtLOnSyNt3Pa/nO4eHPZswLhhat6G2xB9L8RtPk+SIh3c+SCliw7fC9jSLipwAq1nho2vnjLt4Wfu+ePUq4e7+c9+KQYLY29r4O0EFnivPVmTmYQpzUn5V0h9ReDCztK2JknIOuZsLeudBEkKvHxtP1H9zAi3pdLPaFkU8IPorJUZwuk42KmozOq1hKSKG64fyTda1Qytq0Nu1oEvOasnxtmfeMohI8w/k= dev@server
+dev@server:~$ ssh-copy-id -i ~/.ssh/id_rsa.pub root@172.232.123.61
+/usr/bin/ssh-copy-id: INFO: Source of key(s) to be installed: "/home/dev/.ssh/id_rsa.pub"
+The authenticity of host '172.232.123.61 (172.232.123.61)' can't be established.
+ED25519 key fingerprint is SHA256:SoFy/0c7lKEYvSVoAl4qarCSE3xRHFBGNFII7l/3CN8.
+This host key is known by the following other names/addresses:
+    ~/.ssh/known_hosts:1: [hashed name]
+    ~/.ssh/known_hosts:7: [hashed name]
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+/usr/bin/ssh-copy-id: INFO: attempting to log in with the new key(s), to filter out any that are already installed
+/usr/bin/ssh-copy-id: INFO: 1 key(s) remain to be installed -- if you are prompted now it is to install the new keys
+root@172.232.123.61's password: 
+
+Number of key(s) added: 1
+
+Now try logging into the machine, with:   "ssh 'root@172.232.123.61'"
+and check to make sure that only the key(s) you wanted were added.
+
+dev@server:~$ ssh-copy-id -i ~/.ssh/id_rsa.pub root@172.232.97.155
+/usr/bin/ssh-copy-id: INFO: Source of key(s) to be installed: "/home/dev/.ssh/id_rsa.pub"
+The authenticity of host '172.232.97.155 (172.232.97.155)' can't be established.
+ED25519 key fingerprint is SHA256:ssZl07jKUi73EWimQ2Xp4/+SgHVttPD+/IKsiBTdMxY.
+This host key is known by the following other names/addresses:
+    ~/.ssh/known_hosts:3: [hashed name]
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+/usr/bin/ssh-copy-id: INFO: attempting to log in with the new key(s), to filter out any that are already installed
+/usr/bin/ssh-copy-id: INFO: 1 key(s) remain to be installed -- if you are prompted now it is to install the new keys
+root@172.232.97.155's password: 
+
+Number of key(s) added: 1
+
+Now try logging into the machine, with:   "ssh 'root@172.232.97.155'"
+and check to make sure that only the key(s) you wanted were added.
+
+dev@server:~$ ssh-copy-id -i ~/.ssh/id_rsa.pub root@172.232.97.116
+/usr/bin/ssh-copy-id: INFO: Source of key(s) to be installed: "/home/dev/.ssh/id_rsa.pub"
+The authenticity of host '172.232.97.116 (172.232.97.116)' can't be established.
+ED25519 key fingerprint is SHA256:BQsSJ1Bq5h1sEufz/04vbKKeHtMdcTJPiWWzxsf7sA8.
+This host key is known by the following other names/addresses:
+    ~/.ssh/known_hosts:5: [hashed name]
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+/usr/bin/ssh-copy-id: INFO: attempting to log in with the new key(s), to filter out any that are already installed
+/usr/bin/ssh-copy-id: INFO: 1 key(s) remain to be installed -- if you are prompted now it is to install the new keys
+root@172.232.97.116's password: 
+
+Number of key(s) added: 1
+
+Now try logging into the machine, with:   "ssh 'root@172.232.97.116'"
+and check to make sure that only the key(s) you wanted were added.
+
+dev@server:~$ 
+
+
 
 
 ################################################################
@@ -200,7 +285,7 @@ Setp 3️⃣ : Setup Supervisor to Keep Bench Running
 
 Create a New User (If Not Already Created)
     adduser frappe
-
+    Note: Password as you want ex. Nazmul3118@$#N
 Give Sudo Access
     usermod -aG sudo frappe
 

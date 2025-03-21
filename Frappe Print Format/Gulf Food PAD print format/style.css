@@ -68,7 +68,7 @@ table th {
     padding:0px !important;
     display: flex;
     flex-direction:column;
-    height:100vh;
+    /*height:100vh;*/
 }
 .header{
     align-self:flex-start;

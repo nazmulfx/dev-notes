@@ -22,7 +22,8 @@ step 4 : set maintenance mood off
     bench --site site1.local set-maintenance-mode off
 
 step 5 : install nginx
-    sudo apt install nginx
+    sudo apt install nginx -y
+    sudo apt install ansible -y
 
 step 6 : setup bench for production mode
     sudo bench setup production [ubuntu-username]
@@ -32,8 +33,9 @@ step 6 : setup bench for production mode
         sudo apt install ansible [Note: From global env]
 
     Note: if error: bench.exceptions.CommandFaildError: bench setup role fail2ban
-        sudo nano /usr/local/lib/python3.10/dist-packages/bench/playbooks/roles/mariadb/tasks/main.yml
+        sudo nano /usr/local/lib/{{python3.10}}/dist-packages/bench/playbooks/roles/mariadb/tasks/main.yml
         Note: replace include with include_tasks, & then run production command again
+        Note: replace python version if needed
 
 ---
 - include_tasks: centos.yml
@@ -167,7 +169,13 @@ step 13 : if error: bench.exceptions.CommandFailedError: sudo supervisorctl rest
                 sudo supervisorctl reread
                 sudo supervisorctl update
 
+step 3 : test nginx
+    sudo nginx -t
 
+    Note: if nginx test is successful then go for ssl certificate
+
+step 4 : request for ssl certificate
+    sudo certbot --nginx -d frappe.test-host.click
 
 
 

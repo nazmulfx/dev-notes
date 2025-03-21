@@ -1,68 +1,80 @@
-/* Styles go here */
+.print-body {
+  /*width: 7.3in;*/
+  /*margin: 0in auto;*/
+  margin-top:135px;
+  margin-bottom:65px;
+}
 
-.page-header, .page-header-space {
-    height: 100px;
-  }
-  
-  .page-footer, .page-footer-space {
-    height: 50px;
-  
-  }
-  
-  .page-footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    border-top: 1px solid black; /* for demo */
-    background: yellow; /* for demo */
-  }
-  
-  .page-header {
-    position: fixed;
-    top: 0mm;
-    width: 100%;
-    border-bottom: 1px solid black; /* for demo */
-    background: yellow; /* for demo */
-  }
-  
-  .page {
-    page-break-after: always;
-  }
-  
-  @page {
-    /*margin: 20mm*/
+
+
+table {
+  width:100%;
+  border: 1px solid black !important;
+}
+
+table th, td {
+  border: 1px solid black !important;
+  color: black !important;
+}
+
+table th {
+  font-weight:bold !important;
+  background-color: ECECEC !important;
+}
+
+.width-50 {
+  width:50%;
+}
+.width-25{
+  width:25%;
+}
+.width-20{
+  width:20%;
+}
+.width-15{
+  width:15%;
+}
+.width-10{
+  width:10%;
+}
+
+
+
+/* Print Page Settings */
+@media print{
+  @page{
       size: A4 portrait;
-      margin:0;
+      /*margin:0;*/
   }
-  
-  @media print {
-     thead {display: table-header-group;} 
-     tfoot {display: table-footer-group;}
-     
-     button {display: none;}
-     
-     body {margin: 0;}
-  }
-  
-  
-  /* Default Design Customize */
-  .print-format{
-      padding:0px !important;
-  }
-  
-  .print-heading{
-      margin:0px !important;
-      padding:0px !important;
-  }
-  .letter-head{
-      margin:0px !important;
-  }
-  .letter-head div{
-      margin:0px !important;
-  }
-  .print-format td, .print-format th {
-      padding:0px !important;
-  }
-  .page-header {
-      margin:0px !important;
-  }
+  /*.print-format{*/
+  /*    display: flex;*/
+  /*    flex-direction:column;*/
+  /*    height:100vh;*/
+  /*}*/
+  /*.header{*/
+  /*    align-self:flex-start;*/
+  /*}*/
+  /*.print-body{*/
+  /*    flex-grow:1;*/
+  /*}*/
+  /*.footer{*/
+  /*    align-self:flex-end;*/
+  /*}*/
+}
+
+
+/* Default Design Customize */
+/*.print-format{*/
+/*    padding:0px !important;*/
+/*}*/
+
+/*.print-heading{*/
+/*    margin:0px !important;*/
+/*    padding:0px !important;*/
+/*}*/
+/*.letter-head{*/
+/*    margin:0px !important;*/
+/*}*/
+/*.letter-head div{*/
+/*    margin:0px !important;*/
+/*}*/
