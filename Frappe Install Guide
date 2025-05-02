@@ -237,7 +237,7 @@ default-character-set = utf8mb4
 
 user = mysql
 pid-file = /run/mysqld/mysqld.pid
-socket = /run/mysqld/mysq
+socket = /run/mysqld/mysql
         """
 
 STEP 6 :  Restart MYSQL Server
