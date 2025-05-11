@@ -275,6 +275,29 @@ STEP 13 initilise the frappe bench & install frappe latest version
         cd frappe-bench
         bench start
 
+        ################  version - 14 ##################
+        sudo apt update
+        sudo add-apt-repository ppa:deadsnakes/ppa -y
+        sudo apt update
+        sudo apt install -y python3.10 python3.10-venv python3.10-dev
+
+        python3.10 --version
+
+        export PYTHON=python3.10
+
+        python3.10 -m venv bench-py10-env
+        source bench-py10-env/bin/activate
+
+        pip install -U pip
+        pip install frappe-bench
+
+        bench init frappe-bench-v14 --frappe-branch version-14
+
+        ################  version - 13 ##################
+
+
+
+
 
 
 

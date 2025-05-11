@@ -1,0 +1,119 @@
+
+  <!-- Print Format Body Start -->
+  <div class="print-body">
+    <div class="row section-break" data-label="">
+        <div class="col-xs-6">
+            <div class="row data-field" style="margin-top:0px !important">
+                <div class="col-xs-3 text-left"><span style="font-weight:bold">Customer: </span></div>
+                <div class="col-xs-9 text-left">{{doc.customer}}</div>
+            </div>
+            
+            {% set address = frappe.get_doc("Address", doc.customer_address) %}
+            <div class="row data-field" style="margin-top:0px !important">
+                <div class="col-xs-3 text-left"><span style="font-weight:bold">Address: </span></div>
+                <div class="col-xs-9 text-left">
+                    <p>
+                    {% if address.address_line1 %}
+                        {{address.address_line1}},<br>
+                    {% endif %}
+                    {% if address.address_line2 %}
+                        {{address.address_line2}},<br>
+                    {% endif %}
+                    {% if address.state %}
+                        {{address.state}},<br>
+                    {% endif %}
+                    {% if address.city %}
+                        {{address.city}},
+                    {% endif %}
+                    {% if address.country %}
+                    {{address.country}}
+                    {% endif %}
+                    .</p>
+                </div>
+            </div>
+            <div class="row data-field" style="margin-top:0px !important">
+                <div class="col-xs-3 text-left"><span style="font-weight:bold">Phone: </span></div>
+                <div class="col-xs-9 text-left">
+                  {% if address.phone %}
+                      {{address.phone}}
+                  {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="row data-field" style="margin-top:0px !important">
+                <div class="col-xs-6 text-right"><span style="font-weight:bold">Invoice: </span></div>
+                <div class="col-xs-6 text-right">{{doc.name}}</div>
+            </div>
+            <div class="row data-field" style="margin-top:0px !important">
+                <div class="col-xs-6 text-right"><span style="font-weight:bold">Date: </span></div>
+                <div class="col-xs-6 text-right">{{ frappe.utils.formatdate(doc.posting_date, "dd MMM yyyy") }}</div>
+            </div>
+        </div>
+    </div>
+    <div data-fieldname="items" data-fieldtype="Table">
+        <table class="table table-bordered table-condensed">
+            <thead>
+                <tr>
+                    <th class="width-40">Item Name</th>
+                    <th class="width-10 text-center">UOM</th>
+                    <th class="width-15 text-center">Quantity</th>
+                    <th class="width-15 text-center">Rate</th>
+                    <th class="width-20 text-center">Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in doc.items %}
+                <tr>
+                    <td class="width-40">{{item.item_name}}</td>
+                    <td class="width-10 text-right">{{item.uom}}</td>
+                    <td class="width-15 text-right">{{item.qty}}</td>
+                    <td class="width-15 text-right">{{item.get_formatted("rate", doc)}}</td>
+                    <td class="width-20 text-right">{{item.get_formatted("amount", doc)}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="row section-break" data-label="">
+        <div class="col-xs-4">
+            <div class="row data-field" style="margin-top:0px !important">
+                <div class="col-xs-12"><span style="font-weight:bold">Total Quantity: </span>{{doc.total_qty}}</div>
+            </div>
+        </div>
+        <div class="col-xs-8">
+            <div class="row data-field" style="margin-top:0px !important">
+                <div class="col-xs-6 text-right"><span style="font-weight:bold">Total:</span></div>
+                <div class="col-xs-6 text-right">{{doc.get_formatted("total")}}</div>
+            </div>
+            {% if doc.discount_amount %}
+            <div class="row data-field" style="margin-top:0px !important">
+                <div class="col-xs-6 text-right"><span style="font-weight:bold">Discount:</span></div>
+                <div class="col-xs-6 text-right">{{doc.get_formatted("discount_amount")}}</div>
+            </div>
+            {% endif %}
+            {% if doc.total_taxes_and_charges %}
+            <div class="row data-field" style="margin-top:0px !important">
+                <div class="col-xs-6 text-right"><span style="font-weight:bold">Total Taxes and Charges:</span></div>
+                <div class="col-xs-6 text-right">{{doc.get_formatted("total_taxes_and_charges")}}</div>
+            </div>
+            {% endif %}
+            <div class="row data-field" style="margin-top:0px !important">
+                <div class="col-xs-6 text-right"><span style="font-weight:bold">Grand Total:</span></div>
+                <div class="col-xs-6 text-right">{{doc.get_formatted("grand_total")}}</div>
+            </div>
+            {% if doc.rounded_total %}
+            <div class="row data-field" style="margin-top:0px !important">
+                <div class="col-xs-6 text-right"><span style="font-weight:bold">Rounded Total:</span></div>
+                <div class="col-xs-6 text-right">{{doc.get_formatted("rounded_total")}}</div>
+            </div>
+            {% endif %}
+            <div class="row data-field" style="margin-top:0px !important">
+                <div class="col-xs-6 text-right"><span style="font-weight:bold">In Words:</span></div>
+                <!--<div class="col-xs-6 text-left">{{doc.get_formatted("in_words")}}</div>-->
+                <div class="col-xs-6 text-right">{{doc.in_words}}</div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Print Format Body End -->
