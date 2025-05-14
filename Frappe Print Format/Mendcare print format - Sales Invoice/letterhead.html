@@ -1,0 +1,48 @@
+<!-- Header Area Start -->
+ <div class="row section-break">
+    <div class="col-xs-8 text-left">
+        <div class="row section-break">
+            <div class="col-xs-3 header-logo">
+                <img src="/files/logo.png" alt="Mendcare Letterhead" height="" style="height: 100px;">
+            </div>
+            <div class="col-xs-9 header-brand">
+                <h2 style="text-transform: uppercase;">MENDCARE LTD.</h2>
+                <p style="font-size:14px;">House-394, Road-29, Mohakhali DOHS, <br> Dhaka, Bangladesh</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-4 text-right">
+        <p>Mobile : 01717383974 <br> mail : info@mendcarebd.com</p>
+    </div>
+</div>
+<!-- Header Area End -->
+
+
+<!-- Footer Area Start -->
+ <div>
+    <div class="row section-break" style="display:flex;align-items:center;justify-content:center;text-align:center;">
+        <div class="col-xs-3">
+            <p style="border-top:1px dotted black;">Official</p>
+        </div>
+        <div class="col-xs-6">
+            <img src="/files/logo3.png" alt="Mendcare Letterhead" height="" style="width:80px;padding:10px;">
+        </div>
+        <div class="col-xs-3">
+            <p style="border-top:1px dotted black;">Received by</p>
+        </div>
+    </div>
+    <hr>
+    <div style="font-size:9px;">
+        <div class="col-xs-4" style="text-align:left;">
+            Printed on: {{ frappe.utils.now_datetime().strftime('%d %b %y, %I:%M %p') }}
+        </div>
+        <div class="col-xs-4" style="text-align:center;">
+            <p id="pagenum"><strong>{{ _("Page {0} of {1}").format('<span class="page"></span>', '<span class="topage"></span>') }}</strong>
+            </p>
+        </div>
+        <div class="col-xs-4" style="text-align:right;">
+            www.approsysit.com
+        </div>
+    </div>
+</div>
+ <!-- Footer Area End -->

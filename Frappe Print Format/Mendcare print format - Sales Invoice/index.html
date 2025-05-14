@@ -1,0 +1,159 @@
+<!-- Header Section Start -->
+<div  id="header-html" class="header">
+    <div class="print-heading">
+      {% if letter_head %}
+          <div class="letter-head">{{ letter_head }}</div>
+      {% endif %}
+    </div>
+</div>
+<!-- Header Section End -->
+
+
+
+
+<!-- Print Format Body Start -->
+<div class="print-body">
+    <h2 style="font-size:14px">Sales Invoice</h2>
+    <hr>
+    <div class="row section-break" style="margin-top:10px">
+        <div class="col-xs-6 order-details">
+            <h2>Order No. : </h2>
+            <h2>Order Date : </h2>
+            <h2>Bill TO:</h2>
+            <div class="customer-details">
+                {% set customer_address = frappe.get_doc("Address", doc.customer_address) %}
+                <p>{{doc.customer or ""}}</p>
+                <p>{{customer_address.address_line1 or ""}}</p>
+                <p>Mobile : {{customer_address.phone or ""}}</p>
+            </div>
+            <div>
+                <h2>Delivered By : </h2>
+                <h2>Sales Type : </h2>
+            </div>
+        </div>
+        <div class="col-xs-6 invoice-details">
+            <h2>*{{doc.name}}</h2>
+            <p>Invoice No : {{doc.name}}</p>
+            <p>Invoice Date : {{doc.get_formatted("posting_date")}}</p>
+            
+            <h2>*{{"DN Invoice ID"}}</h2>
+            <p>Challan No : {{"Challan No"}}</p>
+            <p>Challan Date : {{"Challan Date"}}</p>
+        </div>
+    </div>
+    <div>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th rowspan="2">Item ID</th>
+                    <th rowspan="2">Item Description</th>
+                    <th rowspan="2">UOM</th>
+                    <th rowspan="2">Qty</th>
+                    <th rowspan="2">Rate</th>
+                    <th rowspan="2">Amount</th>
+                    <th colspan="2">Discount</th>
+                    <th rowspan="2">Net Amount</th>
+                </tr>
+                <tr>
+                    <th>%</th>
+                    <th>Amt.</th>
+                </tr>
+            </thead>
+        	<tbody>
+                {% set namespace_value = namespace(total_discount_amnt=0, total_amnt=0) %}
+                {% set total_amnt = 0 %}
+        		{%- for row in doc.items -%}
+        		<tr>
+        			<!--<td style="width: 3%;">{{ row.idx }}</td>-->
+        			<td style="width:10%;">{{ row.item_code }}</td>
+        			<td style="">{{ row.description }}</td>
+        			<td style="text-align: right;">{{ row.uom or row.stock_uom }}</td>
+        			<td style="text-align: right;">{{ row.qty }}</td>
+        			<td style="text-align: right;white-space: nowrap;">{{row.get_formatted("rate", doc) }}</td>
+        			<td style="text-align: right;white-space: nowrap;">{{row.get_formatted("price_list_rate", doc) }}</td>
+        			<td style="text-align: right;white-space: nowrap;">{{row.get_formatted("discount_percentage")}}</td>
+        			<td style="text-align: right;white-space: nowrap;">{{row.discount_amount}}</td>
+        			<td style="text-align: right;white-space: nowrap;">{{row.get_formatted("amount", doc)}}</td>
+        			
+        			{% set namespace_value.total_discount_amnt = namespace_value.total_discount_amnt + (row.discount_amount or 0) %}
+        			{% set namespace_value.total_amnt = namespace_value.total_amnt + (row.price_list_rate or 0) %}
+        		</tr>
+        		{%- endfor -%}
+        		<tr style="font-weight:bold">
+        		    <td colspan="2" style="text-align:right">Total</td>
+        		    <td colspan="2" style="text-align:right">{{doc.total_qty}}</td>
+        		    <!--<td colspan="2" style="text-align:right;white-space: nowrap;">{{doc.get_formatted("total_amnt")}}</td>-->
+        		    <td colspan="2" style="text-align:right;white-space: nowrap;">{{ frappe.utils.fmt_money(namespace_value.total_amnt, currency=doc.currency) }}</td>
+        		    <td></td>
+        		    <td colspan="" style="text-aligh:right;white-space: nowrap;">{{namespace_value.total_discount_amnt}}</td>
+        		    <td style="text-align:right;white-space: nowrap;">{{doc.get_formatted("net_total")}}</td>
+        		</tr>
+        	</tbody>
+        </table>
+    </div>
+    <div>
+        <div class="row section-break">
+            <div class="col-xs-8">
+                <p>In Words : {{doc.in_words}}</p>
+                <div style="width:70%;margin-left:20px">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th style="width:20%">Item ID</th>
+                                <th>Batch No</th>
+                                <th>Expire Date</th>
+                            </tr>
+                        </thead>
+                    	<tbody>
+                    		{%- for row in doc.items -%}
+                    		<tr>
+                    			<td style="width:10%;text-align:center">{{ row.item_code }}</td>
+                    			<td style="text-align:center">{{""}}</td>
+                    			<td style="text-align:enter;">{{""}}</td>
+                    		</tr>
+                    		{%- endfor -%}
+                    	</tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-xs-4" style="font-weight:bold">
+                {% if doc.additional_discount_percentage or doc.discount_amount %}
+                <div class="row section-break">
+                    <div class="col-xs-8" style="text-align:right">Discout ({{doc.get_formatted("additional_discount_percentage") ~ "%"}}) :</div>
+                    <div class="col-xs-4" style="text-align:right">{{doc.discount_amount}}</div>
+                </div>
+                {% endif %}
+                <div class="row section-break">
+                    <div class="col-xs-8" style="text-align:right">Delivery Charge :</div>
+                    <div class="col-xs-4" style="text-align:right">{{"0"}}</div>
+                </div>
+                {% if doc.rounding_adjustment %}
+                <div class="row section-break">
+                    <div class="col-xs-8" style="text-align:right">Rounded :</div>
+                    <div class="col-xs-4" style="text-align:right">{{doc.rounding_adjustment}}</div>
+                </div>
+                {% endif %}
+                <div class="row section-break">
+                    <div class="col-xs-8" style="text-align:right">Invoice Total :</div>
+                    <div class="col-xs-4" style="text-align:right">{{doc.rounded_total}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <p>Note : If need to return you must have make before 6(six) months from expire date. Conditions Apply*</p>
+</div>
+
+<!-- Print Format Body End -->
+
+
+
+
+<!-- Footer Section Start -->
+<div  id="footer-html" class="footer" style="">
+    <div class="print-footer">
+      {% if footer %}
+          <div class="letter-head">{{ footer }}</div>
+      {% endif %}
+    </div>
+</div>
+<!-- Footer Section End -->

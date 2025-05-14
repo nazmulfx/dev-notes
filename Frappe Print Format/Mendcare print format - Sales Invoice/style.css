@@ -1,0 +1,73 @@
+/* Default CSS Customize */
+.letter-head {
+    margin:0 !important;
+}
+.print-format {
+    padding:0.50in !important;
+}
+.print-format th {
+    color: black !important;
+    padding:5px !important;
+    text-align: center;
+}
+
+
+
+
+/* Custom CSS */
+h2, hr {
+    margin:0px !important;
+    padding:0px !important;
+}
+.order-details {
+    padding-left:45px !important;
+}
+.order-details h2 {
+    font-size:12px;
+    font-weight:bold;
+}
+
+
+.invoice-details {
+    padding-left: 45px !important;
+}
+.invoice-details p {
+    font-weight:12px;
+    font-weight:bold;
+}
+.table {
+    margin: 10px 0px !important;
+}
+.table th, .table td {
+    padding: 3px 5px !important;
+}
+
+
+
+
+/* Print Settings */
+@media print {
+    @page {
+        size: A4 portrait;
+    }
+    .print-format {
+        padding: 0.0in !important;
+        display:flex;
+        flex-direction:column;
+        height:100vh;
+    }
+    .table th, .table td {
+        padding: 5px 3px !important;
+    }
+    .header{
+        align-self:flex-start;
+        width:100%;
+    }
+    .print-body{
+        flex-grow:1;
+    }
+    .footer{
+        align-self:flex-end;
+        width:100%;
+    }
+}

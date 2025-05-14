@@ -13,6 +13,23 @@ scp -r /home/ubuntu/Downloads/scil/ {server ip or url}:/home/nazmul/frappe/frapp
 
 
 
+##############################################################
+###########   Additional Swap memory add   ###################
+##############################################################
+Note: To Check swap memory
+    free -h
+
+step-1: Create and add swap memory
+    sudo fallocate -l 5G /swapfile
+    sudo chmod 600 /swapfile
+    sudo mkswap /swapfile
+    sudo swapon /swapfile
+
+step-2: make permanent swap 
+    echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
+
+
+
 
 ##############################################################
 ###################   Python Environment   ###################
