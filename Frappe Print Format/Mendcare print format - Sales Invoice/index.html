@@ -17,28 +17,34 @@
     <hr>
     <div class="row section-break" style="margin-top:10px">
         <div class="col-xs-6 order-details">
-            <h2>Order No. : </h2>
-            <h2>Order Date : </h2>
+            {% set sales_order = frappe.get_doc("Sales Order", doc.items[0].sales_order) if doc.items[0].sales_order else {} %}
+            <h2>Order No. : {{sales_order.name or ""}}</h2>
+            <h2>Order Date : {{ frappe.format(sales_order.transaction_date, {"fieldtype": "Date"}) }}</h2>
             <h2>Bill TO:</h2>
             <div class="customer-details">
-                {% set customer_address = frappe.get_doc("Address", doc.customer_address) %}
+                {% set customer_address = frappe.get_doc("Address", doc.customer_address) if doc.customer_address else {} %}
                 <p>{{doc.customer or ""}}</p>
-                <p>{{customer_address.address_line1 or ""}}</p>
+                {% if customer_address.address_line1 %}
+                <p>Address: {{customer_address.address_line1 or ""}}</p>
+                {% endif %}
+                {% if customer_address.phone %}
                 <p>Mobile : {{customer_address.phone or ""}}</p>
+                {% endif %}
             </div>
             <div>
-                <h2>Delivered By : </h2>
-                <h2>Sales Type : </h2>
+                <h2>Delivered By : <span style="font-weight:normal">{{doc.custom_delivered_by}}</span></h2>
+                <h2>Sales Type : <span style="font-weight:normal">{{doc.custom_sales_type}}</span></h2>
             </div>
         </div>
         <div class="col-xs-6 invoice-details">
             <h2>*{{doc.name}}</h2>
-            <p>Invoice No : {{doc.name}}</p>
-            <p>Invoice Date : {{doc.get_formatted("posting_date")}}</p>
-            
-            <h2>*{{"DN Invoice ID"}}</h2>
-            <p>Challan No : {{"Challan No"}}</p>
-            <p>Challan Date : {{"Challan Date"}}</p>
+            <p>Invoice No : <span style="font-weight:normal">{{doc.name}}</span></p>
+            <p>Invoice Date : <span style="font-weight:normal">{{doc.get_formatted("posting_date")}}</span></p>
+
+            {% set delivery_note = frappe.get_doc("Delivery Note", doc.items[0].delivery_note) if doc.items[0].delivery_note else {} %} 
+            <h2>*{{delivery_note.name or ""}}</h2>
+            <p>Challan No : <span style="font-weight:normal">{{delivery_note.name or ""}}</span></p>
+            <p>Challan Date : <span style="font-weight:normal">{{ frappe.format(delivery_note.posting_date, {"fieldtype": "Date"}) or ""}}</span></p>
         </div>
     </div>
     <div>
@@ -47,7 +53,7 @@
                 <tr>
                     <th rowspan="2">Item ID</th>
                     <th rowspan="2">Item Description</th>
-                    <th rowspan="2">UOM</th>
+                    <!--<th rowspan="2">UOM</th>-->
                     <th rowspan="2">Qty</th>
                     <th rowspan="2">Rate</th>
                     <th rowspan="2">Amount</th>
@@ -65,9 +71,9 @@
         		{%- for row in doc.items -%}
         		<tr>
         			<!--<td style="width: 3%;">{{ row.idx }}</td>-->
-        			<td style="width:10%;">{{ row.item_code }}</td>
+        			<td style="text-align:center;width:10%;">{{ row.item_code }}</td>
         			<td style="">{{ row.description }}</td>
-        			<td style="text-align: right;">{{ row.uom or row.stock_uom }}</td>
+        			<!--<td style="text-align: right;">{{ row.uom or row.stock_uom }}</td>-->
         			<td style="text-align: right;">{{ row.qty }}</td>
         			<td style="text-align: right;white-space: nowrap;">{{row.get_formatted("rate", doc) }}</td>
         			<td style="text-align: right;white-space: nowrap;">{{row.get_formatted("price_list_rate", doc) }}</td>
@@ -81,12 +87,12 @@
         		{%- endfor -%}
         		<tr style="font-weight:bold">
         		    <td colspan="2" style="text-align:right">Total</td>
-        		    <td colspan="2" style="text-align:right">{{doc.total_qty}}</td>
+        		    <td colspan="" style="text-align:right">{{doc.total_qty}}</td>
         		    <!--<td colspan="2" style="text-align:right;white-space: nowrap;">{{doc.get_formatted("total_amnt")}}</td>-->
         		    <td colspan="2" style="text-align:right;white-space: nowrap;">{{ frappe.utils.fmt_money(namespace_value.total_amnt, currency=doc.currency) }}</td>
         		    <td></td>
-        		    <td colspan="" style="text-aligh:right;white-space: nowrap;">{{namespace_value.total_discount_amnt}}</td>
-        		    <td style="text-align:right;white-space: nowrap;">{{doc.get_formatted("net_total")}}</td>
+        		    <td style="text-aligh:right;white-space: nowrap;">{{namespace_value.total_discount_amnt}}</td>
+        		    <td style="text-align:right;white-space: nowrap;">{{doc.get_formatted("total")}}</td>
         		</tr>
         	</tbody>
         </table>
@@ -106,10 +112,11 @@
                         </thead>
                     	<tbody>
                     		{%- for row in doc.items -%}
+                    		{% set batch = frappe.get_doc("Batch", row.batch_no) if row.batch_no else {} %}
                     		<tr>
                     			<td style="width:10%;text-align:center">{{ row.item_code }}</td>
-                    			<td style="text-align:center">{{""}}</td>
-                    			<td style="text-align:enter;">{{""}}</td>
+                    			<td style="text-align:center">{{batch.name or ""}}</td>
+                    			<td style="text-align:center;">{{ frappe.format(batch.expiry_date, {"fieldtype": "Date"}) or ""}}</td>
                     		</tr>
                     		{%- endfor -%}
                     	</tbody>
@@ -117,16 +124,18 @@
                 </div>
             </div>
             <div class="col-xs-4" style="font-weight:bold">
+                {% for row in doc.taxes %}
+                <div class="row section-break">
+                    <div class="col-xs-8" style="text-align:right">{{row.account_head}} :</div>
+                    <div class="col-xs-4" style="text-align:right">{{row.tax_amount}}</div>
+                </div>
+                {% endfor %}
                 {% if doc.additional_discount_percentage or doc.discount_amount %}
                 <div class="row section-break">
                     <div class="col-xs-8" style="text-align:right">Discout ({{doc.get_formatted("additional_discount_percentage") ~ "%"}}) :</div>
                     <div class="col-xs-4" style="text-align:right">{{doc.discount_amount}}</div>
                 </div>
                 {% endif %}
-                <div class="row section-break">
-                    <div class="col-xs-8" style="text-align:right">Delivery Charge :</div>
-                    <div class="col-xs-4" style="text-align:right">{{"0"}}</div>
-                </div>
                 {% if doc.rounding_adjustment %}
                 <div class="row section-break">
                     <div class="col-xs-8" style="text-align:right">Rounded :</div>
@@ -140,7 +149,11 @@
             </div>
         </div>
     </div>
+    {% if doc.terms %}
+    <p>NOTE: {{doc.terms}}</p>
+    {% else %}
     <p>Note : If need to return you must have make before 6(six) months from expire date. Conditions Apply*</p>
+    {% endif %}
 </div>
 
 <!-- Print Format Body End -->

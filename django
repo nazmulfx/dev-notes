@@ -1,0 +1,15 @@
+pip install django
+pip install djangorestframework
+django-admin --version
+python -m django --version
+django-admin startproject {project name}
+
+add gin in project
+    cd {project folder}
+    git init
+
+    Note: if you want any folder to ignore
+        cd {project folder}
+        nano .gitignore
+            note: add file or folder to ignore like "env/" or "file.txt" and save
+

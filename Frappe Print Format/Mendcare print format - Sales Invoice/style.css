@@ -10,7 +10,13 @@
     padding:5px !important;
     text-align: center;
 }
-
+.print-format .table-bordered td, .print-format .table-bordered th {
+    border: 1px solid black !important;
+}
+.print-heading {
+    border:none !important;
+    margin-bottom:0px !important;
+}
 
 
 
