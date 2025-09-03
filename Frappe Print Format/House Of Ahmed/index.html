@@ -1,0 +1,301 @@
+<div>
+    <div style="width:4in;margin:0 auto;">
+        <img src="/files/logo.png" alt="HOA Logo" height="" style="">
+    </div>
+    <h2 style="text-align:center;font-weight:bold;">Purchase Order</h2>
+    <div class="row" style="margin-top:0px !important;">
+        <div class="col-xs-5">
+            <table class="table" style="margin:0px !important">
+                <tbody>
+                    <tr>
+                        <td style="font-weight:bold;border:none">PO NUMBER:</td>
+                        <td class="border-bottom-only" style="text-align:center;">{{ doc.name }}</td>
+                    </tr>
+                    {% if doc.ref_sq %}
+                    <tr>
+                        <td style="font-weight:bold;border:none">SUPPLIER QTN:</td>
+                        <td class="border-bottom-only" style="text-align:center;">{{doc.ref_sq}}</td>
+                    </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-xs-2"></div>
+        <div class="col-xs-5">
+            <table class="table" style="margin:0px !important">
+                <tbody>
+                    {% if doc.transaction_date %}
+                    <tr>
+                        <td style="font-weight:bold;border:none">DATE:</td>
+                        <td class="border-bottom-only" style="text-align:center;">{{doc.get_formatted("transaction_date")}}</td>
+                    </tr>
+                    {% endif %}
+                    {% if doc.schedule_date %}
+                    <tr>
+                        <td style="font-weight:bold;border:none">REQUIRED BY:</td>
+                        <td class="border-bottom-only" style="text-align:center;">{{ frappe.utils.formatdate(doc.schedule_date) }}</td>
+                    </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row info-area">
+        <div class="col-xs-6">
+            <div class="border-bottom-only info-heading">SUPPLIER</div>
+            {% set supplier = frappe.get_doc("Supplier", doc.supplier) or {} %}
+            {% set supplier_address = frappe.get_doc("Address", supplier.supplier_address) or {} %}
+            {% set contact_person = frappe.get_doc("Contact", doc.contact_person) or {} %}
+            <table class="">
+                <tbody>
+                    {% if supplier.supplier_name %}
+                    <tr>
+                        <td>Name</td>
+                        <td>:</td>
+                        <td>{{supplier.supplier_name}}</td>
+                    </tr>
+                    {% endif %}
+                    {% if supplier_address %}
+                    <tr>
+                        <td>Address</td>
+                        <td>:</td>
+                        <td>
+                            {% if supplier_address.address_line1 %}
+                            {{supplier_address.address_line1}} <br>
+                            {% endif %}
+                            {% if supplier_address.address_line2 %}
+                            {{supplier_address.address_line2}} <br>
+                            {% endif %}
+                            {% if supplier_address.city %}
+                            {{supplier_address.city}}, 
+                            {% endif %}
+                            {% if supplier_address.state %}
+                            {{supplier_address.state}}  <br>
+                            {% endif %}
+                            {% if supplier_address.country %}
+                            {{supplier_address.country}}
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endif %}
+                    {% if supplier.mobile_no %}
+                    <tr>
+                        <td>Phone</td>
+                        <td>:</td>
+                        <td>{{supplier.mobile_no}}</td>
+                    </tr>
+                    {% endif %}
+                    {% if contact_person.first_name or contact_person.first_name %}
+                    <tr>
+                        <td>Contact</td>
+                        <td>:</td>
+                        <!--<td>{{doc.contact_person}}</td> -->
+                        <td>{{contact_person.first_name or ""}} {{contact_person.first_name or ""}}</td>
+                        <!--<td>{{[contact_person.first_name, contact_person.first_name] | select | join(", ")}}</td>-->
+                    </tr>
+                    {% endif %}
+                    {% if contact_person.email_id %}
+                    <tr>
+                        <td>Email</td>
+                        <td>:</td>
+                        <td>{{contact_person.email_id}}</td>
+                    </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-xs-6">
+            {% set company_address = frappe.get_doc("Address", doc.company_address) or {} %}
+            <div class="border-bottom-only info-heading">COMPANY ADDRESS</div>
+            {% if company_address.address_line1 %}
+                {{company_address.address_line1}} <br>
+            {% endif %}
+            {% if company_address.address_line2 %}
+                {{company_address.address_line2}} <br>
+            {% endif %}
+            {% if company_address.city %}
+                {{company_address.city}}, 
+            {% endif %}
+            {% if company_address.state %}
+                {{company_address.state}} <br>
+            {% endif %}
+            {% if company_address.country %}
+                {{company_address.country}}
+            {% endif %}
+        </div>
+    </div>
+    
+    <div clas="row">
+        <table class="table table-bordered table-striped item-table">
+            <thead>
+                <tr>
+                    <th style="font-weight:bold;text-align:center;">SL</th>
+                    <th style="font-weight:bold;text-align:center;">Description</th>
+                    <th style="font-weight:bold;text-align:center;">Quantity</th>
+                    <th style="font-weight:bold;text-align:center;">Unit Price</th>
+                    <th style="font-weight:bold;text-align:center;">Total</td>
+                </tr>
+            </thead>
+            <tbody>
+                <!--<tr>-->
+                <!--    <td style="font-weight:bold;text-align:center;">SL</td>-->
+                <!--    <td style="font-weight:bold;text-align:center;">Description</td>-->
+                <!--    <td style="font-weight:bold;text-align:center;">Quantity</td>-->
+                <!--    <td style="font-weight:bold;text-align:center;">Unit Price</td>-->
+                <!--    <td style="font-weight:bold;text-align:center;">Total</td>-->
+                <!--</tr>-->
+                {% set ns = namespace(qty=0, amount=0) %}
+                {% for item in doc.items %}
+                <tr>
+                    <td style="width:8%;text-align:center;">{{item.idx}}</td>
+                    <td style="width:52%;">{{item.description}}</td>
+                    <td style="width:10%;text-align:center;">{{item.qty}}</td>
+                    <td style="width:15%;text-align:center;">{{item.rate}}</td>
+                    <td style="widht:15%;text-align:center;">{{item.get_formatted("amount", doc)}}</td>
+                </tr>
+                {% set ns.qty = ns.qty + item.qty %}
+                {% set ns.amount = ns.amount + item.amount %}
+                {% endfor %}
+                <tr>
+                    <td style="">{{""}}</td>
+                    <td style="font-weight:bold;text-align:right">{{""}}</td>  
+                    <td style="font-weight:bold;text-align:center;">{{ns.qty}}</td>
+                    <td style="">{{""}}</td>
+                    <td style="font-weight:bold;text-align:center">{{ frappe.format_value(ns.amount, "Currency") }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="row">
+        <div class="col-xs-7">
+            <h2 class="total-qty">TOTAL QTY: {{doc.total_qty}}</h2>
+            <div style="margin-top:10px">
+                {% if doc.terms %}
+                <p style="font-weight:bold">Terms and Conditions</p>
+                <p>{{doc.terms}}</p>
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-xs-5" style="text-align:right;">
+            <table class="table table-nobordered" style="margin:0px !important;">
+                <tbody>
+                    <tr>
+                        <td style="font-weight:bold;width:30%;">Total</td>
+                        <td>:</td>
+                        <td style="text-align:right">{{doc.get_formatted("total")}}</td>
+                    </tr>
+                    {% if doc.taxes %}
+                    {% for row in doc.taxes %} 
+                    <tr>
+                        <td style="font-weight:bold">{{row.account_head}}</td>
+                        <td>:</td>
+                        <td style="text-align:right">{{row.get_formatted("tax_amount", doc)}}</td>
+                    </tr>
+                    {% endfor %}
+                    {% endif %}
+                    {% if doc.discount_amount %}
+                    <tr>
+                        <td style="font-weight:bold">Discount</td>
+                        <td>:</td>
+                        <td style="text-align:right">{{doc.get_formatted("discount_amount")}}</td>
+                    </tr>
+                    {% endif %}
+                    {% if doc.rounding_adjustment %}
+                    <tr>
+                        <td style="font-weight:bold">Rounded Total</td>
+                        <td>:</td>
+                        <td style="text-align:right">{{doc.get_formatted("rounded_total")}}</td>
+                    </tr>
+                    {% endif %}
+                    <tr>
+                        <td style="font-weight:bold">Net Total</td>
+                        <td>:</td>
+                        <td style="text-align:right">{{doc.get_formatted("grand_total")}}</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight:bold">In Words</td>
+                        <td>:</td>
+                        <td style="text-align:right">{{doc.in_words}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <!--{% set currency = frappe.db.get_single_value("System Settings", "currency") %}-->
+            <!--<p><span style="font-weight:bold;">Amount in Words: </span>{{frappe.utils.money_in_words(ns.amount, currency)}} </p> -->
+        </div>
+    </div>
+    <!--<div class="row">-->
+    <!--    <div class="col-xs-12">-->
+    <!--        {% if doc.terms %}-->
+    <!--        <p style="font-weight:bold">Terms and Conditions</p>-->
+    <!--        <p>{{doc.terms}}</p>-->
+    <!--        {% endif %}-->
+    <!--    </div>-->
+    <!--</div>-->
+    
+    <div class="row">
+        <div class="col-xs-12">
+            <div style="border:1px solid black">
+                {% set requested_by_employee = frappe.get_list("Employee", filters={"user_id": doc.custom_requested_by}, fields=["employee_name", "designation"]) or [] %}
+                {% set reviewed_by_employee = frappe.get_list("Employee", filters={"user_id": doc.custom_reviewed_by}, fields=["employee_name", "designation"]) or [] %}
+                {% set approved_by_employee = frappe.get_list("Employee", filters={"user_id": doc.custom_approved_by}, fields=["employee_name", "designation"]) or [] %}
+                <div class="row">
+                    <div class="col-xs-4">
+                        <div class="workflow-info">
+                            <div class="text-bold">Prepared By</div>
+                            <p><span class="text-bold">Name: </span>
+                            {% if requested_by_employee[0] %}
+                            {{requested_by_employee[0].employee_name or ""}}
+                            {% endif %}
+                            </p> 
+                            <p><span class="text-bold">Designation: </span>
+                            {% if requested_by_employee[0] %}
+                            {{requested_by_employee[0].designation or ""}}
+                            {% endif %}
+                            </p>
+                            <p><span class="text-bold">Signature: </span>{{""}}</p>
+                        </div>
+                    </div>
+                    <div class="col-xs-4">
+                        <div class="workflow-info">
+                            <div class="text-bold">Reviewed By</div>
+                            <p><span class="text-bold">Name: </span>
+                            {% if reviewed_by_employee[0] %}
+                            {{reviewed_by_employee[0].employee_name or ""}}
+                            {% endif %}
+                            </p> 
+                            <p><span class="text-bold">Designation: </span>
+                            {% if reviewed_by_employee[0] %}
+                            {{reviewed_by_employee[0].designation or ""}}
+                            {% endif %}
+                            </p>
+                            <p><span class="text-bold">Signature: </span>{{""}}</p>
+                        </div>
+                    </div>
+                    <div class="col-xs-4">
+                        <div class="workflow-info">
+                            <div class="text-bold">Approved By</div>
+                            <p><span class="text-bold">Name: </span>
+                            {% if approved_by_employee[0] %}
+                            {{approved_by_employee[0].employee_name or ""}}
+                            {% endif %}
+                            </p> 
+                            <p><span class="text-bold">Designation: </span>
+                            {% if approved_by_employee[0] %}
+                            {{approved_by_employee[0].designation or ""}}
+                            {% endif %}
+                            </p>
+                            <p><span class="text-bold">Signature: </span>{{""}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!--<div class="row" style="margin-top:100px !important;">-->
+    <!--    {% set received_by = frappe.db.get_value("User", doc.modified_by, "full_name") or "" %}-->
+    <!--    <div class="col-xs-4" style="font-weight:bold;">Ordered by:{% if doc.custom_name_of_requested_by %} {{doc.custom_name_of_requested_by}} {% else %}................................... {% endif %}</div>-->
+    <!--    <div class="col-xs-4" style="font-weight:bold;">Received by:{% if doc.custom_name_of_reviewed_by %} {{doc.custom_name_of_reviewed_by}} {% else %}................................... {% endif %}</div>-->
+    <!--    <div class="col-xs-4" style="font-weight:bold;">Approved by:{% if doc.custom_name_of_approved_by %} {{doc.custom_name_of_approved_by}} {% else %}................................... {% endif %}</div> -->
+    <!--</div>-->
+</div>

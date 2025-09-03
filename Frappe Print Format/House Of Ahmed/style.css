@@ -1,0 +1,61 @@
+/* CSS Customize */
+
+.print-format {
+    padding: 0.25in !important;
+}
+.print-format td, .print-format th {
+    padding: 2px !important; 
+}
+.print-format .table-bordered td, .print-format .table-bordered th {
+    border: 1px solid black !important;
+}
+
+
+/* CSS */
+
+h2 {
+    margin-bottom:0px !important;
+}
+.border-bottom-only {
+    border-top: none !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-bottom:1px solid #d1d8dd !important;
+}
+.info-heading {
+    color:#003366;
+    text-transform: uppercase;
+    font-weight:bold;
+    /*font-size:12px;*/
+}
+.info-area td {
+    font-size: 13px !important;
+}
+.item-table thead {
+    background-color: #003366;
+    color: white;
+}
+.item-table th {
+    color: white;
+}
+.total-qty {
+    font-size:13px;
+    margin:0px !important;
+    font-weight:bold;
+}
+.workflow-info {
+    padding-left:20px;
+}
+.text-bold {
+    font-weight:bold;
+}
+
+/* Print CSS */
+@media print {
+    @page {
+        margin: 0.25in !important;
+    }
+    .item-table th {
+    color: black;
+}
+}
