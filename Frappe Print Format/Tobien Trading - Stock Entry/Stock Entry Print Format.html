@@ -1,0 +1,138 @@
+<!-- Header Section Start -->
+<div  id="header-html" class="header">
+    <div class="print-heading">
+        <div class="row">
+            <div class="col-xs-6 heading-logo">
+                {% if letter_head %}
+                    <div class="letter-head">{{ letter_head }}</div>
+                {% endif %}
+            </div>
+            <div class="col-xs-6 heading-info">
+                <h2>STOCK ENTRY</h2>
+                <P style="font-size: 16px !important">{{doc.name}}</P>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Header Section End -->
+
+
+<div class="print-body">
+    <div class="invoice-info-area">
+        <h2>Tobien Trading - Internal stock movement</h2>
+        <div class="row">
+            <div class="col-xs-3 font-bold">
+                <p>Stock Entry Type:</p>
+            </div>
+            <div class="col-xs-4">
+                <p>{{doc.stock_entry_type or ""}}</p>
+            </div>
+            <div class="col-xs-3 font-bold text-right">
+                <p>Posting Date:</p>
+            </div>
+            <div class="col-xs-2 ">
+                <p>{{doc.get_formatted("posting_date")}}</p>
+            </div>
+        </div>
+    </div>
+    <!-- set warehouse -->
+    {% set ns = namespace(s_warehouse='', t_warehouse='') %}
+    {% for row in doc.items %}
+        {% if not ns.s_warehouse %}
+            {% set ns.s_warehouse = row.s_warehouse %}
+        {% endif %}
+        {% if not ns.t_warehouse %}
+            {% set ns.t_warehouse = row.t_warehouse %}
+        {% endif %}
+    {% endfor %}
+    
+
+    <div class="warehouse-info-area">
+        <p class="font-bold">Keine Adresse für das Absenderlager gefunden.</p>
+        
+        <!-- Get Source Warehouse Address -->
+        {% set source_warehouse_address_doc_name = frappe.get_all("Dynamic Link", filters={"link_doctype":"Warehouse", "parenttype":"Address","link_name": ns.s_warehouse}, fields=["parent"], limit=1, order_by="creation") %}
+        {% if source_warehouse_address_doc_name and source_warehouse_address_doc_name[0].parent %}
+            {% set source_warehouse_address = frappe.get_doc("Address", source_warehouse_address_doc_name[0].parent) %}
+        {% else %}
+            {% set source_warehouse_address = {} %}
+        {% endif %}
+        
+        <!-- Get Target Warehouse Address -->
+        {% set target_warehouse_address_doc_name = frappe.get_all("Dynamic Link", filters={"link_doctype":"Warehouse", "parenttype":"Address","link_name": ns.t_warehouse}, fields=["parent"], limit=1, order_by="creation") %}
+        {% if target_warehouse_address_doc_name and target_warehouse_address_doc_name[0].parent %}
+            {% set target_warehouse_address = frappe.get_doc("Address", target_warehouse_address_doc_name[0].parent) %}
+        {% else %}
+            {% set target_warehouse_address = {} %}
+        {% endif %}
+        
+        <div class="row">
+            {% if ns.s_warehouse %}
+            <div class="col-xs-6">
+                <div class="row">
+                    <div class="col-xs-5"><span class="font-bold">Source Warehouse:</span></div>
+                    <div class="col-xs-7">{{ ns.s_warehouse or ""}}</div>
+                </div>
+                {% if source_warehouse_address %}
+                <div class="row">
+                    <div class="col-xs-5"><span class="font-bold">Address:</span></div>
+                    <div class="col-xs-7">{{source_warehouse_address.get_display() or ""}}</div>
+                </div>
+                {% endif %}
+            </div>
+            {% endif %}
+            {% if ns.t_warehouse %}
+            <div class="col-xs-6">
+                <div class="row">
+                    <div class="col-xs-5"><span class="font-bold">Target Warehouse:</span></div>
+                    <div class="col-xs-7">{{ns.t_warehouse or ""}}</div>
+                </div>
+                {% if target_warehouse_address %}
+                <div class="row">
+                    <div class="col-xs-5"><span class="font-bold">Address:</span></div>
+                    <div class="col-xs-7">{{ target_warehouse_address.get_display() or ""}}</div>
+                </div>
+                {% endif %}
+            </div>
+            {% endif %}
+        </div>
+        
+    </div>
+    <div class="table-area">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th style="text-align:center">Sr</th>
+                    <th style="text-align:center">Item Code</th>
+                    <th>Description</th>
+                    <th style="text-align:center">Qty</th>
+                    <th style="text-align:center">UOM</th>
+                    <th style="text-align:center">Batch No</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in doc.items %}
+                <tr>
+                    <td style="text-align:center">{{row.idx}}</td>
+                    <td style="text-align:center">{{row.item_code}}</td>
+                    <td>{{row.description or ""}}</td>
+                    <td style="text-align:center">{{row.qty or ""}}</td>
+                    <td style="text-align:center">{{row.uom or ""}}</td>
+                    <td style="text-align:center">{{row.batch_no or ""}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<!-- Footer Section Start -->
+<div  id="footer-html" class="footer" style="">
+    <div class="print-footer">
+      {% if footer %}
+          <div class="letter-head">{{ footer }}</div>
+      {% endif %}
+    </div>
+</div>
+<!-- Footer Section End -->

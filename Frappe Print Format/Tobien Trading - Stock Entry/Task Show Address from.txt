@@ -1,0 +1,8 @@
+Task: 
+Show Address from Selected Warehouse.
+
+Solution:
+Warehouse doesn't have Address field directly. But it shows Address in virtual field. so we can't show the address directly from warehouse doctype.
+
+what we do is, from Dynamic Link Doctype child table in Address Doctype as the link with Warehouse. 
+so we fetch Address Doctype from Dynamic Link Reference.
