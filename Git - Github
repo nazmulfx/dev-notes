@@ -136,113 +136,47 @@ git remote set-url origin git@github-nazmul:nazmulfx/library_management.git
 ################## GIT SSH ################
 ###########################################
 
-https://chatgpt.com/c/67429e37-a9b0-800c-80c4-e76811c54cc4
+⭐ Full Guide: Personal + Official GitHub on One PC
+
+1️⃣ Create Two SSH Keys
+    ssh-keygen -t ed25519 -C "nazmulhossain664@gmail.com" -f ~/.ssh/id_ed25519_personal
+    ssh-keygen -t ed25519 -C "nazmul@invento.com.bd" -f ~/.ssh/id_ed25519_official
 
 
+2️⃣ Add Both Keys to SSH Agent
+    eval "$(ssh-agent -s)"
 
+    ssh-add ~/.ssh/id_ed25519_personal
+    ssh-add ~/.ssh/id_ed25519_official
 
-
-
-
-Yes, you can use both GitHub accounts on the same computer. Here's how you can configure it:
-
----
-
-### **1. Set Up SSH Keys for Each Account**
-
-1. **Generate SSH Key for Personal Account**
-   ssh-keygen -t ed25519 -C "your_personal_email@example.com"
-    - Save the key with a custom name, e.g., `~/.ssh/id_ed25519_personal`.
-
-2. **Generate SSH Key for Official Account**
-   ssh-keygen -t ed25519 -C "nazmul@invento.com.bd"
-    - Save the key with a custom name, e.g., `~/.ssh/id_ed25519_official`.
-
-3. **Add Both Keys to the SSH Agent**
-   eval "$(ssh-agent -s)"
-   ssh-add ~/.ssh/id_ed25519_personal
-   ssh-add ~/.ssh/id_ed25519_official
-   
-
-4. **Add the Public Keys to GitHub**
-   - Copy each public key to your clipboard:
+3️⃣ Add Public Keys to GitHub
     cat ~/.ssh/id_ed25519_personal.pub
+
     cat ~/.ssh/id_ed25519_official.pub
-        - Add them to their respective GitHub accounts under **Settings > SSH and GPG Keys**.
 
----
+4️⃣ Create SSH Config File
+    4️⃣ Create SSH Config File
 
-### **2. Configure SSH Config File**
-
-Edit the `~/.ssh/config` file (create it if it doesn't exist):
-
-```bash
-# Personal Account
-Host github-personal
+"""
+# Personal GitHub
+Host github.com-personal
     HostName github.com
     User git
     IdentityFile ~/.ssh/id_ed25519_personal
 
-# Official Account
-Host github-official
+# Official GitHub
+Host github.com-official
     HostName github.com
     User git
     IdentityFile ~/.ssh/id_ed25519_official
-```
 
----
+"""
 
-### **3. Clone Repositories Using the Correct Host**
+5️⃣ Cloning Repositories
+    git clone git@github.com-personal:YOUR_PERSONAL_USERNAME/REPO.git
+    git clone git@github.com-official:YOUR_OFFICIAL_USERNAME/REPO.git
 
-1. For your personal account:
-   ```bash
-   git clone git@github-personal:username/repo.git
-   ```
 
-2. For your official account:
-   ```bash
-   git clone git@github-official:username/repo.git
-   ```
-
----
-
-### **4. Set Up Git Config for Each Repository**
-
-Git allows you to configure user details per repository.
-
-1. Navigate to a repository directory:
-   ```bash
-   cd /path/to/your/repository
-   ```
-
-2. Set the user details for that repository:
-   - For personal repositories:
-     ```bash
-     git config user.name "Your Personal Name"
-     git config user.email "your_personal_email@example.com"
-     ```
-   - For official repositories:
-     ```bash
-     git config user.name "Nazmul from Invento"
-     git config user.email "nazmul@invento.com.bd"
-     ```
-
----
-
-### **5. Verify Configuration**
-
-- Test the connection for each account:
-  ```bash
-  ssh -T git@github-personal
-  ssh -T git@github-official
-  ```
-
-- Ensure you're using the correct credentials for commits in each repository:
-  ```bash
-  git config user.name
-  git config user.email
-  ```
-
----
-
-Now you can seamlessly use both GitHub accounts on the same computer! Let me know if you need any further assistance.
+6️⃣ Verify Everything Works
+    ssh -T git@github.com-personal
+    ssh -T git@github.com-official
