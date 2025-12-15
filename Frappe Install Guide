@@ -286,6 +286,9 @@ STEP 13 initilise the frappe bench & install frappe latest version
         sudo apt install -y python3.10 python3.10-venv python3.10-dev
 
         python3.10 --version
+        
+        python3.10 -m ensurepip --upgrade
+        python3.10 -m pip install --upgrade pip setuptools wheel
 
         export PYTHON=python3.10
 
