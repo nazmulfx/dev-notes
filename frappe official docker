@@ -1,0 +1,196 @@
+
+########################################################
+########################################################
+       Frappe Official Docker Installation Guide
+#########################################################
+
+
+
+
+
+
+
+########################################################
+########################################################
+                  VERION UPGRADE GUIDE
+#########################################################
+
+
+docker exec -it {frappe_docker_container_name} bash
+
+#################### Frappe version-12 ###################
+pyenv install 3.7
+PYENV_VERSION=3.7 pip install --no-cache-dir virtualenv
+pyenv global 3.7
+
+nvm install 10
+nvm use 10
+npm install -g yarn
+
+nvm use v10
+PYENV_VERSION=3.7 bench init --skip-redis-config-generation --frappe-branch version-12 frappe-bench-v12
+
+Note: Change Common Site Config 
+{
+  "background_workers": 1,
+  "file_watcher_port": 6787,
+  "frappe_user": "frappe",
+  "gunicorn_workers": 33,
+  "live_reload": true,
+  "rebase_on_pull": false,
+  "redis_cache": "redis://v11-redis-cache-1:6379",	# Need to Change
+  "redis_queue": "redis://v11-redis-queue-1:6379",	# Need to Change
+  "redis_socketio": "redis://v11-redis-queue-1:6379",	# Need to change
+  "restart_supervisor_on_update": false,
+  "restart_systemd_on_update": false,			
+  "serve_default_site": true,
+  "shallow_clone": true,
+  "socketio_port": 9000,
+  "use_redis_auth": false,
+  "webserver_port": 8000,
+  "db_host": "{{frappe_docker_mariadb_container_name}}"				# Add This new line
+}
+
+
+bench new-site site-v12.local --db-host v11-mariadb-1
+bench use site-v12.local
+
+
+bench restore {_db_file_} --force
+	Note: keep the db file in bench directory
+
+bench migrate --skip-failing
+
+bench backup --with-files
+
+
+#################### Frappe version-13 ###################
+pyenv install 3.7
+PYENV_VERSION=3.7 pip install --no-cache-dir virtualenv
+pyenv global 3.7
+
+nvm install 14
+nvm use 14
+npm install -g yarn
+
+nvm use v14
+PYENV_VERSION=3.7 bench init --skip-redis-config-generation --frappe-branch version-13 frappe-bench-v13
+
+Note: Change Common Site Config 
+{
+  "background_workers": 1,
+  "file_watcher_port": 6788,
+  "frappe_user": "frappe",
+  "gunicorn_workers": 33,
+  "live_reload": true,
+  "rebase_on_pull": false,
+  "redis_cache": "redis://v11-redis-cache-1:6379",	# Need to Change
+  "redis_queue": "redis://v11-redis-queue-1:6379",	# Need to Change
+  "redis_socketio": "redis://v11-redis-queue-1:6379",	# Need to change
+  "restart_supervisor_on_update": false,
+  "restart_systemd_on_update": false,			
+  "serve_default_site": true,
+  "shallow_clone": true,
+  "socketio_port": 9001,
+  "use_redis_auth": false,
+  "webserver_port": 8001,
+  "db_host": "{{frappe_docker_mariadb_container_name}}"				# Add This new line
+}
+
+
+bench new-site site-v13.local --db-host v11-mariadb-1
+bench use site-v13.local
+
+bench restore {_db_file_} --force
+	Note: keep the db file in bench directory
+
+bench migrate --skip-failing
+
+bench backup --with-files
+
+#################### Frappe version-14 ###################
+pyenv install 3.10
+PYENV_VERSION=3.10 pip install --no-cache-dir virtualenv
+pyenv global 3.10
+
+nvm install 16
+nvm use 14
+npm install -g yarn
+
+nvm use v14
+PYENV_VERSION=3.10 bench init --skip-redis-config-generation --frappe-branch version-14 frappe-bench-v14
+
+Note: Change Common Site Config 
+{
+  "background_workers": 1,
+  "file_watcher_port": 6789,
+  "frappe_user": "frappe",
+  "gunicorn_workers": 33,
+  "live_reload": true,
+  "rebase_on_pull": false,
+  "redis_cache": "redis://v11-redis-cache-1:6379",	# Need to Change
+  "redis_queue": "redis://v11-redis-queue-1:6379",	# Need to Change
+  "redis_socketio": "redis://v11-redis-queue-1:6379",	# Need to change
+  "restart_supervisor_on_update": false,
+  "restart_systemd_on_update": false,			
+  "serve_default_site": true,
+  "shallow_clone": true,
+  "socketio_port": 9002,
+  "use_redis_auth": false,
+  "webserver_port": 8002,
+  "db_host": "{{frappe_docker_mariadb_container_name}}"				# Add This new line
+}
+
+bench new-site site-v14.local --db-host v11-mariadb-1
+bench use site-v14.local
+
+bench restore {_db_file_} --force
+	Note: keep the db file in bench directory
+	
+bench migrate --skip-failing
+
+bench backup --with-files
+
+
+#################### Frappe version-15 ###################
+pyenv install 3.12
+PYENV_VERSION=3.12 pip install --no-cache-dir virtualenv
+pyenv global 3.12
+
+nvm install 18
+nvm use 18
+npm install -g yarn
+
+nvm use v18
+PYENV_VERSION=3.12 bench init --skip-redis-config-generation --frappe-branch version-15 frappe-bench-v15
+
+Note: Change Common Site Config 
+{
+  "background_workers": 1,
+  "file_watcher_port": 6790,
+  "frappe_user": "frappe",
+  "gunicorn_workers": 33,
+  "live_reload": true,
+  "rebase_on_pull": false,
+  "redis_cache": "redis://v11-redis-cache-1:6379",	# Need to Change
+  "redis_queue": "redis://v11-redis-queue-1:6379",	# Need to Change
+  "redis_socketio": "redis://v11-redis-queue-1:6379",	# Need to change
+  "restart_supervisor_on_update": false,
+  "restart_systemd_on_update": false,			
+  "serve_default_site": true,
+  "shallow_clone": true,
+  "socketio_port": 9003,
+  "use_redis_auth": false,
+  "webserver_port": 8003,
+  "db_host": "{{frappe_docker_mariadb_container_name}}"				# Add This new line
+}
+
+bench new-site site-v15.local --db-host v11-mariadb-1
+bench use site-v15.local
+
+bench restore {_db_file_} --force
+	Note: keep the db file in bench directory
+
+bench migrate --skip-failing
+
+bench backup --with-files
