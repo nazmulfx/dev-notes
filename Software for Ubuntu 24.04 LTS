@@ -1,0 +1,52 @@
+
+#######################################################################
+#########################   Screen Recorder   #########################
+#######################################################################
+
+
+📌 Method 1 — Install from Ubuntu’s Official Repositories (Easiest)
+    sudo apt update
+    sudo apt install simplescreenrecorder
+    simplescreenrecorder
+
+🧰 Method 2 — Install via PPA (Offers Latest Build)
+    sudo add-apt-repository ppa:maarten-baert/simplescreenrecorder
+    sudo apt update
+    sudo apt install simplescreenrecorder
+    simplescreenrecorder
+
+📦 Method 3 — Install via Snap (Sandboxed Package)
+    sudo snap install simplescreenrecorder
+
+
+
+#######################################################################
+###########################   Screenshot   ############################
+#######################################################################
+
+✅ Method 1 — Install from Official Repository (Recommended)
+    sudo apt update
+    sudo apt install flameshot
+    flameshot gui
+
+🚀 Method 2 — Install via Snap
+    sudo snap install flameshot
+    flameshot
+
+
+⚙️ Set Flameshot as Default Screenshot Tool (Optional)
+        If you're using GNOME (default in Ubuntu 24.04):
+            Open Settings → Keyboard → View and Customize Shortcuts
+            Go to Custom Shortcuts
+            Add a new shortcut:
+                Name: Flameshot
+                Command: flameshot gui
+
+        Set shortcut to PrtSc (Print Screen)
+        ⚠️ Wayland Users Note :
+            Ubuntu 24.04 uses Wayland by default.
+            If screenshot selection does not work:
+                Log out
+                Click the ⚙ icon on login screen
+                Select Ubuntu on Xorg
+                Flameshot works more reliably under X11.

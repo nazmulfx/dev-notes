@@ -3,8 +3,17 @@
 ########################################################
        Frappe Official Docker Installation Guide
 #########################################################
+docker file link: https://github.com/frappe/frappe_docker/blob/main/devcontainer-example/docker-compose.yml
 
+step-1: Download Docker file
+        file: docker-compose.yml
+        folder localtion: /frappe-docker-dev/docker-compose.yml
 
+step-2: run docker file
+        command: docker compose 
+        Note: docker container will be run as 
+        
+step-3: 
 
 
 
