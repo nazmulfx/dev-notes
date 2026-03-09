@@ -280,7 +280,7 @@ STEP 13 initialise the frappe bench & install frappe latest version
         ################  version - 16 ##################
 
         # Note: if fresh ubuntu install with python 3.14
-        bench init frappe-bench-v16 --frappe-branch version-16 
+        bench init frappe-bench-v16 --frappe-branch version-16 --python python3.14
         cd frappe-bench-v16
         bench start
 
@@ -301,12 +301,12 @@ STEP 13 initialise the frappe bench & install frappe latest version
 
         bench init frappe-bench-v16 --frappe-branch version-16 --python python3.14
 
-        # Note: Node required 24
+        # Note: Node 24 required for frappe v16
         which node
         nvm use 24
 
         ################  version - 15 ##################
-        bench init frappe-bench --frappe-branch version-15
+        bench init frappe-bench --frappe-branch version-15 --python python3.12
         cd frappe-bench
         bench start
 
