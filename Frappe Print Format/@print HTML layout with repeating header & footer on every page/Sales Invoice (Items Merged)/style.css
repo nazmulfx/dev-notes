@@ -1,0 +1,328 @@
+
+/* Styles go here */
+
+.page-header, .page-header-space {
+    height: 133px;
+}
+
+.page-footer, .page-footer-space {
+    height: 50px;
+
+}
+
+.page-footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.page-header {
+    position: fixed;
+    top: 0mm;
+    width: 100%;
+}
+
+.page {
+    page-break-after: always;
+}
+table {
+    width: 100%;
+}
+
+@page {
+    /*margin: 20mm*/
+    size: A4 portrait;
+    margin:0;
+}
+
+@media print {
+    thead {display: table-header-group;} 
+    tfoot {display: table-footer-group;}
+    
+    button {display: none;}
+    
+    body {margin: 0;}
+}
+
+
+/* Default Design Customize */
+.print-format{
+    padding:0px !important;
+}
+
+.print-heading{
+    margin:0px !important;
+    padding:0px !important;
+}
+.letter-head{
+    margin:0px !important;
+}
+.letter-head div{
+    margin:0px !important;
+}
+.print-format td, .print-format th {
+    padding:0px !important;
+}
+.page-header {
+    margin:0px !important;
+}
+
+
+
+
+
+/* Default Style Refactor */
+.print-format {
+    padding: 0px !important;
+}
+.header-container {
+    margin-bottom: 0px !important;
+}
+.print-heading {
+    padding-bottom: 0px !important;
+    margin-bottom: 0px !important;
+}
+.print-format td, .print-format th {
+    padding: 3px !important;
+}
+
+
+
+
+/* Print Format Style */
+.section {
+    padding: 0px 0.30in !important;
+}
+
+
+/* Print Style */
+@media print {
+    @page {
+        size: A4 portrait;
+        margin: 0;
+    }
+    
+}
+
+
+/* Style */
+.safco-print-format {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    font-size: 11px !important;
+    color: #333;
+    line-height: 1.4;
+}
+
+.header-container {
+    background-color: #d9eaf7;
+    border: 1px solid #b8d4e9;
+    margin-bottom: 15px;
+}
+
+.logo-wrapper {
+    text-align: left;
+}
+
+.header-logo {
+    max-height: 100px;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.company-name-title {
+    font-weight: 900;
+    font-size: 16px;
+    color: #000;
+    letter-spacing: 0.5px;
+}
+
+.header-address {
+    font-weight: bold;
+    font-size: 14px;
+    margin-top: 15px;
+    color: #000;
+}
+.footer-container {
+    padding: 5px;
+    text-align: center;
+    font-weight:bold;
+    background-color: #d9eaf7;
+    border: 1px solid #b8d4e9;
+}
+
+.invoice-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 2px;
+}
+
+.invoice-number {
+    font-size: 20px;
+    font-weight: 900;
+    color: #555;
+    margin-bottom: 2px;
+}
+
+.invoice-date {
+    font-size: 14px;
+    color: #333;
+}
+
+.section-bar {
+    background-color: #f3b987;
+    font-weight:bold;
+    padding: 2px;
+    border: 1px solid #ddd;
+    font-weight: 900;
+    font-size: 11px;
+    text-transform: uppercase;
+    margin-top: 10px;
+}
+
+.section-content-row {
+    
+}
+
+.billing-box-left, .billing-box-right, .terms-container, .bank-details-container, .remarks-container {
+    border: 1px solid #ddd;
+    padding: 8px 10px;
+    min-height: 100px;
+}
+
+.billing-box-right, .shipment-col-right, .summary-container, .remarks-container {
+    border-left: none;
+}
+
+.box-label {
+    font-weight: 900;
+    color: #000;
+    margin-bottom: 6px;
+    font-size: 10px;
+}
+
+.bold-text {
+    font-weight: 900;
+    color: #000;
+}
+
+.info-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.info-table td {
+    border: 1px solid #ddd;
+    padding: 4px 8px;
+}
+
+.info-label {
+    width: 45%;
+    background-color: #fcfcfc;
+    font-weight: bold;
+    color: #333;
+}
+
+.info-value {
+    width: 55%;
+    color: #000;
+    font-weight: 500;
+}
+
+.item-table {
+    width: 100%;
+    margin-bottom: 5px;
+    border-collapse: collapse;
+}
+
+.item-table th {
+    background-color: #fcfcfc;
+    border: 1px solid #ddd;
+    padding: 6px 8px;
+    font-weight: 900;
+    color: #000;
+    text-transform: uppercase;
+}
+
+.item-table td {
+    border: 1px solid #ddd;
+    padding: 6px 8px;
+    vertical-align: top;
+}
+
+.item-description {
+    font-size: 10px;
+    color: #555;
+    margin-top: 2px;
+}
+
+.empty-row td {
+    height: 25px;
+}
+
+.summary-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.summary-table td {
+    border: 1px solid #ddd;
+    padding: 6px 10px;
+}
+
+.summary-label {
+    width: 60%;
+    background-color: #fcfcfc;
+    font-weight: bold;
+    color: #333;
+}
+
+.summary-value {
+    width: 40%;
+    text-align: right;
+    color: #000;
+    font-weight: 600;
+}
+
+.highlight-total {
+    font-weight: 900 !important;
+    font-size: 13px !important;
+}
+
+.amount-in-words-container {
+    border: 1px solid #ddd;
+    margin: 5px 0px;
+    padding: 6px 0;
+}
+
+.words-label {
+    font-weight: 900;
+    background-color: #fcfcfc;
+    padding: 0 10px;
+    height: 100%;
+}
+
+.words-text {
+    font-weight: 900;
+    text-align: right;
+    padding: 0 10px;
+}
+
+.bank-content div, .terms-content div {
+    margin-bottom: 2px;
+}
+
+.standard-list {
+    padding-left: 15px;
+    margin-bottom: 0;
+}
+
+.standard-list li {
+    margin-bottom: 2px;
+}
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}

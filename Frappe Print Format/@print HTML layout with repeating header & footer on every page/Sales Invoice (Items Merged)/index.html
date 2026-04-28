@@ -1,0 +1,308 @@
+
+<div class="page-header" style="text-align: center">
+    <!-- Header Section Start -->
+    <div id="header-html" class="header header-container">
+        <div class="print-heading">
+            {% if letter_head %}
+                <div class="letter-head section">{{ letter_head }}</div>
+            {% endif %}
+        </div>
+    </div>
+    <!-- Header Section End -->
+</div>
+
+<div class="page-footer">
+    <!-- Footer Area -->
+    <div class="footer-container">
+        {% if footer %}
+        {{ footer }}
+        {% endif %}
+    </div>
+</div>
+
+<table>
+    <thead>
+      <tr>
+        <td>
+          <!--place holder for the fixed-position header-->
+          <div class="page-header-space"></div>
+        </td>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td>
+
+<div class="safco-print-format section">
+
+    <!-- Billing Info -->
+    <div class="" style="display:flex">
+        <div class="section-bar" style="width:100%;text-align:center">
+            BILLING INFORMATION
+        </div>
+    </div>
+    <div class="section-content-row" style="display:flex">
+        <div class="billing-box-left" style="width:50%">
+            <div class="box-label">CONSIGNEE</div>
+            <div class="box-text">
+                <div class="bold-text">{{ doc.customer_name }}</div>
+                <div>{{ doc.address_display or "" }}</div>
+            </div>
+        </div>
+        <div class="billing-box-right" style="width:50%">
+            {% if doc.shipping_address %}
+            <div class="box-label">NOTIFY</div>
+            <div class="box-text">
+                <div class="bold-text">{{ doc.customer_name }}</div>
+                {% if doc.shipping_address %}
+                    <div>{{ doc.shipping_address }}</div>
+                {% else %}
+                    <div>{{ doc.address_display or "" }}</div>
+                {% endif %}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Shipment Info -->
+    <div class="" style="display:flex">
+        <div class="section-bar" style="width:100%;text-align:center">
+            SHIPMENT INFORMATION
+        </div>
+    </div>
+    <div class="section-content-row" style="display:flex">
+        <div class="shipment-col-left" style="width:50%">
+            <table class="info-table">
+                <tr>
+                    <td class="info-label">BL NUMBER</td>
+                    <td class="info-value">{{ doc.custom_bl_number or "" }}</td>
+                </tr>
+                <tr>
+                    <td class="info-label">NAME OF VESSEL</td>
+                    <td class="info-value">{{ doc.custom_name_of_vessel or "" }}</td>
+                </tr>
+                <tr>
+                    <td class="info-label">INCO TERM</td>
+                    <td class="info-value">{{ doc.custom_inco_term or "" }}</td>
+                </tr>
+                <tr>
+                    <td class="info-label">REF. NUMBER</td>
+                    <td class="info-value">{{ doc.custom_ref_number or "" }}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="shipment-col-right" style="width:50%">
+            <table class="info-table">
+                <tr>
+                    <td class="info-label">PORT OF LOADING</td>
+                    <td class="info-value">{{ doc.custom_port_of_loading or "" }}</td>
+                </tr>
+                <tr>
+                    <td class="info-label">PORT OF DELIVERY</td>
+                    <td class="info-value">{{ doc.custom_port_of_delivery or "" }}</td>
+                </tr>
+                <tr>
+                    <td class="info-label">ETD</td>
+                    <td class="info-value">{{ doc.get_formatted("custom_etd") if doc.custom_etd else "" }}</td>
+                </tr>
+                <tr>
+                    <td class="info-label">ETA</td>
+                    <td class="info-value">{{ doc.get_formatted("custom_eta") if doc.custom_eta else "" }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    
+    <!-- Item Information -->
+    <div class="" style="display:flex">
+        <div class="section-bar" style="width:100%;text-align:center">
+            ITEM INFORMATION
+        </div>
+    </div>
+    <table class="item-table table-bordered">
+        <thead>
+            <tr>
+                <th class="text-center" style="width: 6%;">SR. #</th>
+                <th style="width: 44%;">ITEM DESCRIPTIONS</th>
+                <th class="text-center" style="width: 10%;">QTY</th>
+                <th class="text-center" style="width: 10%;">UNIT</th>
+                <th class="text-right" style="width: 15%;">RATE</th>
+                <th class="text-right" style="width: 15%;">TOTAL AMOUNT</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            {% set grouped = {} %}
+            
+            {% for item in doc.items %}
+                {% set key = item.item_code ~ "_" ~ item.uom %}
+                
+                {% if key not in grouped %}
+                    {% set _ = grouped.update({
+                        key: {
+                            "item_name": item.item_name,
+                            "uom": item.uom,
+                            "qty": item.qty,
+                            "rate": item.rate,
+                            "amount": item.amount,
+                            "brand": item.brand,
+                            "custom_country_of_origin": item.custom_country_of_origin
+                        }
+                    }) %}
+                {% else %}
+                    {% set existing = grouped[key] %}
+                    
+                    {% set new_qty = existing.qty + item.qty %}
+                    {% set new_amount = existing.amount + item.amount %}
+                    
+                    {# weighted rate (optional but correct) #}
+                    {% set new_rate = new_amount / new_qty %}
+                    
+                    {% set _ = grouped.update({
+                        key: {
+                            "item_name": existing.item_name,
+                            "uom": existing.uom,
+                            "qty": new_qty,
+                            "rate": new_rate,
+                            "amount": new_amount
+                        }
+                    }) %}
+                {% endif %}
+            {% endfor %}
+            
+            {% set ns = namespace(idx=1) %}
+            {% for key, item in grouped.items() %}
+            <tr>
+                <td class="text-center">{{ ns.idx }}</td>
+                <td>
+                    <b>{{ item.item_name }}</b>
+                    
+                    {% if item.brand %}
+                    <br>Brand: {{item.brand}}
+                    {% endif %}
+                    
+                    {% if item.custom_country_of_origin %}
+                    <br>COO: {{item.custom_country_of_origin}}
+                    {% endif %}
+                    
+                    <!--<br/>{% if item.description %}<div class="item-description">{{ item.description }}</div>{% endif %}-->
+                </td>
+                <td class="text-center">{{ frappe.format(item.qty, {'fieldtype': 'Currency'}) }}</td>
+                <td class="text-center">{{ item.uom or "" }}</td>
+                <td class="text-right">{{ frappe.format(item.rate, {'fieldtype': 'Currency'}) }}</td>
+                <td class="text-right">{{ frappe.format(item.amount, {'fieldtype': 'Currency'}) }}</td>
+            </tr>
+            {% set ns.idx = ns.idx + 1 %}
+            {% endfor %}
+            
+            
+            
+            {% for i in range(9 - doc.items|length) %}
+            <tr class="empty-row">
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Totals and Terms Row -->
+    <div class="totals-terms-row" style="display:flex; gap: 30px;">
+        <div class="terms-container" style="width:60%">
+            <div class="box-label">TERMS & CONDITIONS :</div>
+            <div class="terms-content">
+                {% if doc.terms %}
+                    {{ doc.terms }}
+                {% endif %}
+            </div>
+        </div>
+        <div class="summary-container" style="width: 40%">
+            <table class="summary-table">
+                <tr>
+                    <td class="summary-label">GROSS</td>
+                    <td class="summary-value">{{ doc.get_formatted("total") }}</td>
+                </tr>
+                <!--<tr>-->
+                <!--    <td class="summary-label">(-) ADVANCE / DEPOSIT</td>-->
+                <!--    <td class="summary-value">{{ doc.get_formatted("advance_payment") or "0.00" }}</td>-->
+                <!--</tr>-->
+                {% for tax in doc.taxes %}
+                <tr>
+                    <td class="summary-label">(+) {{ tax.account_head | replace("_", " ") | upper }}</td>
+                    <td class="summary-value">{{ tax.get_formatted("tax_amount") }}</td>
+                </tr>
+                {% endfor %}
+                <tr>
+                    <td class="summary-label">(-) DISCOUNT</td>
+                    <td class="summary-value">{{ doc.get_formatted("discount_amount") or "" }}</td>
+                </tr>
+                <tr class="grand-total-row">
+                    <td class="summary-label">TOTAL AMOUNT</td>
+                    <td class="summary-value highlight-total">{{ doc.get_formatted("grand_total") }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- Amount In Words -->
+    <div class="amount-in-words-container clearfix">
+        <div class="col-xs-4 words-label">TOTAL AMOUNT IN WORDS:</div>
+        <div class="col-xs-8 words-text">{{ doc.in_words or "" }}</div>
+    </div>
+
+    <!-- Bank Details and Remarks -->
+    <div class="footer-row" style="display:flex">
+        <div class="bank-details-container" style="width:50%">
+            <div class="box-label">BANK DETAILS :</div>
+            <div class="bank-content">
+                {% if doc.custom_bank_account %}
+                    {% set bank_account = frappe.get_doc("Bank Account", doc.custom_bank_account) %}
+                    <div class="bold-text">Bank: {{bank_account.bank}}</div>
+                    <div>Branch: {{bank_account.branch_code}}</div>
+                    <div>SWIFT CODE: {{bank_account.custom_swift_code}}</div>
+                    <div>A/C No. {{bank_account.bank_account_no}}</div>
+                    <div>IBAN No.: {{bank_account.iban}}</div>
+                    <div>Currency: {{bank_account.custom_currency}}</div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="remarks-container" style="width:50%">
+            <div class="box-label">REMARKS :</div>
+            <div class="remarks-content">
+                {{ doc.remarks or "" }}
+            </div>
+        </div>
+    </div>
+</div>
+
+        </td>
+      </tr>
+    </tbody>
+
+    <tfoot>
+      <tr>
+        <td>
+          <!--place holder for the fixed-position footer-->
+          <div class="page-footer-space"></div>
+        </td>
+      </tr>
+    </tfoot>
+
+  </table>
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,33 @@
+<!-- Letter Head: Header Section -->
+<div class="row" style="padding:20px 0px 10px">
+    <div class="col-xs-4 header-logo-box">
+        <div class="logo-wrapper" style="height:100px">
+            <img src="/files/safco-logo.png" class="header-logo" style="height:100%; width:auto; display:block;">
+        </div>
+    </div>
+    <div class="col-xs-3 text-left" style="font-size: 14px; color:#000">
+        
+    </div>
+    <div class="col-xs-5 text-right header-invoice-details">
+        <div class="invoice-title">
+            {% if doc.doctype == "Sales Invoice" %}
+            {{doc.custom_invoice_type}}
+            {% else %}
+            {{doc.doctype}}
+            {% endif %}
+        </div>
+        <div class="invoice-number">{{doc.name}}</div>
+        <div class="invoice-date">
+            {{ frappe.utils.formatdate((doc.posting_date or doc.transaction_date), "dd MMMM yyyy") }}
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<!-- Letter Head: Footer Section -->
+P.O.Box 17446, Ajman, UAE
