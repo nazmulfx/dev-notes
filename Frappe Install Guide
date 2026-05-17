@@ -232,12 +232,7 @@ default-character-set = utf8mb4
 # Use it for options that only the server (but not clients) should see
 
 # this is read by the standalone daemon and embedded servers
-[server]
-#############################################
 
-user = mysql
-pid-file = /run/mysqld/mysqld.pid
-socket = /run/mysqld/mysql
         """
 
 STEP 6 :  Restart MYSQL Server
